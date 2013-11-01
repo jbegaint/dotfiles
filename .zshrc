@@ -5,7 +5,7 @@ SAVEHIST=1000
 
 export EDITOR="vim"
 
-~/.colors.sh
+#~/.colors.sh
 
 setopt autocd
 bindkey -e
