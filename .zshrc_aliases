@@ -1,0 +1,15 @@
+alias reload="source ~/.zshrc"
+alias pong="ping -c3 google.com"
+alias pacback="pacman -Qqne > ~/Documents/installed_packages.txt"
+alias enable_alert='PS1="$PS1\a"'
+
+alias ex="exit"
+alias temp="sensors"
+
+alias ls="ls --color"
+alias grep="grep --color=auto"
+alias pacman="pacman --color=auto"
+
+alias head1="head -n1"
+#alias skype='xhost +local: && su skype -c skype'
+
