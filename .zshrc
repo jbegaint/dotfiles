@@ -5,8 +5,6 @@ SAVEHIST=1000
 
 export EDITOR="vim"
 
-#~/.colors.sh
-
 setopt autocd
 bindkey -e
 # End of lines configured by zsh-newuser-install
@@ -24,11 +22,14 @@ else
     print "404: ~/.zshrc_aliases not found."
 fi
 
+precmd () (
+    #enable alert
+    echo -ne '\a'
+)
 
 autoload -U promptinit
 promptinit
 prompt redhat
-
 
 # key bindings
 bindkey    "^[[3~"          delete-char
@@ -59,9 +60,7 @@ extract() {
   fi
 }
 
-# add rb gems to path
-PATH=~/.gem/ruby/2.0.0/bin:$PATH
-# install non-systemwide gems
-GEM_HOME=~/.gem/ruby/2.0.0
-
 PATH=~/bin:$PATH
+
+#load term colors
+bash ~/.colors.sh

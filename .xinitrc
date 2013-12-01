@@ -11,31 +11,28 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
   unset f
 fi
 
+
+#font config stuff
 xset +fp /usr/share/fonts/local/ &
 xset fp rehash &
 
-# qwerty with right win as compose key
-#setxkbmap us '' compose:rwin &
-
-setxkbmap fr &
-
-nitrogen --restore &
+#autostart apps and scripts
 dunst &
-nm-applet &
 parcellite &
 xset dpms 600 &
-#compton -D1 -cGfzb &
+pnmixer &
+compton  &
+bluetooth off &
 
-# systray
-#trayer --SetDockType true --SetPartialStrut true --transparent true --alpha 0 --tint 0x272822 --edge top --align right --widthtype pixel --heighttype pixel --width 100 --height 19 --padding 5 &
+~/bin/docking.sh &
 
-[ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
-mkfifo "$PANEL_FIFO" &
-
+#bspwm legacy config
+#[ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
+#mkfifo "$PANEL_FIFO" &
 #sxhkd &
 #exec bspwm -s "$PANEL_FIFO" -p W 2> ~/.bspwm.log
+
 
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 
 exec i3 -V >> ~/.i3/i3log 2>&1
-#exec startxfce4

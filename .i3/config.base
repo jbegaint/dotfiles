@@ -23,7 +23,7 @@ font pango: Source Code Pro Medium 9
 floating_modifier Mod4
 
 # start a terminal
-bindsym Mod4+Return exec gnome-terminal
+bindsym Mod4+Return exec urxvt
 
 # kill focused window
 bindsym Mod4+q kill
@@ -175,6 +175,8 @@ bindsym XF86AudioRaiseVolume exec amixer set Master 5%+ -q
 bindsym XF86AudioLowerVolume exec amixer set Master 5%- -q
 bindsym XF86AudioMute exec amixer set Master toggle -q
 
+bindsym Mod4+m exec ~/bin/mpc_dmenu.sh
+
 #mpd control
 bindsym XF86AudioPlay exec mpc toggle
 bindsym XF86AudioNext exec mpc next
@@ -182,8 +184,6 @@ bindsym XF86AudioPrev exec mpc prev
 
 
 bindsym ctrl+Mod1+t exec urxvt
-for_window [class="URxvt"] floating enable
-
 # j4-make-config
 # $i3-theme-window
 
@@ -203,5 +203,10 @@ bindsym Mod4+l exec xtrlock
 
 bindsym Print exec scrot -q 100 -e 'mv $f ~/Pictures/Screenshots'
 
-for_window [class="mplayer"] floating enable
+for_window [class="MPlayer"] floating enable
 for_window [class="rosa-media-player"] floating enable
+for_window [class="Pidgin"] floating enable
+for_window [class="Thunar"] floating enable
+for_window [class="Steam"] floating enable
+for_window [class="Transmission"] floating enable
+
