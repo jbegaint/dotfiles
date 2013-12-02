@@ -23,6 +23,7 @@ xset dpms 600 &
 pnmixer &
 compton  &
 bluetooth off &
+eval `cat ~/.fehbg` &
 
 ~/bin/docking.sh &
 
