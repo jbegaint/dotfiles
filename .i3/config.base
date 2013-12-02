@@ -154,7 +154,7 @@ bar {
 	# $i3-theme-bar
 }
 
-#######################################################################
+######################################################################
 # automatically start i3-config-wizard to offer the user to create a
 # keysym-based config which used his favorite modifier (alt or windows)
 #
@@ -168,7 +168,6 @@ exec i3-config-wizard
 
 bindsym Ctrl+Mod1+Right workspace next
 bindsym Ctrl+Mod1+Left workspace prev
-
 
 # volume control
 bindsym XF86AudioRaiseVolume exec amixer set Master 5%+ -q
@@ -191,6 +190,7 @@ bindsym ctrl+Mod1+t exec urxvt
 bindsym Ctrl+Mod1+l exec i3lock -u -i ~/.walls/lock.png
 bindsym Mod4+i exec notify-send MPD "$(mpc status)"
 bindsym Mod4+b bar mode toggle
+bindsym Mod4+Shift+b bt
 
 # Make the currently focused window a scratchpad
 bindsym Mod4+Shift+p move scratchpad
@@ -202,6 +202,8 @@ bindsym Mod4+p scratchpad show
 bindsym Mod4+l exec xtrlock
 
 bindsym Print exec scrot -q 100 -e 'mv $f ~/Pictures/Screenshots'
+bindsym Shift+Print exec scrot -s -q 100 -e 'mv $f ~/Pictures/Screenshots'
+
 
 for_window [class="MPlayer"] floating enable
 for_window [class="rosa-media-player"] floating enable
