@@ -84,7 +84,7 @@ bindsym Mod4+space focus mode_toggle
 bindsym Mod4+a focus parent
 
 # focus the child container
-#bindsym Mod4+d focus child
+bindsym Mod4+c focus child
 
 # switch to workspace
 set $workspace1 1: www
@@ -148,15 +148,18 @@ bindsym Mod4+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-    status_command ~/bin/i3status_mod
+        status_command ~/bin/i3status_mod
 	position top
-    colors {
-        background #073642
-        statusline #eee8d5
-        focused_workspace #cb4b16 #cb4b16 #eee8d5
-        active_workspace #cb4b16 #cb4b16 #eee8d5
-        inactive_workspace #b58900 #b58900 #eee8d5
-    }
+	# j4-make-config
+colors {
+	background #000000
+	statusline #ffffff
+	separator #666666
+	focused_workspace  #4c7899 #285577 #ffffff
+	active_workspace   #333333 #5f676a #ffffff
+	inactive_workspace #333333 #222222 #888888
+	urgent_workspace   #2f343a #900000 #ffffff
+}
 }
 
 ######################################################################
@@ -188,11 +191,12 @@ bindsym XF86AudioPrev exec mpc prev
 
 
 bindsym ctrl+Mod1+t exec urxvt
-
+# j4-make-config
 # class                 border  backgr. text    indicator
-client.focused          #859900 #859900 #fdf6e3 #2e9ef4
-client.focused_inactive #268bd2 #268bd2 #fdf6e3 #484e50
-client.unfocused        #333333 #93a1a1 #fdf6e3 #292d2e
+client.focused          #4c7899 #285577 #ffffff #2e9ef4
+client.focused_inactive #333333 #5f676a #ffffff #484e50
+client.unfocused        #333333 #222222 #888888 #292d2e
+client.urgent           #2f343a #900000 #ffffff #900000
 
 
 bindsym Ctrl+Mod1+l exec i3lock -u -i ~/.walls/lock.png
@@ -206,7 +210,7 @@ bindsym Mod4+Shift+p move scratchpad
 # Show the first scratchpad window
 bindsym Mod4+p scratchpad show
 
-#new_window pixel 2
+new_window pixel 2
 bindsym Mod4+l exec xtrlock
 
 bindsym Print exec scrot -q 100 -e 'mv $f ~/Pictures/Screenshots'

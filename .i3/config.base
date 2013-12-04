@@ -84,7 +84,7 @@ bindsym Mod4+space focus mode_toggle
 bindsym Mod4+a focus parent
 
 # focus the child container
-#bindsym Mod4+d focus child
+bindsym Mod4+c focus child
 
 # switch to workspace
 set $workspace1 1: www
@@ -198,7 +198,7 @@ bindsym Mod4+Shift+p move scratchpad
 # Show the first scratchpad window
 bindsym Mod4+p scratchpad show
 
-#new_window pixel 2
+new_window pixel 2
 bindsym Mod4+l exec xtrlock
 
 bindsym Print exec scrot -q 100 -e 'mv $f ~/Pictures/Screenshots'
