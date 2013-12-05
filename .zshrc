@@ -63,4 +63,4 @@ extract() {
 PATH=~/bin:$PATH
 
 #load term colors
-#bash ~/.colors.sh
+bash ~/.colors.sh

@@ -152,13 +152,15 @@ bar {
 	position top
 	# j4-make-config
 colors {
-	background #000000
-	statusline #ffffff
-	separator #666666
-	focused_workspace  #4c7899 #285577 #ffffff
-	active_workspace   #333333 #5f676a #ffffff
-	inactive_workspace #333333 #222222 #888888
-	urgent_workspace   #2f343a #900000 #ffffff
+    background #222222
+    statusline #eeeeee
+    separator  #2b2b2b
+
+    # bar.class        border  backgr. text
+    focused_workspace  #616161 #616166 #eeeeee
+    active_workspace   #444444 #444444 #eeeeee
+    inactive_workspace #222222 #222222 #bbbbbb
+    urgent_workspace   #770000 #770000 #eeeeee
 }
 }
 
@@ -192,11 +194,11 @@ bindsym XF86AudioPrev exec mpc prev
 
 bindsym ctrl+Mod1+t exec urxvt
 # j4-make-config
-# class                 border  backgr. text    indicator
-client.focused          #4c7899 #285577 #ffffff #2e9ef4
-client.focused_inactive #333333 #5f676a #ffffff #484e50
-client.unfocused        #333333 #222222 #888888 #292d2e
-client.urgent           #2f343a #900000 #ffffff #900000
+# client.class          border  backgr. text    indicator
+client.focused          #616161 #616161 #ffffff #0099bb
+client.focused_inactive #444444 #444444 #eeeeee #666666
+client.unfocused        #222222 #222222 #bbbbbb #222222
+client.urgent           #700000 #700000 #eeeeee #700000
 
 
 bindsym Ctrl+Mod1+l exec i3lock -u -i ~/.walls/lock.png
