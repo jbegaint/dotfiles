@@ -1,6 +1,6 @@
 URxvt.font: xft:Source Code Pro:size=10
 
-URxvt.perl-ext-common: default,clipboard,
+URxvt.perl-ext-common: default,clipboard,url-select
 *.URxvt.urgentOnBell: true
 URxvt.url-select.launcher: chromium
 URxvt.url-select.underline: true
