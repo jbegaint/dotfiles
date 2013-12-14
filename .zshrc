@@ -60,7 +60,7 @@ extract() {
   fi
 }
 
-PATH=~/bin:$PATH
+PATH=~/bin:~/.gem/ruby/2.0.0/bin/$PATH
 
 #load term colors
 bash ~/.colors.sh
