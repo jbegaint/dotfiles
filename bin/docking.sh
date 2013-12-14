@@ -24,7 +24,7 @@ while true; do
 		else 
 			xrandr --output $IN --auto --output $EXT --off
 			setxkbmap fr
-			notify-send "DOCKING INFO" "$IN [on]"
+			notify-send "DOCKING INFO" "$IN [on]\n$EXT [off]"
 		fi
 
 		eval `cat ~/.fehbg`
