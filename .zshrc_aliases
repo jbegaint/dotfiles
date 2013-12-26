@@ -14,3 +14,4 @@ alias pacman="pacman --color=auto"
 alias head1="head -n1"
 #alias skype='xhost +local: && su skype -c skype'
 
+alias sys_age="echo $(ls -lct /etc | tail -1 | awk '{print $6, $7, $8}')"

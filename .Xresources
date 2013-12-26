@@ -1,6 +1,6 @@
 URxvt.font: xft:Source Code Pro:size=10
 
-URxvt.perl-ext-common: default,clipboard,url-select
+URxvt.perl-ext-common: default,clipboard,url-select,tabbedex
 *.URxvt.urgentOnBell: true
 URxvt.url-select.launcher: chromium
 URxvt.url-select.underline: true
@@ -14,6 +14,9 @@ URxvt.pasteCommand: xclip -o -selection clipboard
 
 URxvt.keysym.M-c:   perl:clipboard:copy
 URxvt.keysym.M-v:   perl:clipboard:paste
+
+URxvt.autohide: yes
+URxvt.new-button: no
  
 URxvt.scrollBar: false
 URxvt.depth: 32

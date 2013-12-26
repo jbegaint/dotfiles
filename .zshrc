@@ -3,7 +3,7 @@ HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 
-export EDITOR="vim"
+EDITOR="vim"
 
 setopt autocd
 bindkey -e
@@ -22,14 +22,16 @@ else
     print "404: ~/.zshrc_aliases not found."
 fi
 
+# enable alert
 precmd () (
-    #enable alert
     echo -ne '\a'
 )
 
-autoload -U promptinit
-promptinit
-prompt redhat
+# git-prompt stuff
+setopt PROMPT_SUBST
+source /usr/share/git/completion/git-prompt.sh
+
+PS1=$'┌─[%n@%M][%~] $(__git_ps1 \"(%s)\")\n└─[\$] '
 
 # key bindings
 bindkey    "^[[3~"          delete-char
@@ -60,7 +62,8 @@ extract() {
   fi
 }
 
+# add monkey scripts and gems path...
 PATH=~/bin:~/.gem/ruby/2.0.0/bin/$PATH
 
-#load term colors
+# load terminal colors
 bash ~/.colors.sh
