@@ -33,6 +33,9 @@ source /usr/share/git/completion/git-prompt.sh
 
 PS1=$'┌─[%n@%M][%~] $(__git_ps1 \"(%s)\")\n└─[\$] '
 
+#rehash auto
+zstyle ':completion:*' rehash true
+
 # key bindings
 bindkey    "^[[3~"          delete-char
 
