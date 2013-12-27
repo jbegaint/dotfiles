@@ -1,17 +1,18 @@
-alias reload="source ~/.zshrc"
-alias pong="ping -c3 google.com"
-alias pacback="pacman -Qqne > ~/Documents/installed_packages.txt"
 alias enable_alert='PS1="$PS1 \a"'
+alias pacback="pacman -Qqne > ~/Documents/installed_packages.txt"
+alias pong="ping -c3 google.com"
+alias reload="source ~/.zshrc"
 
-alias ex="exit"
 alias temp="sensors"
 
-alias ls="ls -F --color"
-alias ll="ls -l"
 alias grep="grep --color=auto"
+alias ll="ls -l"
+alias ls="ls -F --color"
 alias pacman="pacman --color=auto"
 
 alias head1="head -n1"
+alias tail1="tail -n1"
 #alias skype='xhost +local: && su skype -c skype'
 
-alias sys_age="echo $(ls -lct /etc | tail -1 | awk '{print $6, $7, $8}')"
+# tip found on arch bbs
+alias install_date="echo $(ls -lct /etc | tail -1 | awk '{print $6, $7, $8}')"
