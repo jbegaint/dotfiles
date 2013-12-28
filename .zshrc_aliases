@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 alias enable_alert='PS1="$PS1 \a"'
 alias pacback="pacman -Qqne > ~/Documents/installed_packages.txt"
 alias pong="ping -c3 google.com"

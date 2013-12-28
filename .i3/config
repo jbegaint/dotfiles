@@ -214,7 +214,7 @@ bindsym Mod4+Shift+p move scratchpad
 bindsym Mod4+p scratchpad show
 
 new_window pixel 2
-bindsym Mod4+l exec xtrlock
+bindsym Mod4+l exec /home/jean/bin/xtrlock_wrapper.sh
 
 bindsym Print exec scrot -q 100 -e 'mv $f ~/Pictures/Screenshots'
 bindsym Shift+Print exec scrot -s -q 100 -e 'mv $f ~/Pictures/Screenshots'

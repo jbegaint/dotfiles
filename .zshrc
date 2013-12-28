@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 # env
 export EDITOR="vim"
 export PS1=$'┌─[%n@%M][%~] $(__git_ps1 \"(%s)\")\n└─[\$] '
@@ -35,6 +37,7 @@ precmd () (
 source /usr/share/git/completion/git-prompt.sh
 
 # key bindings
+bindkey -e
 bindkey    "^[[3~"          delete-char
 
 # extract function
