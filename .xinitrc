@@ -24,7 +24,9 @@ pnmixer &
 compton  &
 bluetooth off &
 eval `cat ~/.fehbg` &
+urxvtd -q &
 
+udiskie &
 ~/bin/docking.sh &
 
 #bspwm legacy config
