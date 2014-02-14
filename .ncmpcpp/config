@@ -1,0 +1,15 @@
+user_interface = "alternative"
+
+visualizer_fifo_path = "/tmp/mpd.fifo"
+visualizer_output_name = "my_fifo"
+visualizer_sync_interval = "1"
+#visualizer_type = "wave" (spectrum/wave)
+visualizer_type = "spectrum" (spectrum/wave)
+visualizer_look = "+|"
+
+mpd_music_dir = "/home/jean/Music"
+
+autocenter_mode = "yes"
+centered_cursor = "yes"
+
+playlist_display_mode = "columns"

@@ -67,3 +67,6 @@ extract() {
 
 # load terminal colors
 bash ~/.colors.sh
+# load virtual env stuff
+source /usr/bin/virtualenvwrapper.sh 
+

@@ -18,3 +18,11 @@ alias tail1="tail -n1"
 
 # tip found on arch bbs
 alias install_date="echo $(ls -lct /etc | tail -1 | awk '{print $6, $7, $8}')"
+
+alias cal="cal -m"
+
+alias keychain_start='eval `keychain --eval --agents ssh id_rsa`'
+
+lsc () {
+	ls "$@" | wc -l
+}

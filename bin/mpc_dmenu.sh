@@ -22,7 +22,7 @@ function load_artist {
 }
 
 function dmenu_wrapper {
-	dmenu -i -sb '#4A6787' -p "$1:"
+	dmenu -i -sb '#4A6787' -p "$1:" -h 21
 }
 
 CMD=$(echo -e $COMMANDS | dmenu_wrapper "action")
