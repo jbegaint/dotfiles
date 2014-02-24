@@ -66,7 +66,13 @@ extract() {
 }
 
 # load terminal colors
-bash ~/.colors.sh
+ 
+BASE16_SCHEME="tomorrow"
+BASE16_SHELL="$HOME/.config/base16-shell/base16-$BASE16_SCHEME.dark.sh"
+[[ -s $BASE16_SHELL ]] && . $BASE16_SHELL
+
 # load virtual env stuff
 source /usr/bin/virtualenvwrapper.sh 
+
+eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
 

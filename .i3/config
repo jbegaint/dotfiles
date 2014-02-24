@@ -155,19 +155,18 @@ bar {
 	colors {
                 background #222222
                 statusline #eeeeee
-		separator  #2b2b2b
+		separator  #222222
 
 		# bar.class        border  backgr. text
-		focused_workspace  #475969 #475969 #eeeeee
-		active_workspace   #444444 #444444 #eeeeee
-		inactive_workspace #222222 #222222 #bbbbbb
-		urgent_workspace   #770000 #770000 #eeeeee
+		#focused_workspace  #475969 #475969 #eeeeee
+                focused_workspace  #81A2BE #81A2BE #1d1f21
+		active_workspace   #444444 #444444 #ffffff
+		inactive_workspace #222222 #222222 #969896       
+		urgent_workspace   #CC6666 #CC6666 #1d1f21
 	}
-
         mode dock
         hidden_state hide
         modifier mod1
-
 }
 
 bindsym Ctrl+Mod1+Right workspace next
@@ -202,6 +201,7 @@ bindsym Mod4+p scratchpad show
 # no title bar, only x pixels border
 new_window pixel 2
 
+
 # scripts shortcuts
 
 bindsym Mod4+l exec /home/jean/bin/xtrlock_wrapper.sh
@@ -223,6 +223,7 @@ for_window [class="Transmission"] floating enable
 for_window [class="Gcolor2"] floating enable
 for_window [class="Mate-calc"] floating enable
 for_window [class="Arandr"] floating enable
+for_window [class="GLeds"] floating enable
 for_window [window_role="pop-up"] floating enable--
 
 

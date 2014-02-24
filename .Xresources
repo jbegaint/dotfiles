@@ -23,4 +23,3 @@ URxvt.scrollBar: false
 URxvt.foreground: #eeeeee
 URxvt.background: #222222
 URxvt.depth: 32
-
