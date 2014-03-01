@@ -154,12 +154,12 @@ bar {
 
 	colors {
                 background #222222
-                statusline #eeeeee
+                statusline #dddddd
 		separator  #222222
 
 		# bar.class        border  backgr. text
 		#focused_workspace  #475969 #475969 #eeeeee
-                focused_workspace  #81A2BE #81A2BE #1d1f21
+		focused_workspace  #81A2BE #81A2BE #1d1f21
 		active_workspace   #444444 #444444 #ffffff
 		inactive_workspace #222222 #222222 #969896       
 		urgent_workspace   #CC6666 #CC6666 #1d1f21

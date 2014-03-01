@@ -1,5 +1,4 @@
 #!/bin/sh
-#
 # ~/.xinitrc
 #
 # Executed by startx (run your window manager from here)
@@ -26,13 +25,6 @@ compton -b &
 bluetooth off &
 eval `cat ~/.fehbg` &
 
-#udiskie &
 ~/bin/docking.sh &
 
-#bspwm legacy config
-#[ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
-#mkfifo "$PANEL_FIFO" &
-#sxhkd &
-#exec bspwm -s "$PANEL_FIFO" -p W 2> ~/.bspwm.log
-
-exec i3 -V >> ~/.i3/i3log 2>&1
+exec i3
