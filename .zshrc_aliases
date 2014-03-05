@@ -26,3 +26,8 @@ alias keychain_start='eval `keychain --eval --agents ssh id_rsa`'
 lsc () {
 	ls "$@" | wc -l
 }
+
+mkcd () {
+	mkdir -p "$@"
+	cd "$@"
+}

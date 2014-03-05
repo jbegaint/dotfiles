@@ -150,7 +150,6 @@ bindsym Mod4+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3status
-	#status_command ~/bin/i3status_wmname.sh
 	position top
 
 	colors {
