@@ -4,10 +4,10 @@
 # Executed by startx (run your window manager from here)
 
 if [ -d /etc/X11/xinit/xinitrc.d ]; then
-  for f in /etc/X11/xinit/xinitrc.d/*; do
-    [ -x "$f" ] && . "$f"
-  done
-  unset f
+	for f in /etc/X11/xinit/xinitrc.d/*; do
+		[ -x "$f" ] && . "$f"
+	done
+	unset f
 fi
 
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
@@ -16,15 +16,20 @@ fi
 xset +fp /usr/share/fonts/local/ &
 xset fp rehash &
 
-#autostart apps and scripts
+#autostart apps
 dunst &
 parcellite &
-xset dpms 600 &
+xset dpms 300 &
 pnmixer &
 compton -b &
 bluetooth off &
+urxvtd -q -o -f &
+
+#restore background
 eval `cat ~/.fehbg` &
 
+#launch scripts
 ~/bin/docking.sh &
+~/bin/redshift/run.sh &
 
 exec i3

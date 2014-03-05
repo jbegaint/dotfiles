@@ -23,7 +23,7 @@ font pango: Source Code Pro Medium 9
 floating_modifier Mod4
 
 # start a terminal
-bindsym Mod4+Return exec urxvt
+bindsym Mod4+Return exec urxvtc
 
 # kill focused window
 bindsym Mod4+q kill
@@ -87,12 +87,13 @@ bindsym Mod4+a focus parent
 bindsym Mod4+c focus child
 
 # switch to workspace
-set $workspace1 "1: www"
+set $ws1 1: www
+set $ws4 4: mail
 
-bindsym Mod4+1 workspace $workspace1
+bindsym Mod4+1 workspace $ws1
 bindsym Mod4+2 workspace number 2
 bindsym Mod4+3 workspace number 3
-bindsym Mod4+4 workspace number 4
+bindsym Mod4+4 workspace $ws4
 bindsym Mod4+5 workspace number 5
 bindsym Mod4+6 workspace number 6
 bindsym Mod4+7 workspace number 7
@@ -101,10 +102,10 @@ bindsym Mod4+9 workspace number 9
 bindsym Mod4+0 workspace number 10
 
 # move focused container to workspace
-bindsym Mod4+Shift+1 move container to workspace $workspace1
+bindsym Mod4+Shift+1 move container to workspace $ws1
 bindsym Mod4+Shift+2 move container to workspace number 2
 bindsym Mod4+Shift+3 move container to workspace number 3
-bindsym Mod4+Shift+4 move container to workspace number 4
+bindsym Mod4+Shift+4 move container to workspace $ws4
 bindsym Mod4+Shift+5 move container to workspace number 5
 bindsym Mod4+Shift+6 move container to workspace number 6
 bindsym Mod4+Shift+7 move container to workspace number 7
@@ -158,7 +159,6 @@ bar {
 		separator  #222222
 
 		# bar.class        border  backgr. text
-		#focused_workspace  #475969 #475969 #eeeeee
 		focused_workspace  #81A2BE #81A2BE #1d1f21
 		active_workspace   #444444 #444444 #ffffff
 		inactive_workspace #222222 #222222 #969896       
@@ -176,6 +176,7 @@ bindsym Ctrl+Mod1+Left workspace prev
 bindsym XF86AudioRaiseVolume exec amixer set Master 5%+ -q
 bindsym XF86AudioLowerVolume exec amixer set Master 5%- -q
 bindsym XF86AudioMute exec amixer set Master toggle -q
+bindsym XF86AudioMicMute exec amixer set Capture toggle -q
 
 # mpd control
 bindsym XF86AudioPlay exec mpc toggle
@@ -189,7 +190,6 @@ client.focused_inactive #444444 #444444 #eeeeee #666666
 client.unfocused        #222222 #222222 #bbbbbb #222222
 client.urgent           #700000 #700000 #eeeeee #700000
 
-
 bindsym Mod4+b bar mode toggle
 
 # Make the currently focused window a scratchpad
@@ -201,16 +201,12 @@ bindsym Mod4+p scratchpad show
 # no title bar, only x pixels border
 new_window pixel 2
 
-
 # scripts shortcuts
-
 bindsym Mod4+l exec /home/jean/bin/xtrlock_wrapper.sh
 bindsym XF86Launch1 exec xtrlock
-
 bindsym Mod4+i exec notify-send MPD "$(mpc status)"
 bindsym Mod4+m exec ~/bin/mpc_dmenu.sh
 bindsym Mod4+n exec ~/bin/rename_i3_ws.py
-
 bindsym Print exec scrot -q 100 -e 'mv $f ~/Pictures/Screenshots'
 
 # floating windows rules
@@ -224,7 +220,9 @@ for_window [class="Gcolor2"] floating enable
 for_window [class="Mate-calc"] floating enable
 for_window [class="Arandr"] floating enable
 for_window [class="GLeds"] floating enable
-for_window [window_role="pop-up"] floating enable--
+for_window [class="Wine"] floating enable
+for_window [class="Skype"] floating enable
+for_window [window_role="pop-up"] floating enable
 
 
 # test config for i3 dsm-changes
