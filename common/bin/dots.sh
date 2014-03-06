@@ -8,15 +8,15 @@ SRC="
 .fehbg
 .i3
 .i3status.conf
-.nanorc
-.vimrc
 .xinitrc
-.Xresources
-.zshrc
-.zshrc_aliases
 "
 
 COMMON="
+.nanorc
+.vimrc
+.Xresources
+.zshrc
+.zshrc_aliases
 bin"
 
 backup_wall()
@@ -27,12 +27,20 @@ backup_wall()
 	cp -v "$wall" "$TARGET/$(hostname)/$wall_basename"
 }
 
+check_dir()
+{
+	if [[ ! -d "$1" ]]; then
+		mkdir -vp "$1"
+	fi
+}
+
 backup_files()
 {
+	check_dir "$2"
 	for i in $1
 	do
 		if [[ -d "$HOME/$i" ]]; then
-			mkdir -p "$TARGET/$i"
+			mkdir -vp "$2/$i"
 			cp -rv "$HOME/$i" "$2"
 		elif [[ -f "$HOME/$i" ]]; then
 			cp -v "$HOME/$i" "$2/$i"
@@ -40,12 +48,8 @@ backup_files()
 	done
 }
 
-if [[ ! -d $TARGET ]]; then
-	mkdir -p $TARGET
-fi
-
 backup_files "$SRC" "$TARGET/$(hostname)"
-backup_files "$COMMON" "$TARGET"
+backup_files "$COMMON" "$TARGET/common"
 backup_wall
 
 exit 0
