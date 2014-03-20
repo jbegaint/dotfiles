@@ -23,7 +23,7 @@ xset dpms 300 &
 pnmixer &
 compton -b &
 bluetooth off &
-urxvtd -q -o -f &
+#urxvtd -q -o -f &
 
 #restore background
 eval `cat ~/.fehbg` &

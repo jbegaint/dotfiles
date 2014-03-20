@@ -1,11 +1,11 @@
-URxvt.font: xft:Source Code Pro:size=10
+URxvt.font: xft:Source Code Pro for Powerline:size=10
 
 URxvt.perl-ext-common: default,clipboard,url-select,tabbedex
 *.URxvt.urgentOnBell: true
 URxvt.url-select.launcher: chromium
 URxvt.url-select.underline: true
-URxvt.keysym.M-u: perl:url-select:select_next
 
+URxvt.keysym.M-u: perl:url-select:select_next
 URxvt.keysym.M-Escape: perl:keyboard-select:activate
 URxvt.keysym.M-s: perl:keyboard-select:search
 

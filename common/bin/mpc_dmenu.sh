@@ -7,6 +7,7 @@ function load {
 
 	if [[ "$1" == "playlist" ]]; then
 		mpc -q load "$2"
+		mpc shuffle
 	else
 		echo "nope"
 		mpc find "$1" "$2" | mpc add
