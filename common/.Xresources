@@ -1,4 +1,4 @@
-URxvt.font: xft:Source Code Pro for Powerline:size=10
+URxvt.font: xft:Source Code Pro for Powerline:size=9
 
 URxvt.perl-ext-common: default,clipboard,url-select,tabbedex
 *.URxvt.urgentOnBell: true

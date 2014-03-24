@@ -1,7 +1,7 @@
 "-- General
 set number
 set ruler
-hi ColorColumn ctermbg=darkblue guibg=lightblue
+hi ColorColumn ctermbg=lightblue guibg=lightblue
 set cc=80
 set so=7
 
@@ -63,6 +63,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'bling/vim-airline'
 Bundle 'tpope/vim-fugitive'
 
+set t_Co=256
 let base16colorspace=256 
 colorscheme base16-tomorrow
 
@@ -80,9 +81,15 @@ noremap <silent> <F2> <ESC>:NERDTreeToggle<CR>
 " airline
 set laststatus=2
 let g:airline_powerline_fonts=1
-let g:airline_theme='tomorrow'
+" waiting for the mode color fix
+let g:airline_theme='jellybeans'
 
 " insert lines
-nmap <silent> <C-Enter> O<ESC>j
-map <silent> <S-Enter> o<ESC>k
-nmap <silent> <leader><CR> :noh<CR> 
+nnoremap <silent> <S-j> o<ESC>k
+nnoremap <silent> <S-k> O<ESC>j
+nnoremap <silent> <leader><CR> :noh<CR> 
+
+"-- GUI stuff
+if has("gui_running")
+	set guifont=Source\ Code\ Pro\ 10
+endif
