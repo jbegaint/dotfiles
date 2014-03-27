@@ -41,7 +41,7 @@ set wrap
 set lbr
 set tw=80
 " Theme
-set background=dark
+"set background=dark
 
 set nofoldenable
 
@@ -65,7 +65,14 @@ Bundle 'tpope/vim-fugitive'
 
 set t_Co=256
 let base16colorspace=256 
-colorscheme base16-tomorrow
+
+if has('gui_running')
+	colorscheme base16-solarized	
+	set background=light
+else
+	colorscheme base16-tomorrow
+	set background=dark
+endif
 
 filetype plugin indent on
 
