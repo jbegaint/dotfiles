@@ -48,7 +48,6 @@ set nofoldenable
 "-- Plugins
 set nocompatible
 filetype off
-
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
@@ -62,13 +61,14 @@ Bundle 'airblade/vim-gitgutter'
 Bundle 'kien/ctrlp.vim'
 Bundle 'bling/vim-airline'
 Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-commentary'
 
 set t_Co=256
 let base16colorspace=256 
 
 if has('gui_running')
-	colorscheme base16-solarized	
-	set background=light
+	colorscheme base16-monokai
+	set background=dark
 else
 	colorscheme base16-tomorrow
 	set background=dark

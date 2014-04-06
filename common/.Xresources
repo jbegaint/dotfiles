@@ -21,5 +21,6 @@ URxvt.new-button: no
 URxvt.scrollBar: false
 
 URxvt.foreground: #eeeeee
-URxvt.background: #222222
+URxvt.background: #1D1F21
 URxvt.depth: 32
+

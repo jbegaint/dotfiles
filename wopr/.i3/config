@@ -39,10 +39,10 @@ bindsym Mod4+d exec dmenu_run -i -sb '#4A6787' -l '3' -h 20
 # bindsym Mod4+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym Mod4+j focus left
-bindsym Mod4+k focus down
-#bindsym Mod4+l focus up
-bindsym Mod4+semicolon focus right
+bindsym Mod4+h focus left
+bindsym Mod4+j focus down
+bindsym Mod4+k focus up
+bindsym Mod4+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym Mod4+Left focus left
@@ -63,10 +63,10 @@ bindsym Mod4+Shift+Up move up
 bindsym Mod4+Shift+Right move right
 
 # split in horizontal orientation
-bindsym Mod4+h split h
+bindsym Mod4+Shift+h split h
 
 # split in vertical orientation
-bindsym Mod4+v split v
+bindsym Mod4+Shift+v split v
 
 # enter fullscreen mode for the focused container
 bindsym Mod4+f fullscreen
@@ -150,7 +150,8 @@ bindsym Mod4+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
+	status_command i3status
+	#status_command i3situation
 	position top
 
 	colors {
@@ -202,7 +203,7 @@ bindsym Mod4+p scratchpad show
 new_window pixel 2
 
 # scripts shortcuts
-bindsym Mod4+l exec /home/jean/bin/xtrlock_wrapper.sh
+#bindsym Mod4+l exec /home/jean/bin/xtrlock_wrapper.sh
 bindsym XF86Launch1 exec xtrlock
 bindsym Mod4+i exec notify-send MPD "$(mpc status)"
 bindsym Mod4+m exec ~/bin/mpc_dmenu.sh

@@ -23,7 +23,7 @@ font pango: Source Code Pro Medium 9
 floating_modifier Mod4
 
 # start a terminal
-bindsym Mod4+Return exec urxvtc
+bindsym Mod4+Return exec urxvt
 
 # kill focused window
 bindsym Mod4+q kill
@@ -38,10 +38,10 @@ bindsym Mod4+d exec dmenu_run -i -sb '#4A6787' -l '3' -h 20
 # bindsym Mod4+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym Mod4+j focus left
-bindsym Mod4+k focus down
-#bindsym Mod4+l focus up
-bindsym Mod4+semicolon focus right
+bindsym Mod4+l focus left
+bindsym Mod4+j focus down
+bindsym Mod4+k focus up
+bindsym Mod4+h focus right
 
 # alternatively, you can use the cursor keys:
 bindsym Mod4+Left focus left
@@ -62,10 +62,10 @@ bindsym Mod4+Shift+Up move up
 bindsym Mod4+Shift+Right move right
 
 # split in horizontal orientation
-bindsym Mod4+h split h
+bindsym Mod4+Shift+h split h
 
 # split in vertical orientation
-bindsym Mod4+v split v
+bindsym Mod4+Shift+v split v
 
 # enter fullscreen mode for the focused container
 bindsym Mod4+f fullscreen
@@ -88,7 +88,7 @@ bindsym Mod4+c focus child
 
 # switch to workspace
 set $ws1 1: www
-set $ws4 4
+set $ws4 number 4
 
 bindsym Mod4+1 workspace $ws1
 bindsym Mod4+2 workspace number 2
@@ -202,7 +202,7 @@ bindsym Mod4+p scratchpad show
 new_window pixel 2
 
 # scripts shortcuts
-bindsym Mod4+l exec /home/jean/bin/xtrlock_wrapper.sh
+# bindsym Mod4+l exec /home/jean/bin/xtrlock_wrapper.sh
 bindsym XF86Launch1 exec xtrlock
 bindsym Mod4+i exec notify-send MPD "$(mpc status)"
 bindsym Mod4+m exec ~/bin/mpc_dmenu.sh
@@ -219,9 +219,10 @@ for_window [class="Transmission"] floating enable
 for_window [class="Gcolor2"] floating enable
 for_window [class="Mate-calc"] floating enable
 for_window [class="Arandr"] floating enable
-for_window [class="GLeds"] floating enable
+for_window [class="Gleds"] floating enable
 for_window [class="Wine"] floating enable
 for_window [class="Skype"] floating enable
+for_window [class="Meh"] floating enable
 for_window [window_role="pop-up"] floating enable
 
 

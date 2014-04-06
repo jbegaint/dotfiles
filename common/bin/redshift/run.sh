@@ -10,4 +10,4 @@ CITY=$(geoiplookup $IP -f ./GeoLiteCity.dat)
 LAT=$(echo "$CITY" | awk -F ',' '{print $7}')
 LONG=$(echo "$CITY" | awk -F ', ' '{print $8}')
 
-redshift-gtk -l $LAT:$LONG &
+redshift -l $LAT:$LONG &

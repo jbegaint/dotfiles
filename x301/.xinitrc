@@ -22,7 +22,7 @@ xset dpms 300 &
 #pnmixer &
 compton -b &
 #bluetooth off &
-urxvtd -q -o -f &
+#urxvtd -q -o -f &
 
 setxkbmap fr
 xset -b
@@ -34,5 +34,7 @@ eval `cat ~/.fehbg` &
 #~/bin/docking.sh &
 ~/bin/redshift/run.sh &
 
-exec i3
+wifi on &
 
+exec i3
+#exec mate-session

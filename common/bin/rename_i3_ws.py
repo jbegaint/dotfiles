@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 
 # rename current workspace name "?" to "workspace_num: str"
 # if str is null, then reset workspace name to "workspace_num"
