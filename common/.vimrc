@@ -1,4 +1,4 @@
-"-- General
+
 set number
 set ruler
 hi ColorColumn ctermbg=lightblue guibg=lightblue
@@ -63,15 +63,14 @@ Bundle 'bling/vim-airline'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-commentary'
 
+set background=dark
 set t_Co=256
 let base16colorspace=256 
 
 if has('gui_running')
 	colorscheme base16-monokai
-	set background=dark
 else
 	colorscheme base16-tomorrow
-	set background=dark
 endif
 
 filetype plugin indent on
@@ -90,6 +89,7 @@ set laststatus=2
 let g:airline_powerline_fonts=1
 " waiting for the mode color fix
 let g:airline_theme='jellybeans'
+" let g:airline_theme='tomorrow'
 
 " insert lines
 nnoremap <silent> <S-j> o<ESC>k

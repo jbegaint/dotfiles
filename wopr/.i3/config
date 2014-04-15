@@ -151,12 +151,11 @@ bindsym Mod4+r mode "resize"
 # finds out, if available)
 bar {
 	status_command i3status
-	#status_command i3situation
 	position top
 
 	colors {
-                background #222222
-                statusline #dddddd
+		background #222222
+		statusline #dddddd
 		separator  #222222
 
 		# bar.class        border  backgr. text
@@ -165,9 +164,7 @@ bar {
 		inactive_workspace #222222 #222222 #969896       
 		urgent_workspace   #CC6666 #CC6666 #1d1f21
 	}
-        mode dock
-        hidden_state hide
-        modifier mod1
+	modifier mod1
 }
 
 bindsym Ctrl+Mod1+Right workspace next
