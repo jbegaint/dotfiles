@@ -1,4 +1,4 @@
-
+"-- General
 set number
 set ruler
 hi ColorColumn ctermbg=lightblue guibg=lightblue
@@ -37,11 +37,11 @@ set nobackup
 set nowb
 set noswapfile
 
-set wrap
-set lbr
+" hard wrap
 set tw=80
-" Theme
-"set background=dark
+set formatoptions+=t
+" for soft wrap
+" set wrap linebreak nolist
 
 set nofoldenable
 
@@ -63,12 +63,15 @@ Bundle 'bling/vim-airline'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-commentary'
 
-set background=dark
 set t_Co=256
 let base16colorspace=256 
+set background=dark
 
 if has('gui_running')
 	colorscheme base16-monokai
+	set guifont=Source\ Code\ Pro\ 10
+	set guioptions-=LlRrb
+	set guioptions-=mT
 else
 	colorscheme base16-tomorrow
 endif
@@ -89,14 +92,8 @@ set laststatus=2
 let g:airline_powerline_fonts=1
 " waiting for the mode color fix
 let g:airline_theme='jellybeans'
-" let g:airline_theme='tomorrow'
 
 " insert lines
 nnoremap <silent> <S-j> o<ESC>k
 nnoremap <silent> <S-k> O<ESC>j
 nnoremap <silent> <leader><CR> :noh<CR> 
-
-"-- GUI stuff
-if has("gui_running")
-	set guifont=Source\ Code\ Pro\ 10
-endif
