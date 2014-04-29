@@ -1,7 +1,6 @@
 "-- General
 set number
 set ruler
-hi ColorColumn ctermbg=lightblue guibg=lightblue
 set cc=80
 set so=7
 
@@ -37,19 +36,15 @@ set nobackup
 set nowb
 set noswapfile
 
-" hard wrap
+set wrap linebreak nolist
 set tw=80
-set formatoptions+=t
-" for soft wrap
-" set wrap linebreak nolist
-
-set nofoldenable
+set fo+=w
 
 "-- Plugins
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+call vundle#begin()
 
 " let Vundle manage Vundle, required
 Bundle 'gmarik/vundle'
@@ -62,6 +57,8 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'bling/vim-airline'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-commentary'
+
+call vundle#end()
 
 set t_Co=256
 let base16colorspace=256 
