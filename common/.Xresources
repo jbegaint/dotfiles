@@ -19,8 +19,7 @@ URxvt.autohide: yes
 URxvt.new-button: no
  
 URxvt.scrollBar: false
-!URxvt.scrollistyle: plain
-
 URxvt.foreground: #eeeeee
 URxvt.background: #1D1F21
 URxvt.depth: 32
+

@@ -17,6 +17,7 @@ COMMON="
 .Xresources
 .zshrc
 .zshrc_aliases
+.vim
 bin"
 
 backup_wall()

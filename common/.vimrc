@@ -57,11 +57,12 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'bling/vim-airline'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-commentary'
+Bundle 'plasticboy/vim-markdown'
 
 call vundle#end()
 
 set t_Co=256
-let base16colorspace=256 
+" let base16colorspace=256 
 set background=dark
 
 if has('gui_running')
@@ -70,8 +71,14 @@ if has('gui_running')
 	set guioptions-=LlRrb
 	set guioptions-=mT
 else
-	colorscheme base16-tomorrow
+	" colorscheme base16-mocha
+	colorscheme wombat256mod
 endif
+
+" https://stackoverflow.com/questions/2447109/showing-a-different-background-colour-in-vim-past-80-characters
+" let &colorcolumn=join(range(81,999),",")
+let &colorcolumn="80,".join(range(120,999),",")
+highlight ColorColumn ctermbg=235 guibg=#2c2d27
 
 filetype plugin indent on
 
@@ -88,9 +95,14 @@ noremap <silent> <F2> <ESC>:NERDTreeToggle<CR>
 set laststatus=2
 let g:airline_powerline_fonts=1
 " waiting for the mode color fix
-let g:airline_theme='jellybeans'
+" let g:airline_theme='jellybeans'
+let g:airline_theme='wombat'
 
 " insert lines
 nnoremap <silent> <S-j> o<ESC>k
 nnoremap <silent> <S-k> O<ESC>j
 nnoremap <silent> <leader><CR> :noh<CR> 
+
+" http://www.bestofvim.com/tip/leave-ex-mode-good/
+nnoremap Q <nop>
+
