@@ -24,6 +24,7 @@ pnmixer &
 compton -b &
 bluetooth off &
 #urxvtd -q -o -f &
+# xset -b
 
 #restore background
 eval `cat ~/.fehbg` &
