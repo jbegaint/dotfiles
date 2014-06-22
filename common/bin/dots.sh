@@ -12,6 +12,7 @@ SRC="
 "
 
 COMMON="
+.tmux.conf
 .nanorc
 .vimrc
 .Xresources
