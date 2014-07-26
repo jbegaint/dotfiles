@@ -23,14 +23,9 @@ xset dpms 300 &
 pnmixer &
 compton -b &
 bluetooth off &
-#urxvtd -q -o -f &
-# xset -b
-
-#restore background
-eval `cat ~/.fehbg` &
 
 #launch scripts
-~/bin/docking.sh &
+~/bin/docked.sh &
 ~/bin/redshift/run.sh &
 
 exec i3

@@ -10,11 +10,18 @@ set autoread
 let mapleader = ","
 nmap <leader>w :w!<cr>
 
+map j gj
+map k gk
+
 syntax on
+
 set encoding=utf-8
+set mouse=a
 
 set wildmenu
 set wildignore=*.o,*~,*.pyc
+set wildignore+=*.aux,*.dvi,*.bcf,*.blg,*.bbl
+
 
 set autoindent
 set smartindent
@@ -39,6 +46,10 @@ set noswapfile
 set wrap linebreak nolist
 set tw=80
 set fo+=wt
+set nofoldenable
+set modeline
+
+set complete+=kspell
 
 "-- Plugins
 set nocompatible
@@ -46,68 +57,123 @@ filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#begin()
 
-" let Vundle manage Vundle, required
-Bundle 'gmarik/vundle'
-Bundle 'chriskempson/base16-vim'
-Bundle 'scrooloose/nerdtree'
-Bundle 'jcf/vim-latex'
 Bundle 'Raimondi/delimitMate'
+Bundle 'Shougo/context_filetype.vim'
+Bundle 'Shougo/neocomplete.vim'
+Bundle 'Shougo/vimproc.vim'
 Bundle 'airblade/vim-gitgutter'
-Bundle 'kien/ctrlp.vim'
-Bundle 'bling/vim-airline'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-commentary'
-Bundle 'plasticboy/vim-markdown'
-Bundle 'scrooloose/syntastic'
-Bundle 'petRUShka/vim-opencl'
-" Bundle 'Shougo/neocomplete.vim'
-Bundle 'clang_pro.vim'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'bling/vim-airline'
+Bundle 'chriskempson/base16-vim'
+Bundle 'gmarik/vundle'
+Bundle 'jcf/vim-latex'
+Bundle 'kien/ctrlp.vim'
 Bundle 'mkitt/tabline.vim'
+Bundle 'petRUShka/vim-opencl'
+Bundle 'plasticboy/vim-markdown'
+Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/syntastic'
+Bundle 'tpope/vim-commentary'
+Bundle 'tpope/vim-fugitive'
+Bundle 'junegunn/goyo.vim'
+Bundle 'junegunn/seoul256.vim'
+Bundle 'github-theme'
+Bundle 'pyte'
+Bundle 'xoria256.vim'
+Bundle 'junegunn/limelight.vim'
+Bundle 'mitsuhiko/fruity-vim-colorscheme'
+Bundle 'chriskempson/vim-tomorrow-theme'
+Bundle 'vydark'
+Bundle 'vylight'
+Bundle 'cleanroom'
+Bundle 'gundo'
+Bundle 'jonathanfilip/vim-lucius'
+Bundle 'vivkin/flatland.vim'
+Bundle 'jordwalke/flatlandia'
+Bundle 'zeis/vim-kolor'
+Bundle 'PotatoesMaster/i3-vim-syntax'
+Bundle 'noahfrederick/vim-hemisu'
+Bundle 'w0ng/vim-hybrid'
 
 call vundle#end()
 
 set t_Co=256
-" let base16colorspace=256 
 set background=dark
 
 if has('gui_running')
-	colorscheme solarized
-	set background=light
-	let g:airline_theme='solarized'
+	colorscheme flatland
+	let g:airline_theme='flatlandia'
 	set guifont=Source\ Code\ Pro\ 10
-	set guioptions-=LlRrb
-	set guioptions-=mT
+
+	set guioptions-=m
+	set guioptions-=T
+	set guioptions-=r
+	set guioptions-=L
+
+	% "standard" editor shortcuts
+	nnoremap <C-tab> :tabnext <CR>
+	nnoremap <C-S-tab> :tabprevious <CR>
 else
 	colorscheme wombat256mod
-	let g:airline_theme='wombat'
+	let g:airline_theme='tomorrow'
 endif
 
 " https://stackoverflow.com/questions/2447109/showing-a-different-background-colour-in-vim-past-80-characters
 " let &colorcolumn=join(range(81,999),",")
-let &colorcolumn="80,".join(range(120,999),",")
+" let &colorcolumn="80,".join(range(120,999),",")
 highlight ColorColumn ctermbg=235 guibg=#2c2d27
 
 filetype plugin indent on
 
-"vim-latex settings
+
+" ------ Plugins options and shortcuts ------
+
+" -- Neocomplete
+let g:neocomplete#use_vimproc = 1
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#enable_auto_select = 0
+let g:neocomplete#sources#syntax#min_keyword_length = 2
+
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+	return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+endfunction
+
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" delimitMate and neocomplete compatibility
+imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
+
+" -- vim-latex settings
 let g:Tex_DefaultTargetFormat="pdf"
 let g:Tex_ViewRule_pdf="zathura"
+let g:tex_flavor='latex'
 
-"-- Shortcuts
-" NERDTree
+" -- NERDTree
 nnoremap <silent> <F2> :NERDTreeToggle<CR>
 noremap <silent> <F2> <ESC>:NERDTreeToggle<CR>
 
-" airline
+" -- Gundo
+nnoremap <F4> :GundoToggle<CR>
+
+" -- vim-airline
 set laststatus=2
 let g:airline_powerline_fonts=1
 
-" delimitMate
+" -- delimitMate
 let delimitMate_expand_cr=1
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#sources#syntax#min_keyword_length = 3
 
+" -- Goyo
+nnoremap <Leader><Space> :Goyo<CR>
+
+" -- vim-fugitive
+nnoremap <F10> :Gstatus<CR>
+
+
+" ------ misc shortcuts/ options ------
 
 " insert lines
 nnoremap <silent> <S-j> o<ESC>k
@@ -126,3 +192,8 @@ augroup myvimrc
 	au!  
 	au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | 
 augroup END
+
+" timeout for ESC
+set timeoutlen=1000 ttimeoutlen=0
+
+nnoremap <C-Space>		:w <bar> exec '!make' <CR> <CR>

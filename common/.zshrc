@@ -30,6 +30,7 @@ fi
 
 # enable alert
 precmd () (
+	# print -Pn "\e]2;[%1~]\a"
     echo -ne '\a'
 )
 
@@ -50,3 +51,4 @@ BASE16_SHELL="$HOME/.config/base16-shell/base16-$BASE16_SCHEME.dark.sh"
 source /usr/bin/virtualenvwrapper.sh 
 
 eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
+# source ~/.fzf.zsh

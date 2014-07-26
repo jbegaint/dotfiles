@@ -19,73 +19,75 @@
 # font pango:DejaVu Sans Mono 10
 font pango: Source Code Pro Medium 9
 
+set $mod Mod4
+
 # use Mouse+Mod4 to drag floating windows to their wanted position
 floating_modifier Mod4
 
 # start a terminal
-# bindsym Mod4+Return exec urxvtc
-bindsym Mod4+Return exec urxvt
+# bindsym $mod+Return exec urxvtc
+bindsym $mod+Return exec urxvt
 
 # kill focused window
-bindsym Mod4+q kill
+bindsym $mod+q kill
 
 # start dmenu (a program launcher)
 
-bindsym Mod4+d exec ~/bin/dmenu_run.pl -i -sb '#81A2BE' -sf '#000000' -h 20
+bindsym $mod+d exec ~/bin/dmenu_run.pl -i -sb '#81A2BE' -sf '#000000' -h 20
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-# bindsym Mod4+d exec --no-startup-id i3-dmenu-desktop
+# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym Mod4+h focus left
-bindsym Mod4+j focus down
-bindsym Mod4+k focus up
-bindsym Mod4+l focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
-bindsym Mod4+Left focus left
-bindsym Mod4+Down focus down
-bindsym Mod4+Up focus up
-bindsym Mod4+Right focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
 
 # move focused window
-bindsym Mod4+Shift+j move left
-bindsym Mod4+Shift+k move down
-bindsym Mod4+Shift+l move up
-bindsym Mod4+Shift+semicolon move right
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
 
 # alternatively, you can use the cursor keys:
-bindsym Mod4+Shift+Left move left
-bindsym Mod4+Shift+Down move down
-bindsym Mod4+Shift+Up move up
-bindsym Mod4+Shift+Right move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym Mod4+Shift+h split h
+bindsym $mod+Shift+h split h
 
 # split in vertical orientation
-bindsym Mod4+Shift+v split v
+bindsym $mod+Shift+v split v
 
 # enter fullscreen mode for the focused container
-bindsym Mod4+f fullscreen
+bindsym $mod+f fullscreen
 
-bindsym Mod4+s layout stacking
-bindsym Mod4+w layout tabbed
-bindsym Mod4+e layout toggle split
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym Mod4+Shift+space floating toggle
+bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym Mod4+space focus mode_toggle
+bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym Mod4+a focus parent
+bindsym $mod+a focus parent
 
 # focus the child container
-bindsym Mod4+c focus child
+bindsym $mod+c focus child
 
 # switch to workspace
 set $ws1 1: www
@@ -93,35 +95,35 @@ set $ws2 2: misc
 set $ws3 3: dev
 set $ws4 4: mail
 
-bindsym Mod4+1 workspace $ws1
-bindsym Mod4+2 workspace $ws2
-bindsym Mod4+3 workspace $ws3
-bindsym Mod4+4 workspace $ws4
-bindsym Mod4+5 workspace number 5
-bindsym Mod4+6 workspace number 6
-bindsym Mod4+7 workspace number 7
-bindsym Mod4+8 workspace number 8
-bindsym Mod4+9 workspace number 9
-bindsym Mod4+0 workspace number 10
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
 
 # move focused container to workspace
-bindsym Mod4+Shift+1 move container to workspace $ws1
-bindsym Mod4+Shift+2 move container to workspace $ws2
-bindsym Mod4+Shift+3 move container to workspace $ws3
-bindsym Mod4+Shift+4 move container to workspace $ws4
-bindsym Mod4+Shift+5 move container to workspace number 5
-bindsym Mod4+Shift+6 move container to workspace number 6
-bindsym Mod4+Shift+7 move container to workspace number 7
-bindsym Mod4+Shift+8 move container to workspace number 8
-bindsym Mod4+Shift+9 move container to workspace number 9
-bindsym Mod4+Shift+0 move container to workspace number 10
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
 
 # reload the configuration file
-bindsym Mod4+Shift+c reload
+bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym Mod4+Shift+r restart
+bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym Mod4+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -147,28 +149,40 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
-bindsym Mod4+r mode "resize"
+bindsym $mod+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
 bar {
 	status_command i3status
 	position top
-	# tray_output LVDS1
+	mode dock
+	hidden_state hide
 
 	colors {
 		background #222222
 		statusline #dddddd
 		separator  #222222
-
+		
 		# bar.class        border  backgr. text
-		# focused_workspace  #81A2BE #81A2BE #1d1f21
-		focused_workspace  #61A2BE #81A2BE #1d1f21
-		active_workspace   #444444 #444444 #ffffff
-		inactive_workspace #222222 #222222 #969896       
-		urgent_workspace   #CC6666 #CC6666 #1d1f21
+		focused_workspace	#81A2BE #81A2BE #222222
+		active_workspace	#969896 #969896 #222222
+		inactive_workspace	#222222 #222222 #969896
+		urgent_workspace	#CC6666 #CC6666 #1d1f21
 	}
-	modifier mod1
+}
+
+set $audiomenu "volume: [+]10% [-]10% [m]ute [r]eset"
+bindsym $mod+F12         mode $audiomenu
+
+mode $audiomenu {
+	bindsym r             exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -- 50%
+    bindsym plus          exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -- +10%
+    bindsym KP_Add        exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -- +10%
+    bindsym minus         exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -- -10%
+    bindsym KP_Subtract   exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -- -10%
+    bindsym m             exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+    bindsym Return        mode "default"
+    bindsym Escape        mode "default"
 }
 
 bindsym Ctrl+Mod1+Right workspace next
@@ -186,33 +200,33 @@ bindsym XF86AudioNext exec mpc next
 bindsym XF86AudioPrev exec mpc prev
 
 # client.class          border  backgr. text    indicator
-
 client.focused          #616161 #969896 #000000 #0099bb
 client.focused_inactive #444444 #444444 #eeeeee #666666
 client.unfocused        #222222 #222222 #bbbbbb #222222
 client.urgent           #700000 #700000 #eeeeee #700000
 
-bindsym Mod4+b bar mode toggle
+bindsym $mod+b bar mode toggle
 
 # Make the currently focused window a scratchpad
-bindsym Mod4+Shift+p move scratchpad
+bindsym $mod+Shift+p move scratchpad
 
 # Show the first scratchpad window
-bindsym Mod4+p scratchpad show
+bindsym $mod+p scratchpad show
 
 # no title bar, only x pixels border
 new_window pixel 2
 
 # scripts shortcuts
-bindsym XF86Launch1 exec i3lock-wrapper
-bindsym Mod4+i exec notify-send MPD "$(mpc status)"
-bindsym Mod4+m exec ~/bin/mpc_dmenu.sh
-bindsym Mod4+n exec ~/bin/rename_i3_ws.py
+bindsym XF86Launch1 exec physlock
+bindsym $mod+i exec notify-send MPD "$(mpc status)"
+bindsym $mod+m exec ~/bin/mpc_dmenu.sh
+bindsym $mod+n exec ~/bin/rename_i3_ws.py
 bindsym Print exec scrot -q 100 -e 'mv $f ~/Pictures/Screenshots'
 
 # floating windows rules
 for_window [class="MPlayer"] floating enable
 for_window [class="mpv"] floating enable
+for_window [class="Vlc"] floating enable
 for_window [class="Steam"] floating enable
 for_window [class="Transmission"] floating enable
 for_window [class="Gcolor2"] floating enable
@@ -233,3 +247,5 @@ enable_alpha_channel yes
 new_window inset 2
 
 workspace_auto_back_and_forth yes
+
+# vim:filetype=i3
