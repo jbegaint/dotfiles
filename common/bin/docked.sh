@@ -1,8 +1,9 @@
 #!/bin/bash
-# inspiration : http://nick.txtcc.com/index.php/linux/809
+# Switch output, keyboard layout and stuff when docking/undocking.
+# Inspiration : http://nick.txtcc.com/index.php/linux/809
 
-IN="LVDS1"
-EXT="HDMI3"
+readonly IN="LVDS1"
+readonly EXT="HDMI3"
 
 is_docked() {
 	local dockname="Mini Dock Plus"

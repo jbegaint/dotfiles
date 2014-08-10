@@ -11,13 +11,13 @@
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
-#font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # The font above is very space-efficient, that is, it looks good, sharp and
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
 # chose a FreeType font, such as:
 # font pango:DejaVu Sans Mono 10
-font pango: Source Code Pro Medium 9
+font pango:Source Code Pro Medium 9
 
 set $mod Mod4
 
@@ -34,6 +34,7 @@ bindsym $mod+q kill
 # start dmenu (a program launcher)
 
 bindsym $mod+d exec ~/bin/dmenu_run.pl -i -sb '#81A2BE' -sf '#000000' -h 20
+bindsym $mod+Shift+d exec j4-dmenu-desktop --dmenu="dmenu -i -sb '#81A2BE' -sf '#000000' -h 20"
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
@@ -118,6 +119,12 @@ bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10
 
+# move current workspace between monitors
+bindsym $mod+Control+h move workspace to output left
+bindsym $mod+Control+j move workspace to output down
+bindsym $mod+Control+k move workspace to output up
+bindsym $mod+Control+l move workspace to output right
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -133,10 +140,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j           resize shrink width 10 px or 10 ppt
-        bindsym k           resize grow height 10 px or 10 ppt
-        bindsym l           resize shrink height 10 px or 10 ppt
-        bindsym semicolon   resize grow width 10 px or 10 ppt
+        bindsym h           resize shrink width 10 px or 10 ppt
+        bindsym j           resize grow height 10 px or 10 ppt
+        bindsym k           resize shrink height 10 px or 10 ppt
+        bindsym l			resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left        resize shrink width 10 px or 10 ppt
@@ -151,25 +158,46 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+# Windows and bar themes
+# define colors (Tomorrow theme)
+set $black		#1D1F21
+set $blue		#81A2BE
+set $green		#B5BD68
+set $grey 		#969896
+set $red 		#CC6666
+set $white 		#C5C8C6
+
+# no title bar, only x pixels border
+new_window pixel 1
+
+# client.class          border  backgr. text    indicator
+client.focused          $blue 	$blue 	$black	$green
+#client.focused_inactive $grey 	$grey 	$black 	$green
+client.focused_inactive $black 	$black 	$white	$green
+client.unfocused        $black 	$black 	$grey	$green
+client.urgent           $red	$red	$black  $green
+
 bar {
 	status_command i3status
+	#status_command ~/bin/i3status.sh
 	position top
-	mode dock
-	hidden_state hide
+	tray_output primary
 
 	colors {
-		background #222222
-		statusline #dddddd
-		separator  #222222
+		background 	$black 
+		statusline 	$white
+		separator	$black 
 		
 		# bar.class        border  backgr. text
-		focused_workspace	#81A2BE #81A2BE #222222
-		active_workspace	#969896 #969896 #222222
-		inactive_workspace	#222222 #222222 #969896
-		urgent_workspace	#CC6666 #CC6666 #1d1f21
+		focused_workspace	$blue 	$blue	$black	
+		#active_workspace	$grey	$grey 	$black
+		active_workspace	$black	$black 	$white
+		inactive_workspace	$black	$black 	$grey
+		urgent_workspace	$red 	$red 	$black	
 	}
 }
 
+# audio mode
 set $audiomenu "volume: [+]10% [-]10% [m]ute [r]eset"
 bindsym $mod+F12         mode $audiomenu
 
@@ -185,6 +213,7 @@ mode $audiomenu {
     bindsym Escape        mode "default"
 }
 
+# fast workspace switching
 bindsym Ctrl+Mod1+Right workspace next
 bindsym Ctrl+Mod1+Left workspace prev
 
@@ -199,11 +228,6 @@ bindsym XF86AudioPlay exec mpc toggle
 bindsym XF86AudioNext exec mpc next
 bindsym XF86AudioPrev exec mpc prev
 
-# client.class          border  backgr. text    indicator
-client.focused          #616161 #969896 #000000 #0099bb
-client.focused_inactive #444444 #444444 #eeeeee #666666
-client.unfocused        #222222 #222222 #bbbbbb #222222
-client.urgent           #700000 #700000 #eeeeee #700000
 
 bindsym $mod+b bar mode toggle
 
@@ -212,9 +236,6 @@ bindsym $mod+Shift+p move scratchpad
 
 # Show the first scratchpad window
 bindsym $mod+p scratchpad show
-
-# no title bar, only x pixels border
-new_window pixel 2
 
 # scripts shortcuts
 bindsym XF86Launch1 exec physlock
@@ -233,7 +254,7 @@ for_window [class="Gcolor2"] floating enable
 for_window [class="Galculator"] floating enable
 for_window [class="Arandr"] floating enable
 for_window [class="Gleds"] floating enable
-for_window [class="Wine"] floating enable
+for_window [class="^Wine$"] floating enable
 for_window [class="Skype"] floating enable
 
 for_window [class="file_progress"] floating enable
@@ -243,8 +264,8 @@ for_window [window_role="pop-up"] floating enable
 assign [class="Pidgin"] 10
 
 # test config for i3 dsm-changes
-enable_alpha_channel yes
-new_window inset 2
+#enable_alpha_channel yes
+#new_window inset 2
 
 workspace_auto_back_and_forth yes
 

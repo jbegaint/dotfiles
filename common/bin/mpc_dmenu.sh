@@ -1,56 +1,62 @@
 #!/bin/bash
 
-ACTIONS="toggle\nnext\nprev\nup\ndown\nalbum\nartist\nplaylists\nshuffle"
+readonly COMMANDS=(toggle next prev up down album artist playlists shuffle)
 
-function load {
+function load() {
 	mpc -q clear
 
 	if [[ "$1" == "playlist" ]]; then
 		mpc -q load "$2"
-		mpc shuffle
 	else
-		echo "nope"
-		mpc find "$1" "$2" | mpc add
+		mpc search "$1" "$2" | mpc add
 	fi
 	mpc -q play
 }
 
-function dmenu_wrapper {
+function dmenu_wrapper() {
 	dmenu -i -sb '#81A2BE' -sf '#000000' -nf '#969896' -p "$1:" -h 21
 }
 
-action=$(echo -e $ACTIONS | dmenu_wrapper "action")
+function parse_cmd() {
+	local $action=$1
 
-# test if return failure 
-[[ -z $action ]] && exit 1
+	case $action in
+		playlists)
+			res=$(mpc lsplaylists | dmenu_wrapper "playlist" )
+			[[ ! -z $res ]] && load "playlist" "$res"
+			;;
 
-case $action in
-	playlists)
-		res=$(mpc lsplaylists | dmenu_wrapper "playlist" )
-		load "playlist" "$res"
-		;;
+		artist)
+			res=$(mpc list artist | sort | uniq -i | dmenu_wrapper "artist")
+			[[ ! -z $res ]] && load "artist" "$res"
+			;;
 
-	artist)
-		res=$(mpc list artist | dmenu_wrapper "artist")
-		load "artist" "$res"
-		;;
+		album)	
+			res=$(mpc list album | dmenu_wrapper "album")
+			[[ ! -z $res ]] && load "album" "$res"
+			;;
 
-	album)	
-		res=$(mpc list album | dmenu_wrapper "album")
-		load "album" "$res"
-		;;
+		up)
+			amixer set Master 5%+ -q
+			;;
 
-	up)
-		amixer set Master 5%+ -q
-		;;
+		down)
+			amixer set Master 5%- -q
+			;;
 
-	down)
-		amixer set Master 5%- -q
-		;;
+		*)
+			mpc $action -q
+			;;
+	esac
+}
 
-	*)
-		mpc $action -q
-		;;
-esac
+main() {
+	action=$(printf "%s\n" "${COMMANDS[@]}" | dmenu_wrapper "action")
+
+	# if not empty then parse command
+	[[ ! -z $action ]] && parse_cmd $action
+}
+
+main
 
 exit 0

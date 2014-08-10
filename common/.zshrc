@@ -4,6 +4,7 @@
 export EDITOR="vim"
 export PS1=$'┌─[%n@%M][%~] $(__git_ps1 \"(%s)\")\n└─[\$] '
 export PATH=~/bin:~/.gem/ruby/2.0.0/bin/:$PATH
+export PATH="$HOME/.dynamic-colors/bin:$PATH"
 
 # history 
 HISTFILE=~/.histfile

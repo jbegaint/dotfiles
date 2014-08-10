@@ -51,6 +51,7 @@ set modeline
 
 set complete+=kspell
 
+
 "-- Plugins
 set nocompatible
 filetype off
@@ -94,10 +95,13 @@ Bundle 'zeis/vim-kolor'
 Bundle 'PotatoesMaster/i3-vim-syntax'
 Bundle 'noahfrederick/vim-hemisu'
 Bundle 'w0ng/vim-hybrid'
+Bundle 'xolox/vim-session'
+Bundle 'xolox/vim-misc'
+" Bundle 'mhinz/vim-startify'
+" Bundle 'CSApprox'
 
 call vundle#end()
 
-set t_Co=256
 set background=dark
 
 if has('gui_running')
@@ -105,15 +109,22 @@ if has('gui_running')
 	let g:airline_theme='flatlandia'
 	set guifont=Source\ Code\ Pro\ 10
 
+	" remove menu, toolbar, and srcollbars
 	set guioptions-=m
 	set guioptions-=T
 	set guioptions-=r
 	set guioptions-=L
 
+	" use console-like tabs
+	set guioptions-=e
+	" use console dialogs
+	set guioptions+=c
+
 	% "standard" editor shortcuts
 	nnoremap <C-tab> :tabnext <CR>
 	nnoremap <C-S-tab> :tabprevious <CR>
 else
+	set t_Co=256
 	colorscheme wombat256mod
 	let g:airline_theme='tomorrow'
 endif
@@ -172,6 +183,19 @@ nnoremap <Leader><Space> :Goyo<CR>
 " -- vim-fugitive
 nnoremap <F10> :Gstatus<CR>
 
+" -- vim-session
+" let g:session_autoload="no"
+" let g:session_autosave="yes"
+
+" -- vim-markdown
+let g:vim_markdown_folding_disabled=1
+
+" -- startify
+" let g:startify_session_persistence = 1
+
+" -- vim-session
+let g:session_autosave = "yes"
+let g:session_autoload = "yes"
 
 " ------ misc shortcuts/ options ------
 
@@ -197,3 +221,16 @@ augroup END
 set timeoutlen=1000 ttimeoutlen=0
 
 nnoremap <C-Space>		:w <bar> exec '!make' <CR> <CR>
+
+" -- highlight current line number
+" 1. clear highlight
+set cursorline
+hi clear CursorLine
+augroup CLClear
+	autocmd! ColorScheme * hi clear CursorLine
+augroup END
+" 2. set highlight for CursorLineNR
+hi CursorLineNr cterm=bold
+augroup CLNRSet
+	autocmd! ColorScheme * hi CursorLineNR cterm=bold
+augroup END
