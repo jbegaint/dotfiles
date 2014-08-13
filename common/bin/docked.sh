@@ -12,7 +12,7 @@ is_docked() {
 }
 
 apply_config_dock() {
-	xrandr --output $IN --off --output $EXT --auto
+	xrandr --output $IN --off --output $EXT --auto --primary
 	setxkbmap us '' compose:rwin
 
 	xset s 0
@@ -22,7 +22,7 @@ apply_config_dock() {
 }
 
 apply_config_undock() {
-	xrandr --output $IN --auto --output $EXT --off
+	xrandr --output $IN --auto --primary --output $EXT --off
 	setxkbmap fr
 
 	xset dpms 300

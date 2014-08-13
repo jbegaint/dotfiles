@@ -95,10 +95,8 @@ Bundle 'zeis/vim-kolor'
 Bundle 'PotatoesMaster/i3-vim-syntax'
 Bundle 'noahfrederick/vim-hemisu'
 Bundle 'w0ng/vim-hybrid'
-Bundle 'xolox/vim-session'
-Bundle 'xolox/vim-misc'
-" Bundle 'mhinz/vim-startify'
-" Bundle 'CSApprox'
+Bundle 'mhinz/vim-startify'
+Bundle 'jellybeans.vim'
 
 call vundle#end()
 
@@ -195,7 +193,7 @@ let g:vim_markdown_folding_disabled=1
 
 " -- vim-session
 let g:session_autosave = "yes"
-let g:session_autoload = "yes"
+" let g:session_autoload = "yes"
 
 " ------ misc shortcuts/ options ------
 
@@ -203,8 +201,8 @@ let g:session_autoload = "yes"
 nnoremap <silent> <S-j> o<ESC>k
 nnoremap <silent> <S-k> O<ESC>j
 
-" http://www.bestofvim.com/tip/leave-ex-mode-good/
-nnoremap Q <nop>
+nnoremap Q		<nop>
+nnoremap <F1> 	<nop>
 
 " clear search highlight
 "This unsets the "last search pattern" register by hitting return

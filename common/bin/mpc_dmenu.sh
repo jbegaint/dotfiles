@@ -44,14 +44,35 @@ function parse_cmd() {
 			amixer set Master 5%- -q
 			;;
 
+		toggle)
+			mpc -q toggle
+			;;
+
+		next)
+			mpc -q next
+			;;
+
+		prev)
+			mpc -q prev
+			;;
+
+		shuffle)
+			mpc -q shuffle
+			;;
+
 		*)
-			mpc $action -q
+			mpc search title "$action" | mpc insert
+			mpc next
 			;;
 	esac
 }
 
 main() {
-	action=$(printf "%s\n" "${COMMANDS[@]}" | dmenu_wrapper "action")
+	commands=()
+	commands+=("${COMMANDS[@]}")
+	commands+=("$(mpc list Title)")
+
+	action=$(printf "%s\n" "${commands[@]}" | dmenu_wrapper "action")
 
 	# if not empty then parse command
 	[[ ! -z $action ]] && parse_cmd $action

@@ -245,7 +245,7 @@ bindsym $mod+n exec ~/bin/rename_i3_ws.py
 bindsym Print exec scrot -q 100 -e 'mv $f ~/Pictures/Screenshots'
 
 # floating windows rules
-for_window [class="MPlayer"] floating enable
+# for_window [class="MPlayer"] floating enable
 for_window [class="mpv"] floating enable
 for_window [class="Vlc"] floating enable
 for_window [class="Steam"] floating enable
