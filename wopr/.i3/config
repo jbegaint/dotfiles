@@ -243,6 +243,7 @@ bindsym $mod+i exec notify-send MPD "$(mpc status)"
 bindsym $mod+m exec ~/bin/mpc_dmenu.sh
 bindsym $mod+n exec ~/bin/rename_i3_ws.py
 bindsym Print exec scrot -q 100 -e 'mv $f ~/Pictures/Screenshots'
+bindsym Control+mod1+l exec xtrlock
 
 # floating windows rules
 # for_window [class="MPlayer"] floating enable

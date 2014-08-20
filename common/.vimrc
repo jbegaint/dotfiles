@@ -100,10 +100,9 @@ Bundle 'jellybeans.vim'
 
 call vundle#end()
 
-set background=dark
-
 if has('gui_running')
 	colorscheme flatland
+	set background=dark
 	let g:airline_theme='flatlandia'
 	set guifont=Source\ Code\ Pro\ 10
 
@@ -121,9 +120,11 @@ if has('gui_running')
 	% "standard" editor shortcuts
 	nnoremap <C-tab> :tabnext <CR>
 	nnoremap <C-S-tab> :tabprevious <CR>
+	inoremap <C-BS> <C-w>
 else
 	set t_Co=256
-	colorscheme wombat256mod
+	colorscheme Tomorrow-Night
+	set background=dark
 	let g:airline_theme='tomorrow'
 endif
 
@@ -143,6 +144,7 @@ let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
 let g:neocomplete#enable_auto_select = 0
 let g:neocomplete#sources#syntax#min_keyword_length = 2
+set completeopt-=preview
 
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
@@ -202,7 +204,7 @@ nnoremap <silent> <S-j> o<ESC>k
 nnoremap <silent> <S-k> O<ESC>j
 
 nnoremap Q		<nop>
-nnoremap <F1> 	<nop>
+nmap <F1> 	<nop>
 
 " clear search highlight
 "This unsets the "last search pattern" register by hitting return

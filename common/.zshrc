@@ -43,7 +43,6 @@ bindkey -e
 bindkey    "^[[3~"          delete-char
 
 # load terminal colors
- 
 BASE16_SCHEME="tomorrow"
 BASE16_SHELL="$HOME/.config/base16-shell/base16-$BASE16_SCHEME.dark.sh"
 [[ -s $BASE16_SHELL ]] && . $BASE16_SHELL
