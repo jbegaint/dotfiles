@@ -3,5 +3,5 @@ dotfiles
 
 Yet another useless dotfiles repo
 
-backup files for my arch setup
-(x230)
+backup files for my arch setups
+(x230 and x301)

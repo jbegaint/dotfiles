@@ -22,7 +22,6 @@ set wildmenu
 set wildignore=*.o,*~,*.pyc
 set wildignore+=*.aux,*.dvi,*.bcf,*.blg,*.bbl
 
-
 set autoindent
 set smartindent
 
@@ -97,6 +96,7 @@ Bundle 'noahfrederick/vim-hemisu'
 Bundle 'w0ng/vim-hybrid'
 Bundle 'mhinz/vim-startify'
 Bundle 'jellybeans.vim'
+Bundle 'hickop/vim-hickop-colors'
 
 call vundle#end()
 
@@ -117,15 +117,15 @@ if has('gui_running')
 	" use console dialogs
 	set guioptions+=c
 
-	% "standard" editor shortcuts
+	" standard editor shortcuts
 	nnoremap <C-tab> :tabnext <CR>
 	nnoremap <C-S-tab> :tabprevious <CR>
 	inoremap <C-BS> <C-w>
 else
 	set t_Co=256
-	colorscheme Tomorrow-Night
 	set background=dark
-	let g:airline_theme='tomorrow'
+	colorscheme wombat256mod
+	let g:airline_theme='wombat'
 endif
 
 " https://stackoverflow.com/questions/2447109/showing-a-different-background-colour-in-vim-past-80-characters
@@ -144,7 +144,7 @@ let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
 let g:neocomplete#enable_auto_select = 0
 let g:neocomplete#sources#syntax#min_keyword_length = 2
-set completeopt-=preview
+" set completeopt-=preview
 
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>

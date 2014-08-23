@@ -12,11 +12,11 @@ fi
 
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 
-#font config stuff
+# font config stuff
 xset +fp /usr/share/fonts/local/ &
 xset fp rehash &
 
-#autostart apps
+# autostart apps
 dunst &
 parcellite &
 xset dpms 300 &
@@ -24,8 +24,11 @@ pnmixer &
 compton -b &
 bluetooth off &
 
-#launch scripts
+# launch scripts
 ~/bin/docked.sh &
 ~/bin/redshift/run.sh &
+
+# term color
+xrdb -merge ~/.config/base16-xresources/base16-tomorrow.dark.xresources
 
 exec i3

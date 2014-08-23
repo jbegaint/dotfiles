@@ -1,4 +1,1 @@
-# Credits: linrunner.de
-
-# ThinkPad Mini Dock Plus Series 3 
-ACTION=="add|remove", SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ENV{PRODUCT}=="17ef/100a/*", ENV{DISPLAY}=":0", ENV{XAUTHORITY}="/home/jean/.Xauthority", RUN+="/usr/bin/arandr"
+/etc/udev/rules.d/81-thinkpad-dock.rules
