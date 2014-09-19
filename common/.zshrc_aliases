@@ -23,6 +23,7 @@ alias cal="cal -m"
 
 alias keychain_start='eval `keychain --eval --agents ssh id_rsa`'
 alias btsync='btsync --config ~/.config/btsync/btsync.conf'
+alias cpv="rsync -poghb --backup-dir=/tmp/rsync -e /dev/null --progress --"
 
 lsc () {
 	ls "$@" | wc -l
@@ -56,7 +57,3 @@ extract() {
 	  echo "\`$1' is not a valid file"
   fi
 }
-
-
-alias cpv="rsync -poghb --backup-dir=/tmp/rsync -e /dev/null --progress --"
-
