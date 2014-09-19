@@ -5,6 +5,7 @@ set cc=80
 set so=7
 
 set autoread
+set ttyfast
 
 " Leader
 let mapleader = ","
@@ -15,6 +16,7 @@ map k gk
 
 syntax on
 
+set listchars=precedes:«,extends:»,eol:↲,tab:▸\ ,trail:.
 set encoding=utf-8
 set mouse=a
 
@@ -30,7 +32,7 @@ set smarttab
 set shiftwidth=4
 set tabstop=4
 
-set hlsearch 
+set hlsearch
 set ignorecase
 set incsearch
 set smartcase
@@ -42,7 +44,7 @@ set nobackup
 set nowb
 set noswapfile
 
-set wrap linebreak nolist
+set wrap linebreak
 set tw=80
 set fo+=wt
 set nofoldenable
@@ -50,24 +52,29 @@ set modeline
 
 set complete+=kspell
 
-
-"-- Plugins
+" -- Plugins
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#begin()
 
+Bundle 'PotatoesMaster/i3-vim-syntax'
 Bundle 'Raimondi/delimitMate'
 Bundle 'Shougo/context_filetype.vim'
 Bundle 'Shougo/neocomplete.vim'
 Bundle 'Shougo/vimproc.vim'
 Bundle 'airblade/vim-gitgutter'
-Bundle 'altercation/vim-colors-solarized'
 Bundle 'bling/vim-airline'
-Bundle 'chriskempson/base16-vim'
+Bundle 'chriskempson/vim-tomorrow-theme'
 Bundle 'gmarik/vundle'
+Bundle 'godlygeek/tabular'  
+Bundle 'gundo'
 Bundle 'jcf/vim-latex'
+Bundle 'jonathanfilip/vim-lucius'
+Bundle 'jordwalke/flatlandia'
 Bundle 'kien/ctrlp.vim'
+Bundle 'mattn/emmet-vim'
+Bundle 'mhinz/vim-startify'
 Bundle 'mkitt/tabline.vim'
 Bundle 'petRUShka/vim-opencl'
 Bundle 'plasticboy/vim-markdown'
@@ -75,35 +82,18 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-fugitive'
-Bundle 'junegunn/goyo.vim'
-Bundle 'junegunn/seoul256.vim'
-Bundle 'github-theme'
-Bundle 'pyte'
-Bundle 'xoria256.vim'
-Bundle 'junegunn/limelight.vim'
-Bundle 'mitsuhiko/fruity-vim-colorscheme'
-Bundle 'chriskempson/vim-tomorrow-theme'
-Bundle 'vydark'
-Bundle 'vylight'
-Bundle 'cleanroom'
-Bundle 'gundo'
-Bundle 'jonathanfilip/vim-lucius'
+Bundle 'tpope/vim-rsi'
+Bundle 'tpope/vim-surround'
 Bundle 'vivkin/flatland.vim'
-Bundle 'jordwalke/flatlandia'
-Bundle 'zeis/vim-kolor'
-Bundle 'PotatoesMaster/i3-vim-syntax'
-Bundle 'noahfrederick/vim-hemisu'
-Bundle 'w0ng/vim-hybrid'
-Bundle 'mhinz/vim-startify'
-Bundle 'jellybeans.vim'
-Bundle 'hickop/vim-hickop-colors'
 
 call vundle#end()
+filetype plugin indent on
 
+" -- gui/console look
 if has('gui_running')
-	colorscheme flatland
 	set background=dark
-	let g:airline_theme='flatlandia'
+	colorscheme Tomorrow-Night
+	let g:airline_theme='tomorrow'
 	set guifont=Source\ Code\ Pro\ 10
 
 	" remove menu, toolbar, and srcollbars
@@ -124,17 +114,15 @@ if has('gui_running')
 else
 	set t_Co=256
 	set background=dark
-	colorscheme wombat256mod
-	let g:airline_theme='wombat'
+	colorscheme Tomorrow-Night
+	hi Normal ctermbg=234
+	let g:airline_theme='tomorrow'
 endif
 
-" https://stackoverflow.com/questions/2447109/showing-a-different-background-colour-in-vim-past-80-characters
-" let &colorcolumn=join(range(81,999),",")
-" let &colorcolumn="80,".join(range(120,999),",")
-highlight ColorColumn ctermbg=235 guibg=#2c2d27
-
-filetype plugin indent on
-
+" color right border after 80 chars (and background after 100)
+let &colorcolumn=join(range(80,999),",")
+let &colorcolumn="80,".join(range(100,999),",")
+highlight ColorColumn ctermbg=236 guibg=#2c2d27
 
 " ------ Plugins options and shortcuts ------
 
@@ -142,9 +130,9 @@ filetype plugin indent on
 let g:neocomplete#use_vimproc = 1
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#enable_auto_select = 0
-let g:neocomplete#sources#syntax#min_keyword_length = 2
-" set completeopt-=preview
+" let g:neocomplete#enable_auto_select = 1
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+set completeopt-=preview
 
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
@@ -152,10 +140,7 @@ function! s:my_cr_function()
 	return pumvisible() ? neocomplete#close_popup() : "\<CR>"
 endfunction
 
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
-" delimitMate and neocomplete compatibility
+" -- delimitMate and neocomplete compatibility
 imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
 
 " -- vim-latex settings
@@ -168,34 +153,29 @@ nnoremap <silent> <F2> :NERDTreeToggle<CR>
 noremap <silent> <F2> <ESC>:NERDTreeToggle<CR>
 
 " -- Gundo
-nnoremap <F4> :GundoToggle<CR>
+nnoremap <F5> :GundoToggle<CR>
 
 " -- vim-airline
 set laststatus=2
-let g:airline_powerline_fonts=1
+let g:airline_powerline_fonts = 0
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = ''
+let g:airline#extensions#tabline#tab_nr_type = 1	" display tab number
 
 " -- delimitMate
 let delimitMate_expand_cr=1
 
-" -- Goyo
-nnoremap <Leader><Space> :Goyo<CR>
-
 " -- vim-fugitive
 nnoremap <F10> :Gstatus<CR>
-
-" -- vim-session
-" let g:session_autoload="no"
-" let g:session_autosave="yes"
 
 " -- vim-markdown
 let g:vim_markdown_folding_disabled=1
 
-" -- startify
-" let g:startify_session_persistence = 1
-
-" -- vim-session
-let g:session_autosave = "yes"
-" let g:session_autoload = "yes"
+" -- ctrlp
+let g:ctrlp_custom_ignore = 'git\|venv'
 
 " ------ misc shortcuts/ options ------
 
@@ -203,24 +183,28 @@ let g:session_autosave = "yes"
 nnoremap <silent> <S-j> o<ESC>k
 nnoremap <silent> <S-k> O<ESC>j
 
-nnoremap Q		<nop>
-nmap <F1> 	<nop>
-
 " clear search highlight
-"This unsets the "last search pattern" register by hitting return
 nnoremap <CR> :noh<CR><CR>
-nnoremap <silent> <leader><CR> :noh<CR> 
+nnoremap <silent> <leader><CR> :noh<CR>
+
+" disable hex mode and help shortcuts
+nnoremap Q		<nop>
+nmap 	<F1> 	<nop>
+
+" misc shortcuts
+" nnoremap <C-Space>		:w <bar> exec '!make' <CR> <CR>
+nnoremap <silent> <F3> :set invnumber<CR>
+nnoremap <silent> <F4> :set invlist<CR>
+nnoremap <silent> <F6> :AirlineToggle<CR>
 
 " reload vimrc on the fly
-augroup myvimrc 
-	au!  
-	au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | 
+augroup myvimrc
+	au!
+	au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC |
 augroup END
 
 " timeout for ESC
 set timeoutlen=1000 ttimeoutlen=0
-
-nnoremap <C-Space>		:w <bar> exec '!make' <CR> <CR>
 
 " -- highlight current line number
 " 1. clear highlight
@@ -234,3 +218,6 @@ hi CursorLineNr cterm=bold
 augroup CLNRSet
 	autocmd! ColorScheme * hi CursorLineNR cterm=bold
 augroup END
+
+"-- Languages specific stuff
+autocmd FileType python set sw=4 ts=4 sts=4

@@ -1,8 +1,9 @@
 #!/bin/bash
+# command simple mpc actions via dmenu
 
 readonly COMMANDS=(toggle next prev up down album artist playlists shuffle)
 
-function load() {
+function mpc_load() {
 	mpc -q clear
 
 	if [[ "$1" == "playlist" ]]; then
@@ -23,17 +24,17 @@ function parse_cmd() {
 	case $action in
 		playlists)
 			res=$(mpc lsplaylists | dmenu_wrapper "playlist" )
-			[[ ! -z $res ]] && load "playlist" "$res"
+			[[ ! -z $res ]] && mpc_load "playlist" "$res"
 			;;
 
 		artist)
 			res=$(mpc list artist | sort | uniq -i | dmenu_wrapper "artist")
-			[[ ! -z $res ]] && load "artist" "$res"
+			[[ ! -z $res ]] && mpc_load "artist" "$res"
 			;;
 
 		album)	
 			res=$(mpc list album | dmenu_wrapper "album")
-			[[ ! -z $res ]] && load "album" "$res"
+			[[ ! -z $res ]] && mpc_load "album" "$res"
 			;;
 
 		up)
@@ -68,11 +69,12 @@ function parse_cmd() {
 }
 
 main() {
-	commands=()
-	commands+=("${COMMANDS[@]}")
+	# add commands as items
+	commands=("${COMMANDS[@]}")
+	# add all songs as items
 	commands+=("$(mpc list Title)")
 
-	action=$(printf "%s\n" "${commands[@]}" | dmenu_wrapper "action")
+	action=$(printf "%s\n" "${commands[@]}" | dmenu_wrapper "MPD")
 
 	# if not empty then parse command
 	[[ ! -z $action ]] && parse_cmd $action

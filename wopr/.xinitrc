@@ -21,7 +21,7 @@ dunst &
 parcellite &
 xset dpms 300 &
 pnmixer &
-compton -b &
+# compton -b &
 bluetooth off &
 
 # launch scripts

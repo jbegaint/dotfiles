@@ -33,7 +33,7 @@ bindsym $mod+q kill
 
 # start dmenu (a program launcher)
 
-bindsym $mod+d exec ~/bin/dmenu_run.pl -i -sb '#81A2BE' -sf '#000000' -h 20
+bindsym $mod+d exec ~/bin/dmenu_run.pl -i -sb '#81A2BE' -sf '#000000' -h 21
 bindsym $mod+Shift+d exec j4-dmenu-desktop --dmenu="dmenu -i -sb '#81A2BE' -sf '#000000' -h 20"
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
@@ -164,22 +164,22 @@ set $black		#1D1F21
 set $blue		#81A2BE
 set $green		#B5BD68
 set $grey 		#969896
+set $darkgrey 	#373B41
 set $red 		#CC6666
 set $white 		#C5C8C6
 
 # no title bar, only x pixels border
 new_window pixel 1
 
-# client.class          border  backgr. text    indicator
-client.focused          $blue 	$blue 	$black	$green
-#client.focused_inactive $grey 	$grey 	$black 	$green
-client.focused_inactive $black 	$black 	$white	$green
-client.unfocused        $black 	$black 	$grey	$green
-client.urgent           $red	$red	$black  $green
+# client.class          border  backgr. 	text    indicator
+client.focused          $blue 	$blue 		$black	$green
+#client.focused_inactive $grey 	$grey 		$black 	$green
+client.focused_inactive $black 	$darkgrey 		$white	$green
+client.unfocused        $black 	$darkgrey 	$grey	$green
+client.urgent           $red	$red		$black  $green
 
 bar {
 	status_command i3status
-	#status_command ~/bin/i3status.sh
 	position top
 	tray_output primary
 
