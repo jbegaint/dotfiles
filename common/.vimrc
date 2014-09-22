@@ -85,6 +85,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-rsi'
 Bundle 'tpope/vim-surround'
 Bundle 'vivkin/flatland.vim'
+Bundle 'baskerville/bubblegum'
 
 call vundle#end()
 filetype plugin indent on
@@ -164,6 +165,8 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ''
 let g:airline#extensions#tabline#left_alt_sep = ''
 let g:airline#extensions#tabline#tab_nr_type = 1	" display tab number
+let g:airline#extensions#whitespace#mixed_indent_algo = 1 " do not report error on C multi line comments
+
 
 " -- delimitMate
 let delimitMate_expand_cr=1

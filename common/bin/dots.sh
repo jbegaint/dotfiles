@@ -18,6 +18,7 @@ readonly COMMON="
 .vimrc
 .zshrc
 .zshrc_aliases
+.zprofile
 bin/"
 
 backup_wall() {
