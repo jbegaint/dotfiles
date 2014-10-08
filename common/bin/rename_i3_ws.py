@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 
 # rename current workspace name "?" to "workspace_num: str"
 # if str is null, then reset workspace name to "workspace_num"
@@ -20,13 +20,13 @@ def get_name():
 
 	return dmenu.communicate("")[0].decode().rstrip()
 
-
 if __name__ == '__main__':
-	name = get_name()
-	w = get_current_workspace()
+    name = get_name()
+    w = get_current_workspace()
 
-	if name:
-		i3.command("rename workspace \"%s\" to \"%d: %s\"" 
-						% (w['name'], w['num'], name))
-	else:
-		i3.command("rename workspace \"%s\" to \"%d\"" % (w['name'], w['num']))
+    if name:
+        # new name for workspace
+        i3.command("rename workspace \"%s\" to \"%d: %s\"" % (w['name'], w['num'], name))
+    elif not w['name'].isdigit():
+        # revert back to number
+        i3.command("rename workspace \"%s\" to \"%d\"" % (w['name'], w['num']))

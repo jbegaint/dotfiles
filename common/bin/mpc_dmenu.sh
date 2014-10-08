@@ -8,6 +8,7 @@ function mpc_load() {
 
 	if [[ "$1" == "playlist" ]]; then
 		mpc -q load "$2"
+		mpc shuffle
 	else
 		mpc search "$1" "$2" | mpc add
 	fi

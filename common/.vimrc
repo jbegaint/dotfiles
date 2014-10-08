@@ -58,34 +58,34 @@ filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#begin()
 
-Bundle 'PotatoesMaster/i3-vim-syntax'
-Bundle 'Raimondi/delimitMate'
-Bundle 'Shougo/context_filetype.vim'
-Bundle 'Shougo/neocomplete.vim'
-Bundle 'Shougo/vimproc.vim'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'bling/vim-airline'
-Bundle 'chriskempson/vim-tomorrow-theme'
-Bundle 'gmarik/vundle'
-Bundle 'godlygeek/tabular'  
-Bundle 'gundo'
-Bundle 'jcf/vim-latex'
-Bundle 'jonathanfilip/vim-lucius'
-Bundle 'jordwalke/flatlandia'
-Bundle 'kien/ctrlp.vim'
-Bundle 'mattn/emmet-vim'
-Bundle 'mhinz/vim-startify'
-Bundle 'mkitt/tabline.vim'
-Bundle 'petRUShka/vim-opencl'
-Bundle 'plasticboy/vim-markdown'
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/syntastic'
-Bundle 'tpope/vim-commentary'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-rsi'
-Bundle 'tpope/vim-surround'
-Bundle 'vivkin/flatland.vim'
-Bundle 'baskerville/bubblegum'
+Plugin 'LaTeX-Box-Team/LaTeX-Box'
+Plugin 'PotatoesMaster/i3-vim-syntax'
+Plugin 'Raimondi/delimitMate'
+Plugin 'Shougo/context_filetype.vim'
+Plugin 'Shougo/neocomplete.vim'
+Plugin 'Shougo/vimproc.vim'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'bling/vim-airline'
+Plugin 'chriskempson/base16-vim'
+Plugin 'chriskempson/vim-tomorrow-theme'
+Plugin 'gmarik/vundle'
+Plugin 'godlygeek/tabular'
+Plugin 'gundo'
+Plugin 'jonathanfilip/vim-lucius'
+Plugin 'jordwalke/flatlandia'
+Plugin 'kien/ctrlp.vim'
+Plugin 'mattn/emmet-vim'
+Plugin 'mhinz/vim-startify'
+Plugin 'mkitt/tabline.vim'
+Plugin 'petRUShka/vim-opencl'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rsi'
+Plugin 'tpope/vim-surround'
+Plugin 'vivkin/flatland.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -144,11 +144,6 @@ endfunction
 " -- delimitMate and neocomplete compatibility
 imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
 
-" -- vim-latex settings
-let g:Tex_DefaultTargetFormat="pdf"
-let g:Tex_ViewRule_pdf="zathura"
-let g:tex_flavor='latex'
-
 " -- NERDTree
 nnoremap <silent> <F2> :NERDTreeToggle<CR>
 noremap <silent> <F2> <ESC>:NERDTreeToggle<CR>
@@ -179,6 +174,10 @@ let g:vim_markdown_folding_disabled=1
 
 " -- ctrlp
 let g:ctrlp_custom_ignore = 'git\|venv'
+
+" -- Latex-Box
+let g:LatexBox_quickfix = 2
+let g:LatexBox_latexmk_preview_continuously = 1
 
 " ------ misc shortcuts/ options ------
 
@@ -223,4 +222,4 @@ augroup CLNRSet
 augroup END
 
 "-- Languages specific stuff
-autocmd FileType python set sw=4 ts=4 sts=4
+autocmd FileType python set sw=4 ts=4 sts=4 tw=0

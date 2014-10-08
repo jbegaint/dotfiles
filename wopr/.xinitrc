@@ -31,4 +31,7 @@ bluetooth off &
 # term color
 xrdb -merge ~/.config/base16-xresources/base16-tomorrow.dark.xresources
 
+# fix some xdg-* related bugs
+export DE='xfce'
+
 exec i3

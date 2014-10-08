@@ -32,7 +32,7 @@ bindsym $mod+q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec ~/bin/dmenu_run.pl -i -sb '#81A2BE' -sf '#000000' -h 21
-bindsym $mod+Shift+d exec j4-dmenu-desktop --dmenu="dmenu -i -sb '#81A2BE' -sf '#000000' -h 20"
+bindsym $mod+Shift+d exec j4-dmenu-desktop --dmenu="dmenu -i -sb '#81A2BE' -sf '#000000' -h 21"
 
 # change focus
 bindsym $mod+h focus left
@@ -176,16 +176,16 @@ bar {
 	tray_output primary
 
 	colors {
-		background 	$black 
+		background 	$black
 		statusline 	$white
-		separator	$black 
-		
+		separator	$black
+
 		# bar.class        border  backgr. text
-		focused_workspace	$blue 	$blue	$black	
+		focused_workspace	$blue 	$blue	$black
 		#active_workspace	$grey	$grey 	$black
 		active_workspace	$black	$black 	$white
 		inactive_workspace	$black	$black 	$grey
-		urgent_workspace	$red 	$red 	$black	
+		urgent_workspace	$red 	$red 	$black
 	}
 }
 
@@ -210,10 +210,11 @@ bindsym Ctrl+Mod1+Right workspace next
 bindsym Ctrl+Mod1+Left workspace prev
 
 # volume control
-bindsym XF86AudioRaiseVolume exec amixer set Master 5%+ -q
-bindsym XF86AudioLowerVolume exec amixer set Master 5%- -q
-bindsym XF86AudioMute exec amixer set Master toggle -q
-bindsym XF86AudioMicMute exec amixer set Capture toggle -q
+bindsym XF86AudioRaiseVolume 	exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -- +5%
+bindsym	XF86AudioLowerVolume 	exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -- -5%
+bindsym XF86AudioMute 			exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute 		exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
 
 # mpd control
 bindsym XF86AudioPlay exec mpc toggle
@@ -235,7 +236,7 @@ bindsym $mod+i exec notify-send MPD "$(mpc status)"
 bindsym $mod+m exec ~/bin/mpc_dmenu.sh
 bindsym $mod+n exec ~/bin/rename_i3_ws.py
 bindsym Print exec scrot -q 100 -e 'mv $f ~/Pictures/Screenshots'
-bindsym Control+mod1+l exec xtrlock
+bindsym Control+mod1+l exec i3lock -t -i ~/Pictures/Wallpapers/tile1pxbw.png
 
 # floating windows rules
 # for_window [class="MPlayer"] floating enable
@@ -251,6 +252,7 @@ for_window [class="Skype"] floating enable
 
 for_window [class="file_progress"] floating enable
 for_window [window_role="pop-up"] floating enable
+for_window [class="com-mathworks-util-PostVMInit"] floating enable
 
 # assign workspace
 assign [class="Pidgin"] 10
