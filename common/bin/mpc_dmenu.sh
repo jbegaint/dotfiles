@@ -33,7 +33,7 @@ function parse_cmd() {
 			[[ ! -z $res ]] && mpc_load "artist" "$res"
 			;;
 
-		album)	
+		album)
 			res=$(mpc list album | dmenu_wrapper "album")
 			[[ ! -z $res ]] && mpc_load "album" "$res"
 			;;

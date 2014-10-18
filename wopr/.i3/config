@@ -30,10 +30,6 @@ bindsym $mod+Return exec urxvt
 # kill focused window
 bindsym $mod+q kill
 
-# start dmenu (a program launcher)
-bindsym $mod+d exec ~/bin/dmenu_run.pl -i -sb '#81A2BE' -sf '#000000' -h 21
-bindsym $mod+Shift+d exec j4-dmenu-desktop --dmenu="dmenu -i -sb '#81A2BE' -sf '#000000' -h 21"
-
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -174,6 +170,7 @@ bar {
 	status_command i3status
 	position top
 	tray_output primary
+	modifier Mod1
 
 	colors {
 		background 	$black
@@ -230,13 +227,16 @@ bindsym $mod+Shift+p move scratchpad
 # Show the first scratchpad window
 bindsym $mod+p scratchpad show
 
-# miscellaneous scripts shortcuts
-bindsym XF86Launch1 exec physlock
-bindsym $mod+i exec notify-send MPD "$(mpc status)"
+# dmenu menus
+bindsym $mod+Shift+d exec ~/bin/dmenu_run.pl -i -sb '#81A2BE' -sf '#000000' -h 21
+bindsym $mod+d exec j4-dmenu-desktop --dmenu="dmenu -i -sb '#81A2BE' -sf '#000000' -h 21"
 bindsym $mod+m exec ~/bin/mpc_dmenu.sh
 bindsym $mod+n exec ~/bin/rename_i3_ws.py
+bindsym $mod+Tab exec ~/bin/quickswitch-for-i3/quickswitch.py -d "dmenu -i -sb \#81A2BE -sf \#000000 -nf \#969896 -l 20 -h 21"
+
+bindsym $mod+i exec notify-send MPD "$(mpc status)"
 bindsym Print exec scrot -q 100 -e 'mv $f ~/Pictures/Screenshots'
-bindsym Control+mod1+l exec i3lock -t -i ~/Pictures/Wallpapers/tile1pxbw.png
+bindsym Control+mod1+l exec xautolock -locknow
 
 # floating windows rules
 # for_window [class="MPlayer"] floating enable

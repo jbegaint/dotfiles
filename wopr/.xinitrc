@@ -28,6 +28,8 @@ bluetooth off &
 ~/bin/docked.sh &
 ~/bin/redshift/run.sh &
 
+xautolock -locker 'i3lock -c 333333' &
+
 # term color
 xrdb -merge ~/.config/base16-xresources/base16-tomorrow.dark.xresources
 

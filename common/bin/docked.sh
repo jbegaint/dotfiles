@@ -18,6 +18,10 @@ apply_config_dock() {
 	xset s 0
 	xset -dpms
 
+	pacmd set-sink-port \
+		alsa_output.pci-0000_00_1b.0.analog-stereo \
+		analog-output
+
 	notify-send "DOCKING INFO" "$IN [off]\n$EXT [on]"
 }
 
@@ -26,6 +30,10 @@ apply_config_undock() {
 	setxkbmap fr
 
 	xset dpms 300
+
+	pacmd set-sink-port \
+		alsa_output.pci-0000_00_1b.0.analog-stereo \
+		analog-output-speaker
 
 	notify-send "DOCKING INFO" "$IN [on]\n$EXT [off]"
 }
