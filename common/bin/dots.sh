@@ -16,9 +16,8 @@ readonly COMMON="
 .tmux.conf
 .vim/
 .vimrc
-.zshrc
-.zshrc_aliases
-.zprofile
+.zsh/
+.zshenv
 bin/"
 
 backup_wall() {
@@ -44,11 +43,11 @@ backup_files() {
 
 	for i in $src
 	do
-		if [[ -d "$HOME/$i" ]]; 
+		if [[ -d "$HOME/$i" ]];
 		then
 			check_dir "$dest/$i"
 			cp -r "$HOME/$i" "$dest"
-		elif [[ -f "$HOME/$i" ]]; 
+		elif [[ -f "$HOME/$i" ]];
 		then
 			cp "$HOME/$i" "$dest/$i"
 		fi

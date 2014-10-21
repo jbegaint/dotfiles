@@ -186,10 +186,20 @@ bar {
 	}
 }
 
+# xautolock mode
+set $xautolockmenu "xautolock: [e]nable [d]isable"
+bindsym $mod+F11         mode $xautolockmenu
+mode $xautolockmenu {
+		bindsym e		exec --no-startup-id xautolock -enable
+		bindsym d		exec --no-startup-id xautolock -disable
+
+		bindsym Return        mode "default"
+		bindsym Escape        mode "default"
+}
+
 # audio mode
 set $audiomenu "volume: [+]10% [-]10% [m]ute [r]eset"
 bindsym $mod+F12         mode $audiomenu
-
 mode $audiomenu {
 	bindsym r             exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -- 50%
     bindsym plus          exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -- +10%
