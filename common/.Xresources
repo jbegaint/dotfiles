@@ -1,6 +1,10 @@
 URxvt.font: xft:Source Code Pro for Powerline:size=10
 
-URxvt.perl-ext-common: default,clipboard,url-select,tabbedex
+xterm*dynamicColors: true
+urxvt*dynamicColors: on
+
+URxvt.perl-ext-common: default,clipboard,url-select,tabbedex,urxvt-colors
+
 *.URxvt.urgentOnBell: true
 URxvt.url-select.launcher: chromium
 URxvt.url-select.underline: true
@@ -12,9 +16,6 @@ URxvt.keysym.M-s: perl:keyboard-select:search
 URxvt.copyCommand:  xclip -i -selection clipboard
 URxvt.pasteCommand: xclip -o -selection clipboard
 
-URxvt.keysym.M-c:   perl:clipboard:copy
-URxvt.keysym.M-v:   perl:clipboard:paste
-
 URxvt.autohide: yes
 URxvt.new-button: no
 
@@ -24,3 +25,23 @@ URxvt.background: #1D1F21
 URxvt.depth: 32
 
 URxvt*colorIT: #ffffff
+
+URxvt.keysym.M-c: perl:clipboard:copy
+URxvt.keysym.M-v: perl:clipboard:paste
+
+urxvt*perl-lib: /home/jean/bin/urxvt
+urxvt*keysym.F12:	perl:urxvt-colors:cycle
+
+/* rofi */
+rofi.background: #1d1f21
+rofi.foreground: #c5c8c6
+rofi.highlightbg: #81a2be
+rofi.highlightfg: #1d1f21
+rofi.bordercolor: #81a2be
+rofi.font: Source Code Pro Medium 9
+rofi.padding: 5
+rofi.lines: 5
+rofi.borderwidth: 1
+rofi.width: 30
+rofi.location: 0
+rofi.yoffset: 0

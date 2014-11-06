@@ -14,6 +14,7 @@ $(get_dir)%{$fg[red]%}$(__git_ps1 \" (%s)\")%{$fg_bold[blue]%} » %{$reset_color
 # export PS1=$'
 #  %~%{$fg[red]%}$(__git_ps1 \" (%s)\")%{$fg_bold[blue]%} » %{$reset_color%}'
 export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.dynamic-colors/bin:$PATH"
 
 # history
 HISTFILE=~/.histfile
@@ -28,6 +29,8 @@ setopt PROMPT_SUBST
 compinit
 zstyle ':completion:*' menu select
 zstyle ':completion:*' rehash true
+
+source $HOME/.dynamic-colors/completions/dynamic-colors.zsh
 
 # load aliases
 ALIASFILE=~/.zsh/.zshrc_aliases

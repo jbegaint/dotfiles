@@ -71,22 +71,36 @@ Plugin 'chriskempson/vim-tomorrow-theme'
 Plugin 'gmarik/vundle'
 Plugin 'godlygeek/tabular'
 Plugin 'gundo'
+Plugin 'jelera/vim-javascript-syntax'
 Plugin 'jonathanfilip/vim-lucius'
 Plugin 'jordwalke/flatlandia'
 Plugin 'kien/ctrlp.vim'
 Plugin 'mattn/emmet-vim'
 Plugin 'mhinz/vim-startify'
 Plugin 'mkitt/tabline.vim'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'pangloss/vim-javascript'
 Plugin 'petRUShka/vim-opencl'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-rsi'
 Plugin 'tpope/vim-surround'
-Plugin 'vivkin/flatland.vim'
 Plugin 'vimwiki/vimwiki'
+Plugin 'vivkin/flatland.vim'
+Plugin 'klen/python-mode'
+Plugin 'nanotech/jellybeans.vim'
+Plugin 'w0ng/vim-hybrid'
+Plugin 'freeo/vim-kalisi'
+Plugin 'whatyouhide/vim-gotham'
+Plugin 'tomasr/molokai'
+Plugin 'closetag.vim'
+Plugin 'Sorcerer'
+Plugin 'romainl/Apprentice'
+Plugin 'romainl/Disciple'
 
 call vundle#end()
 filetype plugin indent on
@@ -117,7 +131,6 @@ else
 	set t_Co=256
 	set background=dark
 	colorscheme Tomorrow-Night
-	hi Normal ctermbg=234
 	let g:airline_theme='tomorrow'
 endif
 
@@ -175,10 +188,16 @@ let g:vim_markdown_folding_disabled=1
 
 " -- ctrlp
 let g:ctrlp_custom_ignore = 'git\|venv'
+let g:ctrlp_cmd = 'CtrlPMixed'
+
 
 " -- Latex-Box
 let g:LatexBox_quickfix = 2
 let g:LatexBox_latexmk_preview_continuously = 1
+
+" -- Pymode
+let g:pymode_doc_bind = 'D'
+let g:pymode_options_colorcolumn = 0
 
 " ------ misc shortcuts/ options ------
 
@@ -199,6 +218,11 @@ nmap 	<F1> 	<nop>
 nnoremap <silent> <F3> :set invnumber<CR>
 nnoremap <silent> <F4> :set invlist<CR>
 nnoremap <silent> <F6> :AirlineToggle<CR>
+nnoremap <silent> <F7> :call ToggleColours()<CR>
+
+" painless navigation in wrapped lines
+nnoremap j gj
+nnoremap k gk
 
 " reload vimrc on the fly
 augroup myvimrc
@@ -224,3 +248,23 @@ augroup END
 
 "-- Languages specific stuff
 autocmd FileType python set sw=4 ts=4 sts=4 tw=0
+
+" misc functions
+function! ToggleColours()
+	if g:colors_name == 'hybrid'
+		colorscheme hybrid-light
+	elseif g:colors_name == 'hybrid-light'
+		colorscheme hybrid
+	endif
+endfunction
+"
+" Simple re-format for minified Javascript
+command! UnMinify call UnMinify()
+function! UnMinify()
+	%s/{\ze[^\r\n]/{\r/g
+	%s/){/) {/g
+	%s/};\?\ze[^\r\n]/\0\r/g
+	%s/;\ze[^\r\n]/;\r/g
+	%s/[^\s]\zs[=&|]\+\ze[^\s]/ \0 /g
+	normal ggVG=
+endfunction}}}

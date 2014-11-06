@@ -239,14 +239,16 @@ bindsym $mod+p scratchpad show
 
 # dmenu menus
 bindsym $mod+Shift+d exec ~/bin/dmenu_run.pl -i -sb '#81A2BE' -sf '#000000' -h 21
-bindsym $mod+d exec j4-dmenu-desktop --dmenu="dmenu -i -sb '#81A2BE' -sf '#000000' -h 21"
+#bindsym $mod+d exec j4-dmenu-desktop --dmenu="dmenu -i -sb '#81A2BE' -sf '#000000' -h 21"
+bindsym $mod+d exec rofi -rnow
+bindsym $mod+Tab exec rofi -now
 bindsym $mod+m exec ~/bin/mpc_dmenu.sh
 bindsym $mod+n exec ~/bin/rename_i3_ws.py
-bindsym $mod+Tab exec ~/bin/quickswitch-for-i3/quickswitch.py -d "dmenu -i -sb \#81A2BE -sf \#000000 -nf \#969896 -l 20 -h 21"
 
 bindsym $mod+i exec notify-send MPD "$(mpc status)"
 bindsym Print exec scrot -q 100 -e 'mv $f ~/Pictures/Screenshots'
 bindsym Control+mod1+l exec xautolock -locknow
+bindsym XF86Launch1 exec physlock -d
 
 # floating windows rules
 # for_window [class="MPlayer"] floating enable

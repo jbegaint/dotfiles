@@ -14,7 +14,6 @@ readonly COMMON="
 .Xresources
 .nanorc
 .tmux.conf
-.vim/
 .vimrc
 .zsh/
 .zshenv
