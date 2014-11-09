@@ -148,22 +148,28 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Windows and bar themes
-# define colors (Tomorrow theme)
+# define colors (base16 themes mix)
 set $black		#1D1F21
 set $blue		#81A2BE
+#set $blue		#65737e
 set $green		#B5BD68
 set $grey 		#969896
-set $darkgrey 	#373B41
+#set $darkgrey 	#373B41
+#set $darkgrey 	#525252
+set $darkgrey 	#868686
+set $darkgrey1 	#424242
 set $red 		#CC6666
 set $white 		#C5C8C6
+
+# cool blue 65737e
 
 # no title bar, only x pixels border
 new_window pixel 1
 
 # client.class          border  backgr. 	text    indicator
 client.focused          $blue 	$blue 		$black	$green
-client.focused_inactive $black 	$darkgrey 	$white	$green
-client.unfocused        $black 	$darkgrey 	$grey	$green
+client.focused_inactive $black 	$darkgrey1 	$white	$green
+client.unfocused        $black 	$darkgrey1 	$grey	$green
 client.urgent           $red	$red		$black  $green
 
 bar {
@@ -178,11 +184,14 @@ bar {
 		separator	$black
 
 		# bar.class        border  backgr. text
-		focused_workspace	$blue 	$blue	$black
-		#active_workspace	$grey	$grey 	$black
-		active_workspace	$black	$black 	$white
-		inactive_workspace	$black	$black 	$grey
-		urgent_workspace	$red 	$red 	$black
+		#focused_workspace	$blue 	$blue	$black
+		focused_workspace	$darkgrey 	$darkgrey	$black
+		#active_workspace	$black	$black 	$white
+		active_workspace	$darkgrey	$black 		$grey
+		#inactive_workspace	$black	$black 	$darkgrey
+		inactive_workspace	$darkgrey	$black	 	$darkgrey
+		#urgent_workspace	$red 	$red 	$black
+		urgent_workspace	$red 		$red 		$black
 	}
 }
 
@@ -269,9 +278,8 @@ for_window [class="com-mathworks-util-PostVMInit"] floating enable
 # assign workspace
 assign [class="Pidgin"] 10
 
-# test config for i3 dsm-changes
-#enable_alpha_channel yes
-#new_window inset 2
+# config for i3 patched with useless gaps
+gap_size 5
 
 workspace_auto_back_and_forth yes
 

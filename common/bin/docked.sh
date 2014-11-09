@@ -44,6 +44,8 @@ reload_config_generic() {
 }
 
 main() {
+	# test
+	sleep 1s
 
 	if is_docked; then
 		apply_config_dock

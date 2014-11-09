@@ -64,10 +64,13 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'Shougo/context_filetype.vim'
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'Shougo/vimproc.vim'
+Plugin 'Sorcerer'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'bling/vim-airline'
 Plugin 'chriskempson/base16-vim'
 Plugin 'chriskempson/vim-tomorrow-theme'
+Plugin 'closetag.vim'
+Plugin 'freeo/vim-kalisi'
 Plugin 'gmarik/vundle'
 Plugin 'godlygeek/tabular'
 Plugin 'gundo'
@@ -75,32 +78,30 @@ Plugin 'jelera/vim-javascript-syntax'
 Plugin 'jonathanfilip/vim-lucius'
 Plugin 'jordwalke/flatlandia'
 Plugin 'kien/ctrlp.vim'
+Plugin 'klen/python-mode'
+Plugin 'majutsushi/tagbar'
 Plugin 'mattn/emmet-vim'
 Plugin 'mhinz/vim-startify'
 Plugin 'mkitt/tabline.vim'
+Plugin 'nanotech/jellybeans.vim'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'pangloss/vim-javascript'
 Plugin 'petRUShka/vim-opencl'
 Plugin 'plasticboy/vim-markdown'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'tpope/vim-rsi'
-Plugin 'tpope/vim-surround'
-Plugin 'vimwiki/vimwiki'
-Plugin 'vivkin/flatland.vim'
-Plugin 'klen/python-mode'
-Plugin 'nanotech/jellybeans.vim'
-Plugin 'w0ng/vim-hybrid'
-Plugin 'freeo/vim-kalisi'
-Plugin 'whatyouhide/vim-gotham'
-Plugin 'tomasr/molokai'
-Plugin 'closetag.vim'
-Plugin 'Sorcerer'
 Plugin 'romainl/Apprentice'
 Plugin 'romainl/Disciple'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+Plugin 'tomasr/molokai'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rsi'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'vimwiki/vimwiki'
+Plugin 'vivkin/flatland.vim'
+Plugin 'w0ng/vim-hybrid'
+Plugin 'whatyouhide/vim-gotham'
 
 call vundle#end()
 filetype plugin indent on
@@ -131,6 +132,9 @@ else
 	set t_Co=256
 	set background=dark
 	colorscheme Tomorrow-Night
+	" use term background color
+	" hi Normal ctermbg=None
+	hi Normal ctermbg=234
 	let g:airline_theme='tomorrow'
 endif
 
@@ -158,13 +162,6 @@ endfunction
 " -- delimitMate and neocomplete compatibility
 imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
 
-" -- NERDTree
-nnoremap <silent> <F2> :NERDTreeToggle<CR>
-noremap <silent> <F2> <ESC>:NERDTreeToggle<CR>
-
-" -- Gundo
-nnoremap <F5> :GundoToggle<CR>
-
 " -- vim-airline
 set laststatus=2
 let g:airline_powerline_fonts = 0
@@ -173,15 +170,9 @@ let g:airline_right_sep = ''
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ''
 let g:airline#extensions#tabline#left_alt_sep = ''
-let g:airline#extensions#tabline#tab_nr_type = 1	" display tab number
-let g:airline#extensions#whitespace#mixed_indent_algo = 1 " do not report error on C multi line comments
-
 
 " -- delimitMate
 let delimitMate_expand_cr=1
-
-" -- vim-fugitive
-nnoremap <F10> :Gstatus<CR>
 
 " -- vim-markdown
 let g:vim_markdown_folding_disabled=1
@@ -189,7 +180,6 @@ let g:vim_markdown_folding_disabled=1
 " -- ctrlp
 let g:ctrlp_custom_ignore = 'git\|venv'
 let g:ctrlp_cmd = 'CtrlPMixed'
-
 
 " -- Latex-Box
 let g:LatexBox_quickfix = 2
@@ -213,25 +203,32 @@ nnoremap <silent> <leader><CR> :noh<CR>
 nnoremap Q		<nop>
 nmap 	<F1> 	<nop>
 
-" misc shortcuts
+" -- misc shortcuts
 " nnoremap <C-Space>		:w <bar> exec '!make' <CR> <CR>
+
+" Fn shortcuts
+nnoremap <silent> <F2> :NERDTreeToggle<CR>
 nnoremap <silent> <F3> :set invnumber<CR>
 nnoremap <silent> <F4> :set invlist<CR>
+nnoremap <silent> <F5> :GundoToggle<CR>
 nnoremap <silent> <F6> :AirlineToggle<CR>
 nnoremap <silent> <F7> :call ToggleColours()<CR>
+nnoremap <silent> <F8> :TagbarToggle<CR>
+nnoremap <silent> <F10> :Gstatus<CR>
 
 " painless navigation in wrapped lines
 nnoremap j gj
 nnoremap k gk
+
+" swap : and ;
+nnoremap ; :
+nnoremap : ;
 
 " reload vimrc on the fly
 augroup myvimrc
 	au!
 	au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC |
 augroup END
-
-" timeout for ESC
-set timeoutlen=1000 ttimeoutlen=0
 
 " -- highlight current line number
 " 1. clear highlight
@@ -246,25 +243,14 @@ augroup CLNRSet
 	autocmd! ColorScheme * hi CursorLineNR cterm=bold
 augroup END
 
-"-- Languages specific stuff
+" -- Languages specific stuff
 autocmd FileType python set sw=4 ts=4 sts=4 tw=0
 
 " misc functions
-function! ToggleColours()
-	if g:colors_name == 'hybrid'
-		colorscheme hybrid-light
-	elseif g:colors_name == 'hybrid-light'
-		colorscheme hybrid
-	endif
-endfunction
-"
-" Simple re-format for minified Javascript
-command! UnMinify call UnMinify()
-function! UnMinify()
-	%s/{\ze[^\r\n]/{\r/g
-	%s/){/) {/g
-	%s/};\?\ze[^\r\n]/\0\r/g
-	%s/;\ze[^\r\n]/;\r/g
-	%s/[^\s]\zs[=&|]\+\ze[^\s]/ \0 /g
-	normal ggVG=
-endfunction}}}
+" function! ToggleColours()
+" 	if g:colors_name == 'hybrid'
+" 		colorscheme hybrid-light
+" 	elseif g:colors_name == 'hybrid-light'
+" 		colorscheme hybrid
+" 	endif
+" endfunction

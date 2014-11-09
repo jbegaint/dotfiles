@@ -29,6 +29,7 @@ pnmixer &
 ~/bin/redshift/run.sh &
 
 xautolock -locker 'i3lock -c 333333' &
+start-pulseaudio-x11 &
 
 # fix some xdg-* related bugs
 export DE='xfce'
