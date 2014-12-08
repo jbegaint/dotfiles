@@ -13,8 +13,12 @@ export PS1=$'
 $(get_dir)%{$fg[red]%}$(__git_ps1 \" (%s)\")%{$fg_bold[blue]%} » %{$reset_color%}'
 # export PS1=$'
 #  %~%{$fg[red]%}$(__git_ps1 \" (%s)\")%{$fg_bold[blue]%} » %{$reset_color%}'
+
+export GOPATH="$HOME/.go"
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/.dynamic-colors/bin:$PATH"
+export PATH="$HOME/.gem/ruby/2.1.0/bin:$PATH"
+export PATH="$GOPATH/bin:$PATH"
 
 # history
 HISTFILE=~/.histfile
@@ -52,4 +56,4 @@ source /usr/share/git/completion/git-prompt.sh
 bindkey -e
 bindkey    "^[[3~"          delete-char
 
-eval $(keychain --eval --agents ssh -Q --quiet id_rsa)
+eval $(keychain --eval --agents ssh -Q --quiet --timeout 60)

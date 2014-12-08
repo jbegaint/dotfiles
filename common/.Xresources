@@ -1,9 +1,9 @@
-URxvt.font: xft:Source Code Pro for Powerline:size=10
+URxvt.font: xft:Source Code Pro for Powerline:size=10, xft:DejaVu Sans Mono:size=10
 
 xterm*dynamicColors: true
 urxvt*dynamicColors: on
 
-URxvt.perl-ext-common: default,clipboard,url-select,tabbedex,urxvt-colors
+URxvt.perl-ext-common: default,clipboard,url-select,urxvt-colors
 
 *.URxvt.urgentOnBell: true
 URxvt.url-select.launcher: chromium

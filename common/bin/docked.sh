@@ -13,40 +13,40 @@ is_docked() {
 
 apply_config_dock() {
 	xrandr --output $IN --off --output $EXT --auto --primary
-	setxkbmap us '' compose:rwin
 
 	xset s 0
 	xset -dpms
+
+	notify-send "DOCKING INFO" "$IN [off]\n$EXT [on]"
 
 	pacmd set-sink-port \
 		alsa_output.pci-0000_00_1b.0.analog-stereo \
 		analog-output
 
-	notify-send "DOCKING INFO" "$IN [off]\n$EXT [on]"
+	setxkbmap us '' compose:rwin
 }
 
 apply_config_undock() {
 	xrandr --output $IN --auto --primary --output $EXT --off
-	setxkbmap fr
+	setxkbmap fr '' compose:rctrl
 
 	xset dpms 300
+
+	notify-send "DOCKING INFO" "$IN [on]\n$EXT [off]"
 
 	pacmd set-sink-port \
 		alsa_output.pci-0000_00_1b.0.analog-stereo \
 		analog-output-speaker
-
-	notify-send "DOCKING INFO" "$IN [on]\n$EXT [off]"
 }
 
 reload_config_generic() {
 	# reload wallpaper
 	eval $(cat ~/.fehbg)
+	# unmap caps lock
+	xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
 }
 
 main() {
-	# test
-	sleep 1s
-
 	if is_docked; then
 		apply_config_dock
 	else

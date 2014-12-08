@@ -20,16 +20,19 @@ xset fp rehash &
 
 # autostart apps
 dunst &
+eval $(cat ~/.fehbg) &
 parcellite &
-xset dpms 300 &
 pnmixer &
+start-pulseaudio-x11 &
+xautolock -locker 'i3lock -c 333333' &
+xset dpms 300 &
 
 # launch scripts
 ~/bin/docked.sh &
 ~/bin/redshift/run.sh &
 
-xautolock -locker 'i3lock -c 333333' &
-start-pulseaudio-x11 &
+# map caps lock to escape
+xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
 
 # fix some xdg-* related bugs
 export DE='xfce'

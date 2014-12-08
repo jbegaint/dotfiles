@@ -1,4 +1,5 @@
 "-- General
+
 set number
 set ruler
 set cc=80
@@ -6,13 +7,6 @@ set so=7
 
 set autoread
 set ttyfast
-
-" Leader
-let mapleader = ","
-nmap <leader>w :w!<cr>
-
-map j gj
-map k gk
 
 syntax on
 
@@ -47,12 +41,51 @@ set noswapfile
 set wrap linebreak
 set tw=80
 set fo+=wt
-set nofoldenable
+
+" set nofoldenable
 set modeline
 
 set complete+=kspell
+set ttimeout
+set ttimeoutlen=100
 
-" -- Plugins
+" leader
+let mapleader = "\<Space>"
+
+" switching between buffers w/o pain
+nnoremap <silent><Tab> :bnext<CR>
+nnoremap <silent><S-Tab> :bprev<CR>
+
+" insert lines
+nnoremap <silent> <S-j> o<ESC>k
+nnoremap <silent> <S-k> O<ESC>j
+
+" clear search highlight
+nnoremap <CR> :noh<CR><CR>
+nnoremap <silent> <leader><CR> :noh<CR>
+
+" disable hex mode and help shortcuts
+nnoremap Q		<nop>
+nmap 	<F1> 	<nop>
+
+" painless navigation in wrapped lines
+nnoremap j gj
+nnoremap k gk
+
+" folding
+nnoremap <Leader><Space> za
+
+" swap : and ;
+" nnoremap ; :
+" nnoremap : ;
+
+" set statusline=\ \%f%m%r%h%w\ ::\ %=\ %y\ [%{&ff}]\ %c\ [%p%%:\ %l/%L]\
+set statusline=\ \%f%m%r%h%w\ %=\
+set statusline+=%{strlen(&ft)?&ft:'none'} "filetype
+set statusline+=\ -\ %{strlen(&fenc)?&fenc:'none'}[%{&ff}]\
+" mode filename --- filetype encoding[unix] 27%: LineN:ColN: errrors
+
+" -- Plugins {{{
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/vundle/
@@ -64,18 +97,15 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'Shougo/context_filetype.vim'
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'Shougo/vimproc.vim'
-Plugin 'Sorcerer'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'bling/vim-airline'
 Plugin 'chriskempson/base16-vim'
 Plugin 'chriskempson/vim-tomorrow-theme'
 Plugin 'closetag.vim'
-Plugin 'freeo/vim-kalisi'
 Plugin 'gmarik/vundle'
 Plugin 'godlygeek/tabular'
 Plugin 'gundo'
 Plugin 'jelera/vim-javascript-syntax'
-Plugin 'jonathanfilip/vim-lucius'
 Plugin 'jordwalke/flatlandia'
 Plugin 'kien/ctrlp.vim'
 Plugin 'klen/python-mode'
@@ -92,26 +122,26 @@ Plugin 'romainl/Apprentice'
 Plugin 'romainl/Disciple'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
-Plugin 'tomasr/molokai'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rsi'
 Plugin 'tpope/vim-surround'
+Plugin 'ggreer/the_silver_searcher'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'vimwiki/vimwiki'
-Plugin 'vivkin/flatland.vim'
 Plugin 'w0ng/vim-hybrid'
-Plugin 'whatyouhide/vim-gotham'
-
+Plugin 'fatih/vim-go'
 call vundle#end()
+" -- }}}
+
 filetype plugin indent on
 
 " -- gui/console look
 if has('gui_running')
 	set background=dark
-	colorscheme Tomorrow-Night
-	let g:airline_theme='tomorrow'
-	set guifont=Source\ Code\ Pro\ 10
+	colorscheme jellybeans
+	let g:airline_theme = 'jellybeans'
+	set guifont=Source\ Code\ Pro\ For\ Powerline\ 10
 
 	" remove menu, toolbar, and srcollbars
 	set guioptions-=m
@@ -131,11 +161,8 @@ if has('gui_running')
 else
 	set t_Co=256
 	set background=dark
-	colorscheme Tomorrow-Night
-	" use term background color
-	" hi Normal ctermbg=None
-	hi Normal ctermbg=234
-	let g:airline_theme='tomorrow'
+	colorscheme jellybeans
+	let g:airline_theme = 'jellybeans'
 endif
 
 " color right border after 80 chars (and background after 100)
@@ -164,47 +191,46 @@ imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
 
 " -- vim-airline
 set laststatus=2
-let g:airline_powerline_fonts = 0
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ''
-let g:airline#extensions#tabline#left_alt_sep = ''
+let g:airline_powerline_fonts=1
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tagbar#enabled=0
+let g:airline#extensions#whitespace#mixed_indent_algo = 1
 
 " -- delimitMate
 let delimitMate_expand_cr=1
 
 " -- vim-markdown
-let g:vim_markdown_folding_disabled=1
+" let g:vim_markdown_folding_disabled=1
 
 " -- ctrlp
+if has('gui_running')
+	nnoremap <C-Space> :CtrlPBuffer<CR>
+else
+	nnoremap <C-@> :CtrlPBuffer<CR>
+endif
 let g:ctrlp_custom_ignore = 'git\|venv'
-let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_cmd = 'exe "CtrlP".get(["", "MRU", "Buffer"], v:count)'
 
 " -- Latex-Box
 let g:LatexBox_quickfix = 2
 let g:LatexBox_latexmk_preview_continuously = 1
+let g:LatexBox_Folding = 1
 
 " -- Pymode
 let g:pymode_doc_bind = 'D'
 let g:pymode_options_colorcolumn = 0
 
-" ------ misc shortcuts/ options ------
+" -- The Silver Searcher
+if executable('ag')
+	" use ag over grep
+	set grepprg=ag\ --nogroup\ --nocolor
 
-" insert lines
-nnoremap <silent> <S-j> o<ESC>k
-nnoremap <silent> <S-k> O<ESC>j
+	" use ag in ctrlp
+	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+	let g:ctrlp_use_caching = 0
+endif
 
-" clear search highlight
-nnoremap <CR> :noh<CR><CR>
-nnoremap <silent> <leader><CR> :noh<CR>
-
-" disable hex mode and help shortcuts
-nnoremap Q		<nop>
-nmap 	<F1> 	<nop>
-
-" -- misc shortcuts
-" nnoremap <C-Space>		:w <bar> exec '!make' <CR> <CR>
+" -- misc shortcuts and options
 
 " Fn shortcuts
 nnoremap <silent> <F2> :NERDTreeToggle<CR>
@@ -212,17 +238,9 @@ nnoremap <silent> <F3> :set invnumber<CR>
 nnoremap <silent> <F4> :set invlist<CR>
 nnoremap <silent> <F5> :GundoToggle<CR>
 nnoremap <silent> <F6> :AirlineToggle<CR>
-nnoremap <silent> <F7> :call ToggleColours()<CR>
+" nnoremap <silent> <F7> :call ToggleColours()<CR>
 nnoremap <silent> <F8> :TagbarToggle<CR>
 nnoremap <silent> <F10> :Gstatus<CR>
-
-" painless navigation in wrapped lines
-nnoremap j gj
-nnoremap k gk
-
-" swap : and ;
-nnoremap ; :
-nnoremap : ;
 
 " reload vimrc on the fly
 augroup myvimrc
@@ -254,3 +272,20 @@ autocmd FileType python set sw=4 ts=4 sts=4 tw=0
 " 		colorscheme hybrid
 " 	endif
 " endfunction
+
+autocmd VimEnter,VimResized * call DisplayStatusLine()
+
+" do not show vim-airline if term is too small
+function! DisplayStatusLine()
+	let prevl = &laststatus
+
+	if &lines > 22
+		set laststatus=2
+	else
+		set laststatus=1
+	endif
+
+	if prevl != &laststatus
+		:AirlineToggle
+	endif
+endfunction
