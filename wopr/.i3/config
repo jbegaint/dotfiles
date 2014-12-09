@@ -153,14 +153,10 @@ set $black		#1D1F21
 set $blue		#81A2BE
 set $green		#B5BD68
 set $grey 		#969896
-set $darkgrey 	#424242
+set $darkgrey 	#373B41
 set $red 		#CC6666
 set $white 		#C5C8C6
 
-# cool blue 65737e
-
-# no title bar, only x pixels border
-#new_window pixel 1
 new_window pixel 3
 
 # client.class          border  	backgr. 	text    indicator
@@ -181,12 +177,8 @@ bar {
 		statusline 	$white
 
 		# bar.class			border		backgr. 	text
-		#focused_workspace	$darkgrey 	$darkgrey	$black
-		#active_workspace	$darkgrey	$black 		$grey
-		#inactive_workspace	$darkgrey	$black	 	$darkgrey
-		#urgent_workspace	$red 		$red 		$black
-		focused_workspace	$grey 		$grey		$black
-		active_workspace	$grey		$grey 		$green
+		focused_workspace	$grey 		$darkgrey	$grey
+		active_workspace	$grey		$darkgrey 	$green
 		inactive_workspace	$darkgrey	$darkgrey	$grey
 		urgent_workspace	$red		$red 		$black
 	}
@@ -271,6 +263,7 @@ for_window [class="Skype"] floating enable
 for_window [class="file_progress"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [class="com-mathworks-util-PostVMInit"] floating enable
+for_window [class="^Gcr-prompter"] floating enable
 
 # assign workspace
 assign [class="Pidgin"] 10
