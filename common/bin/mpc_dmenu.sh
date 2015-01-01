@@ -16,7 +16,8 @@ function mpc_load() {
 }
 
 function dmenu_wrapper() {
-	dmenu -i -sb '#81A2BE' -sf '#000000' -nf '#969896' -p "$1:" -h 21
+	dmenu -i -sb '#81A2BE' -sf '#000000' -nf '#969896' -p "$1:" -h 21\
+		-fn 'Source Code Pro-9:normal'
 }
 
 function parse_cmd() {

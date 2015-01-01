@@ -1,7 +1,7 @@
 #!/bin/bash
 # Check for ck4up updates and notify the user
 
-# get number of new/ updates web pages
+# get number of new/ updated web pages
 n=$(ck4up -k | grep -E 'new:|diff:' | wc -l)
 
 if [ $n != 0 ]

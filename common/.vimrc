@@ -42,12 +42,15 @@ set wrap linebreak
 set tw=80
 set fo+=wt
 
-" set nofoldenable
+set nofoldenable
 set modeline
 
 set complete+=kspell
 set ttimeout
 set ttimeoutlen=100
+
+set splitright
+set splitbelow
 
 " leader
 let mapleader = "\<Space>"
@@ -161,7 +164,10 @@ if has('gui_running')
 else
 	set t_Co=256
 	set background=dark
-	colorscheme jellybeans
+	" colorscheme jellybeans
+	" let g:airline_theme = 'jellybeans'
+	let base16colorspace=256
+	colorscheme base16-tomorrow
 	let g:airline_theme = 'jellybeans'
 endif
 

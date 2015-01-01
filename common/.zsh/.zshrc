@@ -56,4 +56,9 @@ source /usr/share/git/completion/git-prompt.sh
 bindkey -e
 bindkey    "^[[3~"          delete-char
 
-eval $(keychain --eval --agents ssh -Q --quiet --timeout 60)
+# keychain
+keys=$(cat ~/.ssh/keys)
+eval $(keychain --eval --agents ssh --nogui -q $keys)
+
+# color scheme
+~/.config/base16-shell/base16-tomorrow.dark.sh
