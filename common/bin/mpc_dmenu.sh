@@ -40,11 +40,11 @@ function parse_cmd() {
 			;;
 
 		up)
-			amixer set Master 5%+ -q
+			pulseaudio-ctl up 5
 			;;
 
 		down)
-			amixer set Master 5%- -q
+			pulseaudio-ctl down 5
 			;;
 
 		toggle)
@@ -70,14 +70,16 @@ function parse_cmd() {
 }
 
 main() {
-	# add commands as items
+	# start mpd ?
+	[[ -z $(pidof mpd) ]] && mpd
+
+	# add commands
 	commands=("${COMMANDS[@]}")
-	# add all songs as items
+	# add all songs
 	commands+=("$(mpc list Title)")
 
 	action=$(printf "%s\n" "${commands[@]}" | dmenu_wrapper "MPD")
 
-	# if not empty then parse command
 	[[ ! -z $action ]] && parse_cmd $action
 }
 

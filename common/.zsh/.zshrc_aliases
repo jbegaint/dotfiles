@@ -25,6 +25,8 @@ alias keychain_start='eval `keychain --eval --agents ssh id_rsa`'
 alias btsync='btsync --config ~/.config/btsync/btsync.conf'
 alias cpv="rsync -poghb --backup-dir=/tmp/rsync -e /dev/null --progress --"
 
+alias uncaps="xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'"
+
 lsc () {
 	ls "$@" | wc -l
 }

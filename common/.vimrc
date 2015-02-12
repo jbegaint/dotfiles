@@ -15,6 +15,7 @@ set encoding=utf-8
 set mouse=a
 
 set wildmenu
+set wildmode=longest,list
 set wildignore=*.o,*~,*.pyc
 set wildignore+=*.aux,*.dvi,*.bcf,*.blg,*.bbl
 
@@ -23,8 +24,9 @@ set smartindent
 
 set noexpandtab
 set smarttab
-set shiftwidth=4
-set tabstop=4
+set shiftwidth=8
+set tabstop=8
+set softtabstop=8
 
 set hlsearch
 set ignorecase
@@ -69,7 +71,6 @@ nnoremap <silent> <leader><CR> :noh<CR>
 
 " disable hex mode and help shortcuts
 nnoremap Q		<nop>
-nmap 	<F1> 	<nop>
 
 " painless navigation in wrapped lines
 nnoremap j gj
@@ -95,6 +96,7 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#begin()
 
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
+Plugin 'Matt-Deacalion/vim-systemd-syntax'
 Plugin 'PotatoesMaster/i3-vim-syntax'
 Plugin 'Raimondi/delimitMate'
 Plugin 'Shougo/context_filetype.vim'
@@ -105,13 +107,14 @@ Plugin 'bling/vim-airline'
 Plugin 'chriskempson/base16-vim'
 Plugin 'chriskempson/vim-tomorrow-theme'
 Plugin 'closetag.vim'
+Plugin 'fatih/vim-go'
+Plugin 'ggreer/the_silver_searcher'
 Plugin 'gmarik/vundle'
 Plugin 'godlygeek/tabular'
 Plugin 'gundo'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'jordwalke/flatlandia'
 Plugin 'kien/ctrlp.vim'
-Plugin 'klen/python-mode'
 Plugin 'majutsushi/tagbar'
 Plugin 'mattn/emmet-vim'
 Plugin 'mhinz/vim-startify'
@@ -124,16 +127,14 @@ Plugin 'plasticboy/vim-markdown'
 Plugin 'romainl/Apprentice'
 Plugin 'romainl/Disciple'
 Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rsi'
 Plugin 'tpope/vim-surround'
-Plugin 'ggreer/the_silver_searcher'
 Plugin 'tpope/vim-unimpaired'
-Plugin 'vimwiki/vimwiki'
+Plugin 'scrooloose/syntastic'
 Plugin 'w0ng/vim-hybrid'
-Plugin 'fatih/vim-go'
+Plugin 'morhetz/gruvbox'
 call vundle#end()
 " -- }}}
 
@@ -164,8 +165,6 @@ if has('gui_running')
 else
 	set t_Co=256
 	set background=dark
-	" colorscheme jellybeans
-	" let g:airline_theme = 'jellybeans'
 	let base16colorspace=256
 	colorscheme base16-tomorrow
 	let g:airline_theme = 'jellybeans'
@@ -214,17 +213,13 @@ if has('gui_running')
 else
 	nnoremap <C-@> :CtrlPBuffer<CR>
 endif
-let g:ctrlp_custom_ignore = 'git\|venv'
+let g:ctrlp_custom_ignore = '\v[\/](venv|venv2|staticfiles)$'
 let g:ctrlp_cmd = 'exe "CtrlP".get(["", "MRU", "Buffer"], v:count)'
 
 " -- Latex-Box
 let g:LatexBox_quickfix = 2
 let g:LatexBox_latexmk_preview_continuously = 1
 let g:LatexBox_Folding = 1
-
-" -- Pymode
-let g:pymode_doc_bind = 'D'
-let g:pymode_options_colorcolumn = 0
 
 " -- The Silver Searcher
 if executable('ag')
@@ -239,6 +234,7 @@ endif
 " -- misc shortcuts and options
 
 " Fn shortcuts
+nnoremap <silent> <F1> mmgqip`m
 nnoremap <silent> <F2> :NERDTreeToggle<CR>
 nnoremap <silent> <F3> :set invnumber<CR>
 nnoremap <silent> <F4> :set invlist<CR>
@@ -247,12 +243,6 @@ nnoremap <silent> <F6> :AirlineToggle<CR>
 " nnoremap <silent> <F7> :call ToggleColours()<CR>
 nnoremap <silent> <F8> :TagbarToggle<CR>
 nnoremap <silent> <F10> :Gstatus<CR>
-
-" reload vimrc on the fly
-augroup myvimrc
-	au!
-	au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC |
-augroup END
 
 " -- highlight current line number
 " 1. clear highlight
@@ -269,15 +259,6 @@ augroup END
 
 " -- Languages specific stuff
 autocmd FileType python set sw=4 ts=4 sts=4 tw=0
-
-" misc functions
-" function! ToggleColours()
-" 	if g:colors_name == 'hybrid'
-" 		colorscheme hybrid-light
-" 	elseif g:colors_name == 'hybrid-light'
-" 		colorscheme hybrid
-" 	endif
-" endfunction
 
 autocmd VimEnter,VimResized * call DisplayStatusLine()
 

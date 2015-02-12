@@ -25,7 +25,9 @@ set $mod Mod4
 floating_modifier Mod4
 
 # start a terminal
-bindsym $mod+Return exec urxvt
+# bindsym $mod+Return exec urxvt
+bindsym $mod+Return exec urxvtc
+bindsym $mod+Shift+Return exec st
 
 # kill focused window
 bindsym $mod+q kill
@@ -114,6 +116,10 @@ bindsym $mod+Control+j move workspace to output down
 bindsym $mod+Control+k move workspace to output up
 bindsym $mod+Control+l move workspace to output right
 
+# cycle through the workspaces
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -129,16 +135,16 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym h           resize shrink width 10 px or 10 ppt
-        bindsym j           resize grow height 10 px or 10 ppt
-        bindsym k           resize shrink height 10 px or 10 ppt
-        bindsym l			resize grow width 10 px or 10 ppt
+        bindsym h	resize shrink width 10 px or 10 ppt
+        bindsym j       resize grow height 10 px or 10 ppt
+        bindsym k	resize shrink height 10 px or 10 ppt
+        bindsym l	resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left        resize shrink width 10 px or 10 ppt
-        bindsym Down        resize grow height 10 px or 10 ppt
-        bindsym Up          resize shrink height 10 px or 10 ppt
-        bindsym Right       resize grow width 10 px or 10 ppt
+        bindsym Left	resize shrink width 10 px or 10 ppt
+        bindsym Down	resize grow height 10 px or 10 ppt
+        bindsym Up	resize shrink height 10 px or 10 ppt
+        bindsym Right	resize grow width 10 px or 10 ppt
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"
@@ -149,13 +155,13 @@ bindsym $mod+r mode "resize"
 
 # Windows and bar themes
 # define colors (base16 themes mix)
-set $black		#1D1F21
-set $blue		#81A2BE
-set $green		#B5BD68
-set $grey		#969896
+set $black	#1D1F21
+set $blue	#81A2BE
+set $green	#B5BD68
+set $grey	#969896
 set $darkgrey	#373B41
-set $red		#CC6666
-set $white		#C5C8C6
+set $red	#CC6666
+set $white	#C5C8C6
 
 new_window pixel 1
 new_float pixel 1
@@ -174,14 +180,14 @@ bar {
 	position top
 	tray_output primary
 	modifier Mod1
-	font pango:Source Code Pro Medium, FontAwesome 9
+	font pango:Source Code Pro Medium 9
 
 	colors {
 		background	$darkgrey
 		separator	$darkgrey
 		statusline	$white
 
-		# bar.class			border		backgr.		text
+		# bar.class		border		backgr.		text
 		focused_workspace	$grey		$darkgrey	$grey
 		active_workspace	$grey		$black		$grey
 		inactive_workspace	$darkgrey	$darkgrey	$grey
@@ -193,38 +199,37 @@ bar {
 set $xautolockmenu "xautolock: [e]nable [d]isable"
 bindsym $mod+F11         mode $xautolockmenu
 mode $xautolockmenu {
-		bindsym e		exec --no-startup-id xautolock -enable, mode "default"
-		bindsym d		exec --no-startup-id xautolock -disable, mode "default"
+	bindsym e	exec --no-startup-id xautolock -enable, mode "default"
+	bindsym d	exec --no-startup-id xautolock -disable, mode "default"
 
-		bindsym Return        mode "default"
-		bindsym Escape        mode "default"
+	bindsym Return	mode "default"
+	bindsym Escape	mode "default"
 }
 
 # audio mode
-set $audiomenu "volume: [+]10% [-]10% [m]ute [r]eset"
-bindsym $mod+F12         mode $audiomenu
-mode $audiomenu {
-	bindsym r             exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -- 50%
-    bindsym plus          exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -- +10%
-    bindsym KP_Add        exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -- +10%
-    bindsym minus         exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -- -10%
-    bindsym KP_Subtract   exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -- -10%
-    bindsym m             exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
-
-    bindsym Return        mode "default"
-    bindsym Escape        mode "default"
-}
+# set $audiomenu "volume: [+]10% [-]10% [m]ute [r]eset"
+# bindsym $mod+F12         mode $audiomenu
+# mode $audiomenu {
+# 	bindsym r		exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -- 50%
+# 	bindsym plus		exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -- +10%
+# 	bindsym KP_Add		exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -- +10%
+# 	bindsym minus		exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -- -10%
+# 	bindsym KP_Subtract	exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -- -10%
+# 	bindsym m		exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+#
+# 	bindsym Return		mode "default"
+# 	bindsym Escape		mode "default"
+# }
 
 # fast workspace switching
 bindsym Ctrl+Mod1+Right workspace next
-bindsym Ctrl+Mod1+Left workspace prev
+bindsym Ctrl+Mod1+Left	workspace prev
 
 # volume control
 bindsym XF86AudioRaiseVolume	exec --no-startup-id pulseaudio-ctl up 5
 bindsym XF86AudioLowerVolume	exec --no-startup-id pulseaudio-ctl down 5
-bindsym XF86AudioMute			exec --no-startup-id pulseaudio-ctl mute
-bindsym XF86AudioMicMute		exec --no-startup-id pulseaudio-ctl mute-input
-
+bindsym XF86AudioMute		exec --no-startup-id pulseaudio-ctl mute
+bindsym XF86AudioMicMute	exec --no-startup-id pulseaudio-ctl mute-input
 
 # mpd control
 bindsym XF86AudioPlay exec mpc toggle
@@ -244,7 +249,6 @@ bindsym $mod+p scratchpad show
 bindsym $mod+Shift+d exec ~/bin/dmenu_run.pl -i -sb '#81A2BE' -sf '#000000' -h 21 -fn 'Source Code Pro-9:normal'
 #bindsym $mod+d exec j4-dmenu-desktop --dmenu="dmenu -i -sb '#81A2BE' -sf '#000000' -h 21"
 bindsym $mod+d exec rofi -rnow
-bindsym $mod+Tab exec rofi -now
 bindsym $mod+m exec ~/bin/mpc_dmenu.sh
 bindsym $mod+n exec ~/bin/rename_i3_ws.py
 
@@ -254,7 +258,7 @@ bindsym Control+mod1+l exec xautolock -locknow
 bindsym XF86Launch1 exec physlock -d
 
 # floating windows rules
-# for_window [class="MPlayer"] floating enable
+for_window [class="MPlayer"] floating enable
 for_window [class="mpv"] floating enable
 for_window [class="Steam"] floating enable
 for_window [class="Transmission"] floating enable
@@ -264,12 +268,14 @@ for_window [class="Arandr"] floating enable
 for_window [class="Gleds"] floating enable
 for_window [class="^Wine$"] floating enable
 for_window [class="Skype"] floating enable
+for_window [class="qemu-*"] floating enable
 
 for_window [class="file_progress"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [class="com-mathworks-util-PostVMInit"] floating enable
 
 for_window [class="CybIrViewer"] floating enable
+for_window [class="Salut"] floating enable
 
 # assign workspace
 assign [class="Pidgin"] 10
