@@ -38,10 +38,7 @@ xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
 # fix some xdg-* related bugs
 export DE='xfce'
 
-wmname LG3D
-
 # urxvt daemon
 urxvtd -q -o -f
 
 exec i3
-# exec startkde

@@ -1,5 +1,9 @@
-"-- General
+"-- Pathogen
+execute pathogen#infect()
+syntax on
+filetype plugin indent on
 
+"-- General
 set number
 set ruler
 set cc=80
@@ -7,8 +11,7 @@ set so=7
 
 set autoread
 set ttyfast
-
-syntax on
+set nocompatible
 
 set listchars=precedes:«,extends:»,eol:↲,tab:▸\ ,trail:.
 set encoding=utf-8
@@ -84,61 +87,27 @@ nnoremap <Leader><Space> za
 " nnoremap : ;
 
 " set statusline=\ \%f%m%r%h%w\ ::\ %=\ %y\ [%{&ff}]\ %c\ [%p%%:\ %l/%L]\
-set statusline=\ \%f%m%r%h%w\ %=\
-set statusline+=%{strlen(&ft)?&ft:'none'} "filetype
-set statusline+=\ -\ %{strlen(&fenc)?&fenc:'none'}[%{&ff}]\
+" set statusline=\ \%f%m%r%h%w\ %=\
+" set statusline+=%{strlen(&ft)?&ft:'none'} "filetype
+" set statusline+=\ -\ %{strlen(&fenc)?&fenc:'none'}[%{&ff}]\
 " mode filename --- filetype encoding[unix] 27%: LineN:ColN: errrors
 
-" -- Plugins {{{
-set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#begin()
 
-Plugin 'LaTeX-Box-Team/LaTeX-Box'
-Plugin 'Matt-Deacalion/vim-systemd-syntax'
-Plugin 'PotatoesMaster/i3-vim-syntax'
-Plugin 'Raimondi/delimitMate'
-Plugin 'Shougo/context_filetype.vim'
-Plugin 'Shougo/neocomplete.vim'
-Plugin 'Shougo/vimproc.vim'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'bling/vim-airline'
-Plugin 'chriskempson/base16-vim'
-Plugin 'chriskempson/vim-tomorrow-theme'
-Plugin 'closetag.vim'
-Plugin 'fatih/vim-go'
-Plugin 'ggreer/the_silver_searcher'
-Plugin 'gmarik/vundle'
-Plugin 'godlygeek/tabular'
-Plugin 'gundo'
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'jordwalke/flatlandia'
-Plugin 'kien/ctrlp.vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'mattn/emmet-vim'
-Plugin 'mhinz/vim-startify'
-Plugin 'mkitt/tabline.vim'
-Plugin 'nanotech/jellybeans.vim'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'pangloss/vim-javascript'
-Plugin 'petRUShka/vim-opencl'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'romainl/Apprentice'
-Plugin 'romainl/Disciple'
-Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-rsi'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'scrooloose/syntastic'
-Plugin 'w0ng/vim-hybrid'
-Plugin 'morhetz/gruvbox'
-call vundle#end()
-" -- }}}
+" Plugin 'LaTeX-Box-Team/LaTeX-Box'
+" Plugin 'Shougo/context_filetype.vim'
+" Plugin 'Shougo/neocomplete.vim'
+" Plugin 'Shougo/vimproc.vim'
 
-filetype plugin indent on
+" Plugin 'bling/vim-airline'
+" Plugin 'ggreer/the_silver_searcher'
+" Plugin 'jelera/vim-javascript-syntax'
+" Plugin 'kien/ctrlp.vim'
+" Plugin 'majutsushi/tagbar'
+" Plugin 'mhinz/vim-startify'
+" Plugin 'mkitt/tabline.vim'
+" Plugin 'nathanaelkane/vim-indent-guides'
+" Plugin 'pangloss/vim-javascript'
+" Plugin 'plasticboy/vim-markdown'
 
 " -- gui/console look
 if has('gui_running')
@@ -147,7 +116,7 @@ if has('gui_running')
 	let g:airline_theme = 'jellybeans'
 	set guifont=Source\ Code\ Pro\ For\ Powerline\ 10
 
-	" remove menu, toolbar, and srcollbars
+	" remove menu, toolbar, and scrollbars
 	set guioptions-=m
 	set guioptions-=T
 	set guioptions-=r
@@ -168,6 +137,7 @@ else
 	let base16colorspace=256
 	colorscheme base16-tomorrow
 	let g:airline_theme = 'jellybeans'
+	" let g:airline_theme = 'base16'
 endif
 
 " color right border after 80 chars (and background after 100)
@@ -208,11 +178,6 @@ let delimitMate_expand_cr=1
 " let g:vim_markdown_folding_disabled=1
 
 " -- ctrlp
-if has('gui_running')
-	nnoremap <C-Space> :CtrlPBuffer<CR>
-else
-	nnoremap <C-@> :CtrlPBuffer<CR>
-endif
 let g:ctrlp_custom_ignore = '\v[\/](venv|venv2|staticfiles)$'
 let g:ctrlp_cmd = 'exe "CtrlP".get(["", "MRU", "Buffer"], v:count)'
 
@@ -228,8 +193,14 @@ if executable('ag')
 
 	" use ag in ctrlp
 	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-	let g:ctrlp_use_caching = 0
+	let g:ctrlp_use_caching = 1
 endif
+
+" -- Python-mode
+let g:pymode_options_colorcolumn = 1
+
+" -- Syntastic
+let g:syntastic_python_flake8_args = '--ignore=W191'
 
 " -- misc shortcuts and options
 
@@ -258,7 +229,8 @@ augroup CLNRSet
 augroup END
 
 " -- Languages specific stuff
-autocmd FileType python set sw=4 ts=4 sts=4 tw=0
+autocmd FileType python set sw=4 ts=4 sts=4
+autocmd FileType mkd set fo+=ro
 
 autocmd VimEnter,VimResized * call DisplayStatusLine()
 
