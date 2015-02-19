@@ -1,8 +1,3 @@
-"-- Pathogen
-execute pathogen#infect()
-syntax on
-filetype plugin indent on
-
 "-- General
 set number
 set ruler
@@ -11,7 +6,6 @@ set so=7
 
 set autoread
 set ttyfast
-set nocompatible
 
 set listchars=precedes:«,extends:»,eol:↲,tab:▸\ ,trail:.
 set encoding=utf-8
@@ -92,22 +86,35 @@ nnoremap <Leader><Space> za
 " set statusline+=\ -\ %{strlen(&fenc)?&fenc:'none'}[%{&ff}]\
 " mode filename --- filetype encoding[unix] 27%: LineN:ColN: errrors
 
+" -- Plugins
+filetype off
+set runtimepath+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-" Plugin 'LaTeX-Box-Team/LaTeX-Box'
-" Plugin 'Shougo/context_filetype.vim'
-" Plugin 'Shougo/neocomplete.vim'
-" Plugin 'Shougo/vimproc.vim'
+Plugin 'gmarik/Vundle.vim'
+Plugin 'chriskempson/base16-vim.git'
+Plugin 'docunext/closetag.vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'Raimondi/delimitMate'
+Plugin 'mattn/emmet-vim'
+Plugin 'PotatoesMaster/i3-vim-syntax'
+Plugin 'nanotech/jellybeans.vim'
+Plugin 'LaTeX-Box-Team/LaTeX-Box'
+Plugin 'scrooloose/nerdtree'
+Plugin 'klen/python-mode'
+Plugin 'scrooloose/syntastic'
+Plugin 'majutsushi/tagbar'
+Plugin 'bling/vim-airline'
+Plugin 'tpope/vim-commentary'
+Plugin 'nvie/vim-flake8'
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-rsi'
+Plugin 'Matt-Deacalion/vim-systemd-syntax'
 
-" Plugin 'bling/vim-airline'
-" Plugin 'ggreer/the_silver_searcher'
-" Plugin 'jelera/vim-javascript-syntax'
-" Plugin 'kien/ctrlp.vim'
-" Plugin 'majutsushi/tagbar'
-" Plugin 'mhinz/vim-startify'
-" Plugin 'mkitt/tabline.vim'
-" Plugin 'nathanaelkane/vim-indent-guides'
-" Plugin 'pangloss/vim-javascript'
-" Plugin 'plasticboy/vim-markdown'
+call vundle#end()
+filetype plugin indent on
+syntax on
 
 " -- gui/console look
 if has('gui_running')

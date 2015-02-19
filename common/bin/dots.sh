@@ -15,7 +15,6 @@ readonly COMMON="
 .nanorc
 .tmux.conf
 .vimrc
-.vim/
 .zsh/
 .zshenv
 bin/"
