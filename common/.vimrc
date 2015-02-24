@@ -254,21 +254,5 @@ autocmd FileType python set sw=4 ts=4 sts=4
 autocmd FileType javascript set sw=4 ts=4 sts=4
 autocmd FileType mkd set fo+=ro
 
+" -- Generic
 autocmd BufWritePre * :%s/\s\+$//e
-
-" autocmd VimEnter,VimResized * call DisplayStatusLine()
-
-" do not show vim-airline if term is too small
-function! DisplayStatusLine()
-	let prevl = &laststatus
-
-	if &lines > 22
-		set laststatus=2
-	else
-		set laststatus=1
-	endif
-
-	if prevl != &laststatus
-		:AirlineToggle
-	endif
-endfunction
