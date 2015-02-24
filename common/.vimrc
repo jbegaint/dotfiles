@@ -51,34 +51,35 @@ set ttimeoutlen=100
 set splitright
 set splitbelow
 
-" leader
 let mapleader = "\<Space>"
 
-" switching between buffers w/o pain
-nnoremap <silent><Tab> :bnext<CR>
-nnoremap <silent><S-Tab> :bprev<CR>
+nnoremap <Leader><Space> za
 
-" insert lines
+nnoremap <CR> :noh<CR><CR>
+
 nnoremap <silent> <S-j> o<ESC>k
 nnoremap <silent> <S-k> O<ESC>j
 
-" clear search highlight
-nnoremap <CR> :noh<CR><CR>
-nnoremap <silent> <leader><CR> :noh<CR>
+nnoremap <silent><S-Tab> :bprev<CR>
+nnoremap <silent><Tab> :bnext<CR>
 
-" disable hex mode and help shortcuts
-nnoremap Q		<nop>
-
-" painless navigation in wrapped lines
 nnoremap j gj
 nnoremap k gk
 
-" folding
-nnoremap <Leader><Space> za
-
-" swap : and ;
 " nnoremap ; :
 " nnoremap : ;
+
+inoremap jk <Esc>
+
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+noremap <C-h> <C-w>h
+
+inoremap <F1> <ESC>
+nnoremap <F1> <ESC>
+vnoremap <F1> <ESC>
+nnoremap Q <nop>
 
 " set statusline=\ \%f%m%r%h%w\ ::\ %=\ %y\ [%{&ff}]\ %c\ [%p%%:\ %l/%L]\
 " set statusline=\ \%f%m%r%h%w\ %=\
@@ -101,16 +102,18 @@ Plugin 'PotatoesMaster/i3-vim-syntax'
 Plugin 'nanotech/jellybeans.vim'
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
 Plugin 'scrooloose/nerdtree'
-Plugin 'klen/python-mode'
 Plugin 'scrooloose/syntastic'
 Plugin 'majutsushi/tagbar'
+Plugin 'hynek/vim-python-pep8-indent'
 Plugin 'bling/vim-airline'
 Plugin 'tpope/vim-commentary'
-Plugin 'nvie/vim-flake8'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-rsi'
 Plugin 'Matt-Deacalion/vim-systemd-syntax'
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-session'
 
 call vundle#end()
 filetype plugin indent on
@@ -154,22 +157,22 @@ highlight ColorColumn ctermbg=236 guibg=#2c2d27
 
 " ------ Plugins options and shortcuts ------
 
-" -- Neocomplete
-let g:neocomplete#use_vimproc = 1
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
+" " -- Neocomplete
+" let g:neocomplete#use_vimproc = 1
+" let g:neocomplete#enable_at_startup = 1
+" let g:neocomplete#enable_smart_case = 1
 " let g:neocomplete#enable_auto_select = 1
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-set completeopt-=preview
+" let g:neocomplete#sources#syntax#min_keyword_length = 3
+" set completeopt-=preview
 
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-	return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-endfunction
+" " <CR>: close popup and save indent.
+" inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+" function! s:my_cr_function()
+" 	return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+" endfunction
 
-" -- delimitMate and neocomplete compatibility
-imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
+" " -- delimitMate and neocomplete compatibility
+" imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
 
 " -- vim-airline
 set laststatus=2
@@ -186,7 +189,6 @@ let delimitMate_expand_cr=1
 
 " -- ctrlp
 let g:ctrlp_custom_ignore = '\v[\/](venv|venv2|staticfiles)$'
-let g:ctrlp_cmd = 'exe "CtrlP".get(["", "MRU", "Buffer"], v:count)'
 
 " -- Latex-Box
 let g:LatexBox_quickfix = 2
@@ -199,15 +201,27 @@ if executable('ag')
 	set grepprg=ag\ --nogroup\ --nocolor
 
 	" use ag in ctrlp
-	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+	let g:ctrlp_user_command = 'ag %s -l --nocolor -i
+				\ --ignore "*.pyc"
+				\ --ignore "*.git"
+				\ --ignore "*.svn"
+				\ --ignore venv
+				\ --ignore venv2
+				\ -g ""'
 	let g:ctrlp_use_caching = 1
 endif
 
 " -- Python-mode
 let g:pymode_options_colorcolumn = 1
+let g:pymode_doc_bind = ''
+let g:pymode_rope = 0
 
 " -- Syntastic
-let g:syntastic_python_flake8_args = '--ignore=W191'
+let g:syntastic_python_flake8_args = '--ignore=W191,E128'
+
+" -- vim-session
+let g:session_autoload = 'yes'
+let g:session_autosave = 'yes'
 
 " -- misc shortcuts and options
 
@@ -237,9 +251,12 @@ augroup END
 
 " -- Languages specific stuff
 autocmd FileType python set sw=4 ts=4 sts=4
+autocmd FileType javascript set sw=4 ts=4 sts=4
 autocmd FileType mkd set fo+=ro
 
-autocmd VimEnter,VimResized * call DisplayStatusLine()
+autocmd BufWritePre * :%s/\s\+$//e
+
+" autocmd VimEnter,VimResized * call DisplayStatusLine()
 
 " do not show vim-airline if term is too small
 function! DisplayStatusLine()
