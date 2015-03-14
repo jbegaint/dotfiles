@@ -15,9 +15,7 @@ is_docked() {
 apply_config_dock() {
 	echo "docked"
 
-	# xrandr --output $IN --off --output $EXT --auto --primary
-	source ~/.screenlayout/HDMI3Left.sh
-
+	source ~/.screenlayout/HDMI3Left.sh &
 	setxkbmap fr
 	# setxkbmap us '' compose:rwin
 
@@ -32,9 +30,7 @@ apply_config_dock() {
 apply_config_undock() {
 	echo "undocked"
 
-	# xrandr --output $IN --auto --primary --output $EXT --off
-	source ~/.screenlayout/LVDS1.sh
-
+	source ~/.screenlayout/LVDS1.sh &
 	setxkbmap fr
 
 	xset dpms 300

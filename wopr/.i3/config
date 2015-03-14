@@ -115,6 +115,10 @@ bindsym $mod+Control+h move workspace to output left
 bindsym $mod+Control+j move workspace to output down
 bindsym $mod+Control+k move workspace to output up
 bindsym $mod+Control+l move workspace to output right
+bindsym $mod+Control+Left move workspace to output left
+bindsym $mod+Control+Down move workspace to output down
+bindsym $mod+Control+Up move workspace to output up
+bindsym $mod+Control+Right move workspace to output right
 
 # cycle through the workspaces
 bindsym $mod+Tab workspace next
@@ -167,7 +171,7 @@ new_window pixel 1
 new_float pixel 1
 
 # config for i3 patched with useless gaps
-gap_size 0
+# gap_size 0
 
 # client.class          border		backgr.		text    indicator
 client.focused          $grey		$grey		$black	$green
@@ -205,21 +209,6 @@ mode $xautolockmenu {
 	bindsym Return	mode "default"
 	bindsym Escape	mode "default"
 }
-
-# audio mode
-# set $audiomenu "volume: [+]10% [-]10% [m]ute [r]eset"
-# bindsym $mod+F12         mode $audiomenu
-# mode $audiomenu {
-# 	bindsym r		exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -- 50%
-# 	bindsym plus		exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -- +10%
-# 	bindsym KP_Add		exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -- +10%
-# 	bindsym minus		exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -- -10%
-# 	bindsym KP_Subtract	exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -- -10%
-# 	bindsym m		exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
-#
-# 	bindsym Return		mode "default"
-# 	bindsym Escape		mode "default"
-# }
 
 # fast workspace switching
 bindsym Ctrl+Mod1+Right workspace next

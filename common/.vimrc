@@ -89,41 +89,42 @@ nnoremap Q <nop>
 
 " -- Plugins
 filetype off
-set runtimepath+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
 
-Plugin 'gmarik/Vundle.vim'
-Plugin 'chriskempson/base16-vim.git'
-Plugin 'docunext/closetag.vim'
-Plugin 'kien/ctrlp.vim'
-Plugin 'Raimondi/delimitMate'
-Plugin 'mattn/emmet-vim'
-Plugin 'PotatoesMaster/i3-vim-syntax'
-Plugin 'nanotech/jellybeans.vim'
-Plugin 'LaTeX-Box-Team/LaTeX-Box'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
-Plugin 'majutsushi/tagbar'
-Plugin 'hynek/vim-python-pep8-indent'
-Plugin 'bling/vim-airline'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-rsi'
-Plugin 'Matt-Deacalion/vim-systemd-syntax'
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-session'
+call plug#begin()
+Plug 'chriskempson/base16-vim'
+Plug 'docunext/closetag.vim'
+Plug 'kien/ctrlp.vim'
+Plug 'Raimondi/delimitMate'
+Plug 'mattn/emmet-vim', {'for': 'html'}
+Plug 'PotatoesMaster/i3-vim-syntax', {'for': 'i3'}
+Plug 'nanotech/jellybeans.vim'
+Plug 'LaTeX-Box-Team/LaTeX-Box', {'for': 'latex'}
+Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
+Plug 'scrooloose/syntastic'
+Plug 'majutsushi/tagbar'
+Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
+Plug 'bling/vim-airline'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-rsi'
+Plug 'Matt-Deacalion/vim-systemd-syntax', {'for': 'systemd'}
+Plug 'jelera/vim-javascript-syntax', {'for': 'javascript'}
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-session'
+Plug 'plasticboy/vim-markdown', {'for': 'mkd'}
+Plug 'DanielFGray/DistractionFree.vim'
+call plug#end()
 
-call vundle#end()
 filetype plugin indent on
 syntax on
 
 " -- gui/console look
 if has('gui_running')
 	set background=dark
-	colorscheme jellybeans
+	colorscheme base16-tomorrow
 	let g:airline_theme = 'jellybeans'
+	" colorscheme jellybeans
 	set guifont=Source\ Code\ Pro\ For\ Powerline\ 10
 
 	" remove menu, toolbar, and scrollbars
@@ -220,8 +221,11 @@ let g:pymode_rope = 0
 let g:syntastic_python_flake8_args = '--ignore=W191,E128'
 
 " -- vim-session
-let g:session_autoload = 'yes'
+let g:session_autoload = 'no'
 let g:session_autosave = 'yes'
+
+" -- vim-commentary
+autocmd FileType i3 set commentstring=#\ %s
 
 " -- misc shortcuts and options
 
@@ -252,7 +256,6 @@ augroup END
 " -- Languages specific stuff
 autocmd FileType python set sw=4 ts=4 sts=4
 autocmd FileType javascript set sw=4 ts=4 sts=4
-autocmd FileType mkd set fo+=ro
 
 " -- Generic
 autocmd BufWritePre * :%s/\s\+$//e
