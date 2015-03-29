@@ -1,12 +1,8 @@
 #!/bin/zsh
 autoload -Uz colors && colors
 
-get_dir () {
-	[[ "$PWD" != "$HOME" ]] && echo ' %~'
-}
-
 PROMPT=$'
-$(get_dir)%{$fg[red]%}$(__git_ps1 \" (%s)\")%{$fg_bold[blue]%} » %{$reset_color%}'
+%~%{$fg[red]%}$(__git_ps1 \" (%s)\")%{$fg_bold[blue]%} » %{$reset_color%}'
 
 # vi mode
 function zle-line-init zle-keymap-select {
@@ -22,8 +18,6 @@ zle -N zle-keymap-select
 export EDITOR="vim"
 export GOPATH="$HOME/.go"
 export PATH="$HOME/bin:$PATH"
-export PATH="$HOME/.dynamic-colors/bin:$PATH"
-export PATH="$HOME/.gem/ruby/2.1.0/bin:$PATH"
 export PATH="$GOPATH/bin:$PATH"
 
 # history
@@ -39,8 +33,6 @@ setopt PROMPT_SUBST
 autoload -Uz compinit && compinit
 zstyle ':completion:*' menu select
 zstyle ':completion:*' rehash true
-
-source $HOME/.dynamic-colors/completions/dynamic-colors.zsh
 
 # load aliases
 ALIASFILE=~/.zsh/.zshrc_aliases
@@ -63,8 +55,10 @@ bindkey -e
 bindkey    "^[[3~"          delete-char
 
 # keychain
-keys=$(cat ~/.ssh/keys)
-eval $(keychain --eval --agents ssh --nogui -q $keys)
+if [ -f ~/.ssh/keys ]; then
+	keys=$(cat ~/.ssh/keys)
+	eval $(keychain --eval --agents ssh --nogui -q $keys)
+fi
 
 # color scheme
 source ~/.config/base16-shell/base16-tomorrow.dark.sh

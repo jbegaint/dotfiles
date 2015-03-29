@@ -87,6 +87,11 @@ set $ws2 2: misc
 set $ws3 3: dev
 set $ws4 4: mail
 
+workspace 1 output LVDS1
+workspace 2 output LVDS1
+workspace 3 output LVDS1
+workspace 4 output LVDS1
+
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace $ws3

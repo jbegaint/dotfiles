@@ -14,7 +14,6 @@ fi
 
 # term color
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
-xrdb -merge ~/.config/base16-xresources/base16-tomorrow.dark.xresources
 
 # font config stuff
 xset +fp /usr/share/fonts/local/

@@ -64,7 +64,7 @@ function parse_cmd() {
 			;;
 
 		*)
-			mpc search title "$action" | mpc insert
+			mpc search title "$action" | head -n1 | mpc insert
 			;;
 	esac
 }

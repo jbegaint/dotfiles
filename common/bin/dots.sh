@@ -5,17 +5,17 @@ readonly TARGET="$HOME/Documents/dotfiles"
 
 readonly LOCAL="
 .fehbg
-.i3/
 .i3status.conf
 .xinitrc
 "
 
 readonly COMMON="
 .Xresources
+.i3/
 .nanorc
 .tmux.conf
-.vimrc
 .vim/
+.vimrc
 .zsh/
 .zshenv
 bin/"

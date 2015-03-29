@@ -4,16 +4,10 @@
 
 readonly IN="LVDS1"
 readonly EXT="HDMI3"
-# readonly EXT="VGA1"
-
-is_docked() {
-	local dockname="Mini Dock Plus"
-
-	[[ -n $(lsusb | grep "$dockname") ]]
-}
+readonly DOCKNAME="Mini Dock Plus"
 
 apply_config_dock() {
-	echo "docked"
+	printf "%s\n" "[docked]"
 
 	source ~/.screenlayout/HDMI3Left.sh &
 	setxkbmap fr
@@ -21,45 +15,30 @@ apply_config_dock() {
 
 	xset s 0
 	xset -dpms
-
-	pacmd set-sink-port \
-		alsa_output.pci-0000_00_1b.0.analog-stereo \
-		analog-output
 }
 
 apply_config_undock() {
-	echo "undocked"
+	printf "%s\n" "[undocked]"
 
 	source ~/.screenlayout/LVDS1.sh &
 	setxkbmap fr
 
 	xset dpms 300
-
-	pacmd set-sink-port \
-		alsa_output.pci-0000_00_1b.0.analog-stereo \
-		analog-output-speaker
-
 }
 
 reload_config_generic() {
-	# reload wallpaper
 	eval $(cat ~/.fehbg)
-
-	# unmap caps lock
+	# remap useless caps lock
 	xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
 }
 
-main() {
+printf "%s: " "Status"
+if [[ -n $(lsusb | grep "$DOCKNAME") ]]; then
+	apply_config_dock
+else
+	apply_config_undock
+fi
 
-	if is_docked; then
-		apply_config_dock
-	else
-		apply_config_undock
-	fi
-
-	reload_config_generic
-}
-
-main
+reload_config_generic
 
 exit 0

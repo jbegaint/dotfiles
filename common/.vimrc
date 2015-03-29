@@ -54,7 +54,6 @@ set splitbelow
 let mapleader = "\<Space>"
 
 nnoremap <Leader><Space> za
-
 nnoremap <CR> :noh<CR><CR>
 
 nnoremap <silent> <S-j> o<ESC>k
@@ -71,21 +70,17 @@ nnoremap k gk
 
 inoremap jk <Esc>
 
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
-noremap <C-h> <C-w>h
+noremap <M-j> <C-w>j
+noremap <M-k> <C-w>k
+noremap <M-l> <C-w>l
+noremap <M-h> <C-w>h
 
 inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 nnoremap Q <nop>
 
-" set statusline=\ \%f%m%r%h%w\ ::\ %=\ %y\ [%{&ff}]\ %c\ [%p%%:\ %l/%L]\
-" set statusline=\ \%f%m%r%h%w\ %=\
-" set statusline+=%{strlen(&ft)?&ft:'none'} "filetype
-" set statusline+=\ -\ %{strlen(&fenc)?&fenc:'none'}[%{&ff}]\
-" mode filename --- filetype encoding[unix] 27%: LineN:ColN: errrors
+set statusline=\ \%f%m%r%h%w\ ::\ %y\ [%{&ff}]\%=\ [%p%%:\ %l/%L]\ 
 
 " -- Plugins
 filetype off
@@ -98,7 +93,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'mattn/emmet-vim', {'for': 'html'}
 Plug 'PotatoesMaster/i3-vim-syntax', {'for': 'i3'}
 Plug 'nanotech/jellybeans.vim'
-Plug 'LaTeX-Box-Team/LaTeX-Box', {'for': 'latex'}
+Plug 'LaTeX-Box-Team/LaTeX-Box', {'for': ['latex', 'tex']}
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 Plug 'scrooloose/syntastic'
 Plug 'majutsushi/tagbar'
@@ -114,6 +109,10 @@ Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
 Plug 'plasticboy/vim-markdown', {'for': 'mkd'}
 Plug 'DanielFGray/DistractionFree.vim'
+Plug 'romainl/Apprentice'
+Plug 'Shougo/neocomplete.vim'
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
 
 filetype plugin indent on
@@ -147,8 +146,7 @@ else
 	set background=dark
 	let base16colorspace=256
 	colorscheme base16-tomorrow
-	let g:airline_theme = 'jellybeans'
-	" let g:airline_theme = 'base16'
+	let g:airline_theme = 'base16'
 endif
 
 " color right border after 80 chars (and background after 100)
@@ -159,34 +157,36 @@ highlight ColorColumn ctermbg=236 guibg=#2c2d27
 " ------ Plugins options and shortcuts ------
 
 " " -- Neocomplete
-" let g:neocomplete#use_vimproc = 1
-" let g:neocomplete#enable_at_startup = 1
-" let g:neocomplete#enable_smart_case = 1
-" let g:neocomplete#enable_auto_select = 1
-" let g:neocomplete#sources#syntax#min_keyword_length = 3
-" set completeopt-=preview
+let g:neocomplete#use_vimproc = 1
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#enable_auto_select = 1
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+set completeopt-=preview
 
-" " <CR>: close popup and save indent.
-" inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-" function! s:my_cr_function()
-" 	return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-" endfunction
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+	return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+endfunction
 
-" " -- delimitMate and neocomplete compatibility
-" imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
+" -- delimitMate and neocomplete compatibility
+imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
 
 " -- vim-airline
 set laststatus=2
-let g:airline_powerline_fonts=1
-let g:airline#extensions#tabline#enabled=1
-let g:airline#extensions#tagbar#enabled=0
+let g:airline_powerline_fonts=0
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tagbar#enabled = 0
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 
 " -- delimitMate
 let delimitMate_expand_cr=1
 
 " -- vim-markdown
-" let g:vim_markdown_folding_disabled=1
+let g:vim_markdown_folding_disabled=1
 
 " -- ctrlp
 let g:ctrlp_custom_ignore = '\v[\/](venv|venv2|staticfiles)$'
@@ -234,9 +234,7 @@ nnoremap <silent> <F1> mmgqip`m
 nnoremap <silent> <F2> :NERDTreeToggle<CR>
 nnoremap <silent> <F3> :set invnumber<CR>
 nnoremap <silent> <F4> :set invlist<CR>
-nnoremap <silent> <F5> :GundoToggle<CR>
 nnoremap <silent> <F6> :AirlineToggle<CR>
-" nnoremap <silent> <F7> :call ToggleColours()<CR>
 nnoremap <silent> <F8> :TagbarToggle<CR>
 nnoremap <silent> <F10> :Gstatus<CR>
 
@@ -256,6 +254,4 @@ augroup END
 " -- Languages specific stuff
 autocmd FileType python set sw=4 ts=4 sts=4
 autocmd FileType javascript set sw=4 ts=4 sts=4
-
-" -- Generic
-autocmd BufWritePre * :%s/\s\+$//e
+autocmd FileType htmldjango set tw=0 sw=4 ts=4 sts=4
