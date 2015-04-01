@@ -1,8 +1,7 @@
 #!/bin/zsh
 autoload -Uz colors && colors
 
-PROMPT=$'
-%~%{$fg[red]%}$(__git_ps1 \" (%s)\")%{$fg_bold[blue]%} » %{$reset_color%}'
+PROMPT=$'%~%{$fg[red]%}$(__git_ps1 \" (%s)\")%{$fg_bold[blue]%} » %{$reset_color%}'
 
 # vi mode
 function zle-line-init zle-keymap-select {
@@ -60,5 +59,5 @@ if [ -f ~/.ssh/keys ]; then
 	eval $(keychain --eval --agents ssh --nogui -q $keys)
 fi
 
-# color scheme
-source ~/.config/base16-shell/base16-tomorrow.dark.sh
+# color scheme (check for interactive mode before sourcing)
+[[ $- == *i* ]] && . ~/.config/base16-shell/base16-tomorrow.dark.sh

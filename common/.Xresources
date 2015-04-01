@@ -1,9 +1,6 @@
 URxvt.font: xft:Source Code Pro for Powerline:size=10, xft:DejaVu Sans Mono:size=10
 
-xterm*dynamicColors: true
-urxvt*dynamicColors: on
-
-URxvt.perl-ext-common: default,clipboard,url-select,urxvt-colors
+URxvt.perl-ext-common: default,clipboard,url-select
 
 *.URxvt.urgentOnBell: true
 URxvt.url-select.launcher: chromium
@@ -20,6 +17,7 @@ URxvt.autohide: yes
 URxvt.new-button: no
 
 URxvt.scrollBar: false
+URxvt.internalBorder: 1
 URxvt.foreground: #eeeeee
 URxvt.background: #1D1F21
 URxvt.depth: 32
@@ -29,14 +27,13 @@ URxvt*colorIT: #ffffff
 URxvt.keysym.M-c: perl:clipboard:copy
 URxvt.keysym.M-v: perl:clipboard:paste
 
-urxvt*perl-lib: /home/jean/bin/urxvt
-urxvt*keysym.F12:	perl:urxvt-colors:cycle
-
 /* rofi */
 rofi.background: #1d1f21
 rofi.foreground: #c5c8c6
 rofi.highlightbg: #81a2be
 rofi.highlightfg: #1d1f21
+xterm*dynamicColors: true
+urxvt*dynamicColors: on
 rofi.bordercolor: #81a2be
 rofi.font: Source Code Pro Medium 9
 rofi.padding: 5
