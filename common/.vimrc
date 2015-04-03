@@ -113,6 +113,7 @@ Plug 'romainl/Apprentice'
 Plug 'Shougo/neocomplete.vim'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 call plug#end()
 
 filetype plugin indent on

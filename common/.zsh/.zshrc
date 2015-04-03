@@ -19,6 +19,7 @@ export GOPATH="$HOME/.go"
 export PATH="$HOME/bin:$PATH"
 export PATH="$GOPATH/bin:$PATH"
 
+
 # history
 export HISTFILE=~/.histfile
 export HISTSIZE=1000
@@ -61,3 +62,4 @@ fi
 
 # color scheme (check for interactive mode before sourcing)
 [[ $- == *i* ]] && . ~/.config/base16-shell/base16-tomorrow.dark.sh
+[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
