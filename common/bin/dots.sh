@@ -24,7 +24,7 @@ backup_wall() {
 	wall=$(cat $HOME/.fehbg | awk '{print $3}')
 	wall=${wall:1:-1} # remove first and last character from string: "'"
 	wall_basename=$(basename $wall)
-	cp "$wall" "$TARGET/$(hostname)/$wall_basename"
+	cp -f "$wall" "$TARGET/$(hostname)/$wall_basename"
 }
 
 check_dir() {
@@ -46,10 +46,10 @@ backup_files() {
 		if [[ -d "$HOME/$i" ]];
 		then
 			check_dir "$dest/$i"
-			cp -r "$HOME/$i" "$dest"
+			cp -f -r "$HOME/$i" "$dest"
 		elif [[ -f "$HOME/$i" ]];
 		then
-			cp "$HOME/$i" "$dest/$i"
+			cp -f "$HOME/$i" "$dest/$i"
 		fi
 	done
 }

@@ -27,7 +27,8 @@ apply_config_undock() {
 }
 
 reload_config_generic() {
-	eval $(cat ~/.fehbg)
+	(sleep 2s; eval $(cat ~/.fehbg))&
+
 	# remap useless caps lock
 	xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
 }

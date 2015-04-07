@@ -109,11 +109,11 @@ Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
 Plug 'plasticboy/vim-markdown', {'for': 'mkd'}
 Plug 'DanielFGray/DistractionFree.vim'
-Plug 'romainl/Apprentice'
 Plug 'Shougo/neocomplete.vim'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+Plug 'chriskempson/base16-shell', { 'dir': '~/.config/base16-shell' }
 call plug#end()
 
 filetype plugin indent on
@@ -161,7 +161,7 @@ highlight ColorColumn ctermbg=236 guibg=#2c2d27
 let g:neocomplete#use_vimproc = 1
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#enable_auto_select = 1
+let g:neocomplete#enable_auto_select = 0
 let g:neocomplete#sources#syntax#min_keyword_length = 3
 set completeopt-=preview
 
