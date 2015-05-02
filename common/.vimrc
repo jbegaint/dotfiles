@@ -114,6 +114,8 @@ Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'chriskempson/base16-shell', { 'dir': '~/.config/base16-shell' }
+Plug 'chriskempson/base16-xresources', { 'dir': '~/.config/base16-xresources' }
+Plug 'raichoo/haskell-vim'
 call plug#end()
 
 filetype plugin indent on
@@ -225,9 +227,6 @@ let g:syntastic_python_flake8_args = '--ignore=W191,E128'
 let g:session_autoload = 'no'
 let g:session_autosave = 'yes'
 
-" -- vim-commentary
-autocmd FileType i3 set commentstring=#\ %s
-
 " -- misc shortcuts and options
 
 " Fn shortcuts
@@ -238,6 +237,7 @@ nnoremap <silent> <F4> :set invlist<CR>
 nnoremap <silent> <F6> :AirlineToggle<CR>
 nnoremap <silent> <F8> :TagbarToggle<CR>
 nnoremap <silent> <F10> :Gstatus<CR>
+set pastetoggle=<F12>
 
 " -- highlight current line number
 " 1. clear highlight
@@ -255,4 +255,5 @@ augroup END
 " -- Languages specific stuff
 autocmd FileType python set sw=4 ts=4 sts=4
 autocmd FileType javascript set sw=4 ts=4 sts=4
-autocmd FileType htmldjango set tw=0 sw=4 ts=4 sts=4
+autocmd FileType html,htmldjango set tw=0 sw=4 ts=4 sts=4
+autocmd FileType haskell set ts=8 et sts=4 sw=4 sr

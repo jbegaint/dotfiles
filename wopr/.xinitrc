@@ -10,8 +10,11 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
 	unset f
 fi
 
-# term color
+# Xresources
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
+COLORS=~/.config/base16-xresources/base16-tomorrow.dark.256.xresources && \
+	test -f $COLORS && \
+	xrdb -merge $COLORS
 
 # font config stuff
 xset +fp /usr/share/fonts/local/
