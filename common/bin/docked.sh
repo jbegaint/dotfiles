@@ -9,7 +9,7 @@ readonly DOCKNAME="Mini Dock Plus"
 apply_config_dock() {
 	printf "%s\n" "[docked]"
 
-	source ~/.screenlayout/HDMI3Left.sh &
+	. ~/.screenlayout/HDMI3Left.sh &
 	setxkbmap fr
 	# setxkbmap us '' compose:rwin
 
@@ -20,17 +20,14 @@ apply_config_dock() {
 apply_config_undock() {
 	printf "%s\n" "[undocked]"
 
-	source ~/.screenlayout/LVDS1.sh &
+	. ~/.screenlayout/LVDS1.sh &
 	setxkbmap fr
 
 	xset dpms 300
 }
 
 reload_config_generic() {
-	(sleep 2s; eval $(cat ~/.fehbg))&
-
-	# remap useless caps lock
-	xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
+	(sleep 1s; eval $(cat ~/.fehbg))&
 }
 
 printf "%s: " "Status"

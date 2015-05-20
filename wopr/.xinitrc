@@ -10,35 +10,28 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
 	unset f
 fi
 
-# Xresources
+# load .Xresources
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 COLORS=~/.config/base16-xresources/base16-tomorrow.dark.256.xresources && \
-	test -f $COLORS && \
+	[[ -f $COLORS ]] && \
 	xrdb -merge $COLORS
 
-# font config stuff
-xset +fp /usr/share/fonts/local/
+# set wallpaper
+eval $(cat ~/.fehbg)
+
+# remap useless caps lock to escape
+setxkbmap -option caps:escape
 
 # autostart apps
+. ~/bin/docked.sh &
 dunst &
-eval $(cat ~/.fehbg) &
 parcellite &
-volumeicon &
-start-pulseaudio-x11&
-xautolock -locker 'i3lock -c 333333'&
-xset dpms 300
-
-# launch scripts
-~/bin/docked.sh &
 redshift-gtk &
-
-# map caps lock to escape
-xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
+urxvtd -q -o -f &
+volumeicon &
+xautolock -locker 'i3lock -c 333333' &
 
 # fix some xdg-* related bugs
 export DE='xfce'
-
-# urxvt daemon
-urxvtd -q -o -f
 
 exec i3

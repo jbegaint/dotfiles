@@ -61,5 +61,5 @@ extract() {
 }
 
 alias addon-sdk="cd /opt/addon-sdk && source bin/activate; cd -"
-alias fuck='eval $(thefuck $(fc -ln -1))'
+alias fuck='eval $(thefuck $(fc -ln -1 | tail -n 1)); fc -R'
 alias FUCK='fuck'

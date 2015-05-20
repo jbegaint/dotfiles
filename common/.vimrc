@@ -92,7 +92,6 @@ Plug 'kien/ctrlp.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'mattn/emmet-vim', {'for': 'html'}
 Plug 'PotatoesMaster/i3-vim-syntax', {'for': 'i3'}
-Plug 'nanotech/jellybeans.vim'
 Plug 'LaTeX-Box-Team/LaTeX-Box', {'for': ['latex', 'tex']}
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 Plug 'scrooloose/syntastic'
@@ -110,12 +109,15 @@ Plug 'xolox/vim-session'
 Plug 'plasticboy/vim-markdown', {'for': 'mkd'}
 Plug 'DanielFGray/DistractionFree.vim'
 Plug 'Shougo/neocomplete.vim'
-Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+Plug 'Shougo/vimproc.vim', {'do': 'make'}
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
-Plug 'chriskempson/base16-shell', { 'dir': '~/.config/base16-shell' }
-Plug 'chriskempson/base16-xresources', { 'dir': '~/.config/base16-xresources' }
-Plug 'raichoo/haskell-vim'
+Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
+Plug 'chriskempson/base16-shell', {'dir': '~/.config/base16-shell'}
+Plug 'chriskempson/base16-xresources', {'dir': '~/.config/base16-xresources'}
+Plug 'raichoo/haskell-vim', {'for': 'haskell'}
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'haya14busa/incsearch.vim'
+" Plug 'Rip-Rip/clang_complete'
 call plug#end()
 
 filetype plugin indent on
@@ -127,7 +129,8 @@ if has('gui_running')
 	colorscheme base16-tomorrow
 	let g:airline_theme = 'jellybeans'
 	" colorscheme jellybeans
-	set guifont=Source\ Code\ Pro\ For\ Powerline\ 10
+	" set guifont=Source\ Code\ Pro\ For\ Powerline\ 10
+	set guifont=Fira\ Mono\ 10
 
 	" remove menu, toolbar, and scrollbars
 	set guioptions-=m
@@ -175,6 +178,7 @@ endfunction
 
 " -- delimitMate and neocomplete compatibility
 imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
+
 
 " -- vim-airline
 set laststatus=2
@@ -236,7 +240,6 @@ nnoremap <silent> <F3> :set invnumber<CR>
 nnoremap <silent> <F4> :set invlist<CR>
 nnoremap <silent> <F6> :AirlineToggle<CR>
 nnoremap <silent> <F8> :TagbarToggle<CR>
-nnoremap <silent> <F10> :Gstatus<CR>
 set pastetoggle=<F12>
 
 " -- highlight current line number

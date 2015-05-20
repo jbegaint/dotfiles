@@ -22,7 +22,7 @@ bin/"
 
 backup_wall() {
 	wall=$(cat $HOME/.fehbg | awk '{print $3}')
-	wall=${wall:1:-1} # remove first and last character from string: "'"
+	wall=${wall:2:-1} # remove first and last character from string: "'"
 	wall_basename=$(basename $wall)
 	cp -f "$wall" "$TARGET/$(hostname)/$wall_basename"
 }
