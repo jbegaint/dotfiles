@@ -27,7 +27,7 @@ apply_config_undock() {
 }
 
 reload_config_generic() {
-	(sleep 1s; eval $(cat ~/.fehbg))&
+	(sleep 1s; ~/.fehbg)&
 }
 
 printf "%s: " "Status"
