@@ -1,6 +1,8 @@
 #!/bin/bash
 # command simple mpc actions via dmenu
 
+set -e
+
 readonly COMMANDS=(toggle next prev up down album artist playlists shuffle)
 
 function mpc_load() {
@@ -15,27 +17,22 @@ function mpc_load() {
 	mpc -q play
 }
 
-function dmenu_wrapper() {
-	dmenu -i -sb '#81A2BE' -sf '#000000' -nf '#969896' -p "$1:" -h 21\
-		-fn 'Source Code Pro-9:normal'
-}
-
 function parse_cmd() {
 	local $action=$1
 
 	case $action in
 		playlists)
-			res=$(mpc lsplaylists | dmenu_wrapper "playlist" )
+			res=$(mpc lsplaylists | ~/bin/dmenu_wrapper "playlist" )
 			[[ ! -z $res ]] && mpc_load "playlist" "$res"
 			;;
 
 		artist)
-			res=$(mpc list artist | sort | uniq -i | dmenu_wrapper "artist")
+			res=$(mpc list artist | sort | uniq -i | ~/bin/dmenu_wrapper "artist")
 			[[ ! -z $res ]] && mpc_load "artist" "$res"
 			;;
 
 		album)
-			res=$(mpc list album | dmenu_wrapper "album")
+			res=$(mpc list album | ~/bin/dmenu_wrapper "album")
 			[[ ! -z $res ]] && mpc_load "album" "$res"
 			;;
 
@@ -75,12 +72,13 @@ main() {
 
 	# add commands
 	commands=("${COMMANDS[@]}")
+
 	# add all songs
 	commands+=("$(mpc list Title)")
 
-	action=$(printf "%s\n" "${commands[@]}" | dmenu_wrapper "MPD")
+	action=$(printf "%s\n" "${commands[@]}" | ~/bin/dmenu_wrapper "MPD")
 
-	[[ ! -z $action ]] && parse_cmd $action
+	[[ ! -z "$action" ]] && parse_cmd "$action"
 }
 
 main

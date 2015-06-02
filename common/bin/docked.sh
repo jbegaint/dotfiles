@@ -9,9 +9,10 @@ readonly DOCKNAME="Mini Dock Plus"
 apply_config_dock() {
 	printf "%s\n" "[docked]"
 
-	. ~/.screenlayout/HDMI3Left.sh &
-	setxkbmap fr
-	# setxkbmap us '' compose:rwin
+	# . ~/.screenlayout/HDMI3Left.sh &
+	. ~/.screenlayout/HDMI3.sh
+	# setxkbmap fr
+	setxkbmap us '' compose:rwin
 
 	xset s 0
 	xset -dpms
