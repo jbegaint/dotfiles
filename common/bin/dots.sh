@@ -1,6 +1,8 @@
 #!/bin/bash
 # Simple bash utility to backup dotfiles
 
+set -e
+
 readonly TARGET="$HOME/Documents/dotfiles"
 
 readonly LOCAL="

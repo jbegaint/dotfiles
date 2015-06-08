@@ -80,7 +80,7 @@ nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 nnoremap Q <nop>
 
-set statusline=\ \%f%m%r%h%w\ ::\ %y\ [%{&ff}]\%=\ [%p%%:\ %l/%L]\ 
+set statusline=\ \%f%m%r%h%w\ ::\ %y\ %=\ %{&ff}\|%{strlen(&fenc)?&fenc:'none'}\%5.c\ [%p%%:\ %l/%L]\ 
 
 " -- Plugins
 filetype off
@@ -97,7 +97,6 @@ Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 Plug 'scrooloose/syntastic'
 Plug 'majutsushi/tagbar'
 Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
-Plug 'bling/vim-airline'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -117,7 +116,6 @@ Plug 'chriskempson/base16-xresources', {'dir': '~/.config/base16-xresources'}
 Plug 'raichoo/haskell-vim', {'for': 'haskell'}
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'haya14busa/incsearch.vim'
-" Plug 'Rip-Rip/clang_complete'
 call plug#end()
 
 filetype plugin indent on
@@ -127,9 +125,6 @@ syntax on
 if has('gui_running')
 	set background=dark
 	colorscheme base16-tomorrow
-	let g:airline_theme = 'jellybeans'
-	" colorscheme jellybeans
-	" set guifont=Source\ Code\ Pro\ For\ Powerline\ 10
 	set guifont=Fira\ Mono\ 10
 
 	" remove menu, toolbar, and scrollbars
@@ -152,7 +147,6 @@ else
 	set background=dark
 	let base16colorspace=256
 	colorscheme base16-tomorrow
-	let g:airline_theme = 'base16'
 endif
 
 " color right border after 80 chars (and background after 100)
@@ -179,16 +173,6 @@ endfunction
 " -- delimitMate and neocomplete compatibility
 imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
 
-
-" -- vim-airline
-set laststatus=2
-let g:airline_powerline_fonts=0
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tagbar#enabled = 0
-let g:airline#extensions#whitespace#mixed_indent_algo = 1
-
 " -- delimitMate
 let delimitMate_expand_cr=1
 
@@ -197,6 +181,7 @@ let g:vim_markdown_folding_disabled=1
 
 " -- ctrlp
 let g:ctrlp_custom_ignore = '\v[\/](venv|venv2|staticfiles)$'
+nnoremap <Nul> :CtrlPBuffer<CR>
 
 " -- Latex-Box
 let g:LatexBox_quickfix = 2
@@ -238,8 +223,9 @@ nnoremap <silent> <F1> mmgqip`m
 nnoremap <silent> <F2> :NERDTreeToggle<CR>
 nnoremap <silent> <F3> :set invnumber<CR>
 nnoremap <silent> <F4> :set invlist<CR>
-nnoremap <silent> <F6> :AirlineToggle<CR>
+nnoremap <silent> <F5> :call StatusToggle()<CR>
 nnoremap <silent> <F8> :TagbarToggle<CR>
+nnoremap <silent> <F11> :call FillLine( '-' )<CR>
 set pastetoggle=<F12>
 
 " -- highlight current line number
@@ -255,8 +241,31 @@ augroup CLNRSet
 	autocmd! ColorScheme * hi CursorLineNR cterm=bold
 augroup END
 
+" fill rest of line with characters
+" https://stackoverflow.com/questions/3364102/how-to-fill-a-line-with-character-x-up-to-column-y-using-vim
+function! FillLine( str )
+    " set tw to the desired total length
+    let tw = &textwidth
+    let offset = 2
+    if tw==0 | let tw = 80 | endif
+    " strip trailing spaces first
+    .s/[[:space:]]*$//
+    " calculate total number of 'str's to insert
+    let reps = (tw - col("$") - offset) / len(a:str)
+    " insert them, if there's room, removing trailing spaces (though forcing
+    " there to be one)
+    if reps > 0
+        .s/$/\=(' '.repeat(a:str, reps))/
+    endif
+endfunction
+
+function! StatusToggle()
+	:let &laststatus = &laststatus == 2 ? 1 : 2
+endfunction
+
 " -- Languages specific stuff
 autocmd FileType python set sw=4 ts=4 sts=4
 autocmd FileType javascript set sw=4 ts=4 sts=4
 autocmd FileType html,htmldjango set tw=0 sw=4 ts=4 sts=4
 autocmd FileType haskell set ts=8 et sts=4 sw=4 sr
+autocmd FileType tex set sw=4 ts=4 sts=4

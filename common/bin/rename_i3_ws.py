@@ -36,7 +36,7 @@ def main():
 
     if name:
         # new name for workspace
-        i3.command("rename workspace to \"%d: %s\"" % (w['num'], name))
+        i3.command("rename workspace to \"%d:%s\"" % (w['num'], name))
     elif not w['name'].isdigit():
         # revert back to number
         i3.command("rename workspace to \"%d\"" % w['num'])
