@@ -1,8 +1,0 @@
-#!/bin/bash
-
-sessions=$(tmux list-sessions)
-
-if [[ ! -z "$sessions" ]]; then
-	s=$(echo "$sessions" | fzf | sed 's/:.*$//')
-	tmux switch-client -t "$s"
-fi

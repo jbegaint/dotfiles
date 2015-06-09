@@ -16,7 +16,6 @@
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
 # chose a FreeType font, such as:
-# font pango:DejaVu Sans Mono 10
 font pango:Source Code Pro Medium 9
 
 set $mod Mod4
@@ -82,38 +81,44 @@ bindsym $mod+a focus parent
 bindsym $mod+c focus child
 
 # switch to workspace
-set $ws1 1: www
-set $ws2 2: misc
-set $ws3 3: dev
-set $ws4 4: mail
+set $ws1 1:www
+set $ws2 2:misc
+set $ws3 3:dev
+set $ws4 4:mail
+set $ws5 5:V
+set $ws6 6:VI
+set $ws7 7:VII
+set $ws8 8:VIII
+set $ws9 9:IX
+set $ws10 10:X
 
-workspace 1 output LVDS1
-workspace 2 output LVDS1
-workspace 3 output LVDS1
-workspace 4 output LVDS1
+workspace $ws1 output LVDS1
+workspace $ws2 output LVDS1
+workspace $ws3 output LVDS1
+workspace $ws4 output LVDS1
 
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace $ws3
 bindsym $mod+4 workspace $ws4
-bindsym $mod+5 workspace number 5
-bindsym $mod+6 workspace number 6
-bindsym $mod+7 workspace number 7
-bindsym $mod+8 workspace number 8
-bindsym $mod+9 workspace number 9
-bindsym $mod+0 workspace number 10
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1
 bindsym $mod+Shift+2 move container to workspace $ws2
 bindsym $mod+Shift+3 move container to workspace $ws3
 bindsym $mod+Shift+4 move container to workspace $ws4
-bindsym $mod+Shift+5 move container to workspace number 5
-bindsym $mod+Shift+6 move container to workspace number 6
-bindsym $mod+Shift+7 move container to workspace number 7
-bindsym $mod+Shift+8 move container to workspace number 8
-bindsym $mod+Shift+9 move container to workspace number 9
-bindsym $mod+Shift+0 move container to workspace number 10
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
 
 # move current workspace between monitors
 bindsym $mod+Control+h move workspace to output left
@@ -172,8 +177,8 @@ set $darkgrey	#373B41
 set $red	#CC6666
 set $white	#C5C8C6
 
-new_window pixel 1
-new_float pixel 1
+new_window pixel 2
+new_float pixel 4
 
 # config for i3 patched with useless gaps
 # gap_size 0
@@ -189,30 +194,50 @@ bar {
 	position top
 	tray_output primary
 	modifier Mod1
-	font pango:Source Code Pro Medium 9
+	strip_workspace_numbers yes
 
 	colors {
-		background	$darkgrey
+		background	$black
 		separator	$darkgrey
 		statusline	$white
 
 		# bar.class		border		backgr.		text
-		focused_workspace	$grey		$darkgrey	$grey
-		active_workspace	$grey		$black		$grey
-		inactive_workspace	$darkgrey	$darkgrey	$grey
+		# focused_workspace	$grey		$grey		$black
+		# active_workspace	$grey		$darkgrey       $grey
+		# inactive_workspace	$darkgrey	$darkgrey	$grey
+		# urgent_workspace	$red		$red		$black
+		focused_workspace	$grey		$black		$grey
+		active_workspace	$grey		$black		$green
+		inactive_workspace	$darkgrey	$black		$grey
 		urgent_workspace	$red		$red		$black
 	}
 }
 
 # xautolock mode
-set $xautolockmenu "xautolock: [e]nable [d]isable"
+set $xautolockmenu "xautolock: [e]nable [d]isable [l]ock"
 bindsym $mod+F11         mode $xautolockmenu
 mode $xautolockmenu {
 	bindsym e	exec --no-startup-id xautolock -enable, mode "default"
 	bindsym d	exec --no-startup-id xautolock -disable, mode "default"
+	bindsym l	exec --no-startup-id xautolock -locknow, mode "default"
 
 	bindsym Return	mode "default"
 	bindsym Escape	mode "default"
+}
+
+# audio mode
+set $audiomenu "volume: [+]10% [-]10% [m]ute [r]eset"
+bindsym $mod+F12         mode $audiomenu
+mode $audiomenu {
+	bindsym r             exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ 50%
+	bindsym plus          exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%
+	bindsym KP_Add        exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%
+	bindsym minus         exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%
+	bindsym KP_Subtract   exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%
+	bindsym m             exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+	bindsym Return        mode "default"
+	bindsym Escape        mode "default"
 }
 
 # fast workspace switching
@@ -225,10 +250,14 @@ bindsym XF86AudioLowerVolume	exec --no-startup-id pulseaudio-ctl down 5
 bindsym XF86AudioMute		exec --no-startup-id pulseaudio-ctl mute
 bindsym XF86AudioMicMute	exec --no-startup-id pulseaudio-ctl mute-input
 
+
 # mpd control
 bindsym XF86AudioPlay exec mpc toggle
 bindsym XF86AudioNext exec mpc next
 bindsym XF86AudioPrev exec mpc prev
+
+# display setup
+bindsym XF86Display exec ~/bin/xrandr_cycle
 
 # toggle bar
 bindsym $mod+b bar mode toggle
@@ -240,14 +269,12 @@ bindsym $mod+Shift+p move scratchpad
 bindsym $mod+p scratchpad show
 
 # dmenu menus
-bindsym $mod+Shift+d exec ~/bin/dmenu_run.pl -i -sb '#81A2BE' -sf '#000000' -h 21 -fn 'Source Code Pro-9:normal'
-#bindsym $mod+d exec j4-dmenu-desktop --dmenu="dmenu -i -sb '#81A2BE' -sf '#000000' -h 21"
-bindsym $mod+d exec rofi -rnow
+bindsym $mod+d exec rofi -show run
 bindsym $mod+m exec ~/bin/mpc_dmenu.sh
 bindsym $mod+n exec ~/bin/rename_i3_ws.py
+bindsym $mod+i exec ~/bin/mpc_info.sh
 
-bindsym $mod+i exec notify-send MPD "$(mpc status)"
-bindsym Print exec scrot -q 100 -e 'mv $f ~/Pictures/Screenshots'
+bindsym Print exec ~/bin/snap.sh
 bindsym Control+mod1+l exec xautolock -locknow
 bindsym XF86Launch1 exec physlock -d
 
@@ -263,17 +290,19 @@ for_window [class="Gleds"] floating enable
 for_window [class="^Wine$"] floating enable
 for_window [class="Skype"] floating enable
 for_window [class="qemu-*"] floating enable
+for_window [class="CybIrViewer"] floating enable
+for_window [class="Salut"] floating enable
+for_window [class="XCalc"] floating enable
 
 for_window [class="file_progress"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [class="com-mathworks-util-PostVMInit"] floating enable
 
-for_window [class="CybIrViewer"] floating enable
-for_window [class="Salut"] floating enable
 
 # assign workspace
 assign [class="Pidgin"] 10
 
 workspace_auto_back_and_forth yes
+force_display_urgency_hint 500 ms
 
 # vim:filetype=i3
