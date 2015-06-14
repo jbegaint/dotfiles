@@ -52,6 +52,7 @@ set splitright
 set splitbelow
 
 let mapleader = "\<Space>"
+let maplocalleader = "\<Space>"
 
 nnoremap <Leader><Space> za
 nnoremap <CR> :noh<CR><CR>
@@ -137,11 +138,6 @@ if has('gui_running')
 	set guioptions-=e
 	" use console dialogs
 	set guioptions+=c
-
-	" standard editor shortcuts
-	nnoremap <C-tab> :tabnext <CR>
-	nnoremap <C-S-tab> :tabprevious <CR>
-	inoremap <C-BS> <C-w>
 else
 	set t_Co=256
 	set background=dark
@@ -181,12 +177,13 @@ let g:vim_markdown_folding_disabled=1
 
 " -- ctrlp
 let g:ctrlp_custom_ignore = '\v[\/](venv|venv2|staticfiles)$'
-nnoremap <Nul> :CtrlPBuffer<CR>
+nnoremap <Leader>b :CtrlPBuffer<CR>
 
 " -- Latex-Box
 let g:LatexBox_quickfix = 2
 let g:LatexBox_latexmk_preview_continuously = 1
 let g:LatexBox_Folding = 1
+let g:LatexBox_split_type = 'new'
 
 " -- The Silver Searcher
 if executable('ag')
@@ -241,8 +238,8 @@ augroup CLNRSet
 	autocmd! ColorScheme * hi CursorLineNR cterm=bold
 augroup END
 
-" fill rest of line with characters
-" https://stackoverflow.com/questions/3364102/how-to-fill-a-line-with-character-x-up-to-column-y-using-vim
+" -- fill rest of line with characters
+" see: https://stackoverflow.com/questions/3364102/how-to-fill-a-line-with-character-x-up-to-column-y-using-vim
 function! FillLine( str )
     " set tw to the desired total length
     let tw = &textwidth
@@ -259,13 +256,7 @@ function! FillLine( str )
     endif
 endfunction
 
+" -- dummy function to toggle the status line
 function! StatusToggle()
 	:let &laststatus = &laststatus == 2 ? 1 : 2
 endfunction
-
-" -- Languages specific stuff
-autocmd FileType python set sw=4 ts=4 sts=4
-autocmd FileType javascript set sw=4 ts=4 sts=4
-autocmd FileType html,htmldjango set tw=0 sw=4 ts=4 sts=4
-autocmd FileType haskell set ts=8 et sts=4 sw=4 sr
-autocmd FileType tex set sw=4 ts=4 sts=4
