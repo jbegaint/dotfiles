@@ -117,6 +117,7 @@ Plug 'chriskempson/base16-xresources', {'dir': '~/.config/base16-xresources'}
 Plug 'raichoo/haskell-vim', {'for': 'haskell'}
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'haya14busa/incsearch.vim'
+Plug 'godlygeek/tabular'
 call plug#end()
 
 filetype plugin indent on
@@ -221,6 +222,7 @@ nnoremap <silent> <F2> :NERDTreeToggle<CR>
 nnoremap <silent> <F3> :set invnumber<CR>
 nnoremap <silent> <F4> :set invlist<CR>
 nnoremap <silent> <F5> :call StatusToggle()<CR>
+nnoremap <silent> <F6> :SyntasticToggleMode<CR>
 nnoremap <silent> <F8> :TagbarToggle<CR>
 nnoremap <silent> <F11> :call FillLine( '-' )<CR>
 set pastetoggle=<F12>
