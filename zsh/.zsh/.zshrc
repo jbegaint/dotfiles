@@ -16,8 +16,8 @@ zle -N zle-keymap-select
 # env
 export EDITOR="vim"
 export GOPATH="$HOME/.go"
-export PATH="$HOME/bin:$PATH"
-export PATH="$GOPATH/bin:$PATH"
+export RUBYPATH="$(ruby -e 'print Gem.user_dir')"
+export PATH="$HOME/bin:$RUBYPATH/bin:$GOPATH/bin:$PATH"
 
 
 # history

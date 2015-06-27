@@ -189,6 +189,7 @@ client.focused_inactive $black		$darkgrey	$white	$green
 client.unfocused        $black		$darkgrey	$grey	$green
 client.urgent           $red		$red		$black  $green
 
+
 bar {
 	status_command i3status
 	position top
@@ -201,27 +202,11 @@ bar {
 		statusline	$white
 
 		# bar.class		border		backgr.		text
-		# focused_workspace	$grey		$grey		$black
-		# active_workspace	$grey		$darkgrey       $grey
-		# inactive_workspace	$darkgrey	$darkgrey	$grey
-		# urgent_workspace	$red		$red		$black
 		focused_workspace	$grey		$black		$grey
 		active_workspace	$grey		$black		$green
 		inactive_workspace	$darkgrey	$black		$grey
 		urgent_workspace	$red		$red		$black
 	}
-}
-
-# xautolock mode
-set $xautolockmenu "xautolock: [e]nable [d]isable [l]ock"
-bindsym $mod+F11         mode $xautolockmenu
-mode $xautolockmenu {
-	bindsym e	exec --no-startup-id xautolock -enable, mode "default"
-	bindsym d	exec --no-startup-id xautolock -disable, mode "default"
-	bindsym l	exec --no-startup-id xautolock -locknow, mode "default"
-
-	bindsym Return	mode "default"
-	bindsym Escape	mode "default"
 }
 
 # audio mode
@@ -274,7 +259,7 @@ bindsym $mod+n exec ~/bin/rename_i3_ws.py
 bindsym $mod+i exec ~/bin/mpc_info.sh
 
 bindsym Print exec ~/bin/snap.sh
-bindsym Control+mod1+l exec xautolock -locknow
+bindsym Control+mod1+l exec ~/bin/lock.sh
 bindsym XF86Launch1 exec physlock -d
 
 # floating windows rules

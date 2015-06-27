@@ -57,6 +57,8 @@ let maplocalleader = "\<Space>"
 nnoremap <Leader><Space> za
 nnoremap <CR> :noh<CR><CR>
 
+nnoremap <Leader>c :bp\|bd #<CR>
+
 nnoremap <silent> <S-j> o<ESC>k
 nnoremap <silent> <S-k> O<ESC>j
 
@@ -139,6 +141,8 @@ if has('gui_running')
 	set guioptions-=e
 	" use console dialogs
 	set guioptions+=c
+
+	inoremap <C-BS> <C-W>
 else
 	set t_Co=256
 	set background=dark

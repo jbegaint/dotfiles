@@ -29,7 +29,7 @@ parcellite &
 redshift-gtk &
 urxvtd -q -o -f &
 volumeicon &
-xautolock -locker 'i3lock -u -c 333333' &
+xss-lock -- ~/bin/lock.sh &
 
 # fix some xdg-* related bugs
 export DE='xfce'
