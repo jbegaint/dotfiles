@@ -120,6 +120,8 @@ Plug 'raichoo/haskell-vim', {'for': 'haskell'}
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'haya14busa/incsearch.vim'
 Plug 'godlygeek/tabular'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 call plug#end()
 
 filetype plugin indent on
@@ -218,8 +220,17 @@ let g:syntastic_python_flake8_args = '--ignore=W191,E128'
 let g:session_autoload = 'no'
 let g:session_autosave = 'yes'
 
-" -- misc shortcuts and options
+" -- UltiSnips
+" Trigger configuration. Do not use <tab> if you use
+" https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+" -- misc shortcuts and options
 " Fn shortcuts
 nnoremap <silent> <F1> mmgqip`m
 nnoremap <silent> <F2> :NERDTreeToggle<CR>

@@ -19,7 +19,6 @@ export GOPATH="$HOME/.go"
 export RUBYPATH="$(ruby -e 'print Gem.user_dir')"
 export PATH="$HOME/bin:$RUBYPATH/bin:$GOPATH/bin:$PATH"
 
-
 # history
 export HISTFILE=~/.histfile
 export HISTSIZE=1000
@@ -65,3 +64,4 @@ fi
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 source /usr/share/doc/pkgfile/command-not-found.zsh
 source ~/.zsh/gibo-completion.zsh
+[[ -n "$TMUX" ]] && export TERM=screen-256color
