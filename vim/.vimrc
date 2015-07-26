@@ -83,7 +83,8 @@ nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 nnoremap Q <nop>
 
-set statusline=\ \%f%m%r%h%w\ ::\ %y\ %=\ %{&ff}\|%{strlen(&fenc)?&fenc:'none'}\%5.c\ [%p%%:\ %l/%L]\ 
+set statusline=\ \%f%m%r%h%w\ ::\ %y\ \%{exists('*fugitive#head')?fugitive#head():''}\ %=\ %{&ff}\|%{strlen(&fenc)?&fenc:'none'}\%5.c\ [%p%%:\ %l/%L]\ 
+set laststatus=2
 
 " -- Plugins
 filetype off
@@ -167,15 +168,6 @@ let g:neocomplete#enable_auto_select = 0
 let g:neocomplete#sources#syntax#min_keyword_length = 3
 set completeopt-=preview
 
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-	return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-endfunction
-
-" -- delimitMate and neocomplete compatibility
-imap <expr> <CR> pumvisible() ? "\<c-y>" : "<Plug>delimitMateCR"
-
 " -- delimitMate
 let delimitMate_expand_cr=1
 
@@ -187,10 +179,11 @@ let g:ctrlp_custom_ignore = '\v[\/](venv|venv2|staticfiles)$'
 nnoremap <Leader>b :CtrlPBuffer<CR>
 
 " -- Latex-Box
-let g:LatexBox_quickfix = 2
-let g:LatexBox_latexmk_preview_continuously = 1
+let g:LatexBox_quickfix = 4
+let g:LatexBox_latexmk_preview_continuously = 0
 let g:LatexBox_Folding = 1
 let g:LatexBox_split_type = 'new'
+let g:LatexBox_latexmk_async = 1
 
 " -- The Silver Searcher
 if executable('ag')

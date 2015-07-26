@@ -23,7 +23,7 @@ eval $(cat ~/.fehbg)
 setxkbmap -option caps:escape
 
 # autostart apps
-. ~/bin/docked.sh &
+~/bin/docked.sh &
 dunst &
 parcellite &
 redshift-gtk &

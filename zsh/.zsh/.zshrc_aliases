@@ -1,6 +1,5 @@
 #!/bin/zsh
 
-alias enable_alert='PS1="$PS1 \a"'
 alias pacback="pacman -Qqne > ~/Documents/installed_packages.txt"
 alias pong="ping -c3 google.com"
 alias reload="source ~/.zsh/.zshrc"
@@ -32,8 +31,8 @@ lsc () {
 }
 
 mkcd () {
-	mkdir -p "$@"
-	cd "$@"
+	mkdir -p $@
+	cd $_;
 }
 
 extract() {
@@ -60,7 +59,8 @@ extract() {
 	fi
 }
 
-alias addon-sdk="cd /opt/addon-sdk && source bin/activate; cd -"
 alias fuck='eval $(thefuck $(fc -ln -1 | tail -n 1)); fc -R'
 alias FUCK='fuck'
 alias vim='nvim'
+alias ncmpcpp='[[ -z $(pidof mpd) ]] && mpd; ncmpcpp'
+alias lock='i3lock -i <(import -window root - | convert -blur -1x5 - png:-)'
