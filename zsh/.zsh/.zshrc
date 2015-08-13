@@ -61,7 +61,9 @@ fi
 
 # color scheme (check for interactive mode before sourcing)
 [[ $- == *i* ]] && . ~/.config/base16-shell/base16-tomorrow.dark.sh
+
+# fuzzy completion
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
-source /usr/share/doc/pkgfile/command-not-found.zsh
-source ~/.zsh/gibo-completion.zsh
+
+# fix tmux colors
 [[ -n "$TMUX" ]] && export TERM=screen-256color

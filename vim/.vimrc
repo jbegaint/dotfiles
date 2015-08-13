@@ -92,7 +92,7 @@ filetype off
 call plug#begin()
 Plug 'chriskempson/base16-vim'
 Plug 'docunext/closetag.vim'
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'mattn/emmet-vim', {'for': 'html'}
 Plug 'PotatoesMaster/i3-vim-syntax', {'for': 'i3'}
@@ -123,6 +123,8 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'godlygeek/tabular'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'vimwiki/vimwiki'
+Plug 'petRUShka/vim-opencl'
 call plug#end()
 
 filetype plugin indent on
@@ -132,7 +134,7 @@ syntax on
 if has('gui_running')
 	set background=dark
 	colorscheme base16-tomorrow
-	set guifont=Fira\ Mono\ 10
+	set guifont=Source\ Code\ Pro\ Medium\ 10
 
 	" remove menu, toolbar, and scrollbars
 	set guioptions-=m
@@ -175,7 +177,6 @@ let delimitMate_expand_cr=1
 let g:vim_markdown_folding_disabled=1
 
 " -- ctrlp
-let g:ctrlp_custom_ignore = '\v[\/](venv|venv2|staticfiles)$'
 nnoremap <Leader>b :CtrlPBuffer<CR>
 
 " -- Latex-Box
@@ -192,11 +193,13 @@ if executable('ag')
 
 	" use ag in ctrlp
 	let g:ctrlp_user_command = 'ag %s -l --nocolor -i
+				\ --ignore "*.o"
 				\ --ignore "*.pyc"
 				\ --ignore "*.git"
 				\ --ignore "*.svn"
 				\ --ignore venv
 				\ --ignore venv2
+				\ --ignore staticfiles
 				\ -g ""'
 	let g:ctrlp_use_caching = 1
 endif
@@ -214,14 +217,16 @@ let g:session_autoload = 'no'
 let g:session_autosave = 'yes'
 
 " -- UltiSnips
-" Trigger configuration. Do not use <tab> if you use
-" https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsExpandTrigger       = "<c-j>"
+let g:UltiSnipsJumpForwardTrigger  = "<c-j>"
+let g:UltiSnipsJumpBackwardTrigger = "<c-p>"
+let g:UltiSnipsListSnippets        = "<c-k>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
+
+" -- NERDTree
+let NERDTreeIgnore = ['\.pyc$', '\.o$', 'venv*']
 
 " -- misc shortcuts and options
 " Fn shortcuts
@@ -270,3 +275,12 @@ endfunction
 function! StatusToggle()
 	:let &laststatus = &laststatus == 2 ? 1 : 2
 endfunction
+
+let g:vimwiki_list = [{'path':'~/.vimwiki/wiki', 'path_html':'~/.vimwiki/export/html/', 'auto_export':1}]
+
+au BufNewFile,BufRead admin.py     setlocal filetype=python.django
+au BufNewFile,BufRead urls.py      setlocal filetype=python.django
+au BufNewFile,BufRead models.py    setlocal filetype=python.django
+au BufNewFile,BufRead views.py     setlocal filetype=python.django
+au BufNewFile,BufRead settings.py  setlocal filetype=python.django
+au BufNewFile,BufRead forms.py     setlocal filetype=python.django

@@ -1,31 +1,5 @@
 #!/bin/zsh
 
-alias pacback="pacman -Qqne > ~/Documents/installed_packages.txt"
-alias pong="ping -c3 google.com"
-alias reload="source ~/.zsh/.zshrc"
-
-alias temp="sensors"
-
-alias grep="grep --color=auto"
-alias ll="ls -l"
-alias ls="ls -F --color"
-alias pacman="pacman --color=auto"
-
-alias head1="head -n1"
-alias tail1="tail -n1"
-#alias skype='xhost +local: && su skype -c skype'
-
-# tip found on arch bbs
-alias install_date="echo $(ls -lct /etc | tail -1 | awk '{print $6, $7, $8}')"
-alias dfc="dfc -p/dev"
-alias cal="cal -m -3"
-
-alias keychain_start='eval `keychain --eval --agents ssh id_rsa`'
-alias btsync='btsync --config ~/.config/btsync/btsync.conf'
-alias cpv="rsync -poghb --backup-dir=/tmp/rsync -e /dev/null --progress --"
-
-alias uncaps="xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'"
-
 lsc () {
 	ls "$@" | wc -l
 }
@@ -59,8 +33,38 @@ extract() {
 	fi
 }
 
+icanhazip() {
+	dig +short myip.opendns.com @resolver1.opendns.com
+}
+
+icanhazptr() {
+	nslookup $(icanhazip) | perl -n -e '/name\s=\s(.*)\.$/ && print "$1\n"'
+}
+
+
+alias cal="cal -m -3"
+alias ncmpcpp='[[ -z $(pidof mpd) ]] && mpd; ncmpcpp'
+alias pacman="pacman --color=auto"
+
+alias ll="ls -l"
+alias ls="ls -F --color"
+
+alias head1="head -n1"
+alias tail1="tail -n1"
+
+alias cpv="rsync -poghb --backup-dir=/tmp/rsync -e /dev/null --progress --"
+alias lock='i3lock -i <(import -window root - | convert -blur -1x5 - png:-)'
+alias pacback="pacman -Qqne > ~/Documents/installed_packages.txt"
+alias pong="ping -c3 google.com"
+alias reload="source ~/.zsh/.zshrc"
+alias temp="sensors"
+alias vim='nvim'
+
+alias caps="xmodmap -e 'keycode 0x42 = Caps_Lock'"
+alias uncaps="xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'"
+
 alias fuck='eval $(thefuck $(fc -ln -1 | tail -n 1)); fc -R'
 alias FUCK='fuck'
-alias vim='nvim'
-alias ncmpcpp='[[ -z $(pidof mpd) ]] && mpd; ncmpcpp'
-alias lock='i3lock -i <(import -window root - | convert -blur -1x5 - png:-)'
+
+# tip found on arch bbs
+alias install_date="echo $(ls -lct /etc | tail -1 | awk '{print $6, $7, $8}')"

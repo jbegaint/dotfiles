@@ -191,14 +191,14 @@ client.urgent           $red		$red		$black  $green
 
 
 bar {
-	status_command i3status
+	status_command i3blocks
 	position top
 	modifier Mod1
 	strip_workspace_numbers yes
 
 	colors {
 		background	$black
-		separator	$darkgrey
+		separator	$black
 		statusline	$white
 
 		# bar.class		border		backgr.		text

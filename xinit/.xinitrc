@@ -30,6 +30,7 @@ redshift-gtk &
 urxvtd -q -o -f &
 volumeicon &
 xss-lock -- ~/bin/lock.sh &
+unclutter -b &
 
 # fix some xdg-* related bugs
 export DE='xfce'
