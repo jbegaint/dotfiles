@@ -252,6 +252,9 @@ bindsym $mod+Shift+p move scratchpad
 # Show the first scratchpad window
 bindsym $mod+p scratchpad show
 
+# Center window
+bindsym $mod+o move absolute position center
+
 # dmenu menus
 bindsym $mod+d exec ~/bin/dmenu_run
 bindsym $mod+Shift+d exec rofi -show run
@@ -286,8 +289,14 @@ for_window [class="com-mathworks-util-PostVMInit"] floating enable
 
 # assign workspace
 assign [class="Pidgin"] $ws10
+for_window [class="Pidgin"] focus
+
+assign [class="Thunderbird"] $ws4
+for_window [class="Thunderbird"] focus
 
 workspace_auto_back_and_forth yes
 force_display_urgency_hint 500 ms
+
+delay_exit_on_zero_displays 500ms
 
 # vim:filetype=i3

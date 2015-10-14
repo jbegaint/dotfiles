@@ -12,7 +12,7 @@ set encoding=utf-8
 set mouse=a
 
 set wildmenu
-set wildmode=longest,list
+set wildmode=longest:list,full
 set wildignore=*.o,*~,*.pyc
 set wildignore+=*.aux,*.dvi,*.bcf,*.blg,*.bbl
 
@@ -71,8 +71,6 @@ nnoremap k gk
 " nnoremap ; :
 " nnoremap : ;
 
-inoremap jk <Esc>
-
 noremap <M-j> <C-w>j
 noremap <M-k> <C-w>k
 noremap <M-l> <C-w>l
@@ -94,7 +92,7 @@ Plug 'chriskempson/base16-vim'
 Plug 'docunext/closetag.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Raimondi/delimitMate'
-Plug 'mattn/emmet-vim', {'for': 'html'}
+Plug 'mattn/emmet-vim', {'for': ['html', 'htmldjango']}
 Plug 'PotatoesMaster/i3-vim-syntax', {'for': 'i3'}
 Plug 'LaTeX-Box-Team/LaTeX-Box', {'for': ['latex', 'tex']}
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
@@ -109,7 +107,8 @@ Plug 'Matt-Deacalion/vim-systemd-syntax', {'for': 'systemd'}
 Plug 'jelera/vim-javascript-syntax', {'for': 'javascript'}
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
-Plug 'plasticboy/vim-markdown', {'for': 'mkd'}
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown', {'for': ['mkd', 'mkd.markdown']}
 Plug 'DanielFGray/DistractionFree.vim'
 Plug 'Shougo/neocomplete.vim'
 Plug 'Shougo/vimproc.vim', {'do': 'make'}
@@ -125,6 +124,12 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'vimwiki/vimwiki'
 Plug 'petRUShka/vim-opencl'
+Plug 'vim-scripts/BufOnly.vim'
+Plug 'ap/vim-buftabline'
+Plug 'unblevable/quick-scope'
+Plug 'tpope/vim-surround'
+Plug 'morhetz/gruvbox'
+Plug 'klen/python-mode'
 call plug#end()
 
 filetype plugin indent on
@@ -179,6 +184,9 @@ let g:vim_markdown_folding_disabled=1
 " -- ctrlp
 nnoremap <Leader>b :CtrlPBuffer<CR>
 
+" -- BufOnly
+nnoremap <Leader>o :BufOnly<CR>
+
 " -- Latex-Box
 let g:LatexBox_quickfix = 4
 let g:LatexBox_latexmk_preview_continuously = 0
@@ -208,9 +216,10 @@ endif
 let g:pymode_options_colorcolumn = 1
 let g:pymode_doc_bind = ''
 let g:pymode_rope = 0
+let g:pymode_lint = 0
 
 " -- Syntastic
-let g:syntastic_python_flake8_args = '--ignore=W191,E128'
+let g:syntastic_python_flake8_args = '--ignore=W191,E128,E501'
 
 " -- vim-session
 let g:session_autoload = 'no'
@@ -227,6 +236,43 @@ let g:UltiSnipsEditSplit="vertical"
 
 " -- NERDTree
 let NERDTreeIgnore = ['\.pyc$', '\.o$', 'venv*']
+
+" -- buftabline
+let g:buftabline_show = 1
+
+" -- vimwiki
+let vimwiki_html_path = '~/.vimwiki/export/html/'
+let g:vimwiki_list = [{
+			\ 'path': '~/.vimwiki/wiki',
+			\ 'path_html': vimwiki_html_path,
+			\ 'auto_export': 1,
+			\ 'template_path': vimwiki_html_path.'assets/',
+			\ 'template_default': 'default',
+			\ 'template_ext': '.tpl',
+			\ }]
+
+" -- quick-scope
+" https://gist.github.com/cszentkiralyi/dc61ee28ab81d23a67aa
+let g:qs_enable = 0
+let g:qs_enable_char_list = [ 'f', 'F', 't', 'T' ]
+
+function! Quick_scope_selective(movement)
+    let needs_disabling = 0
+    if !g:qs_enable
+        QuickScopeToggle
+        redraw
+        let needs_disabling = 1
+    endif
+    let letter = nr2char(getchar())
+    if needs_disabling
+        QuickScopeToggle
+    endif
+    return a:movement . letter
+endfunction
+
+for i in g:qs_enable_char_list
+	execute 'noremap <expr> <silent>' . i . " Quick_scope_selective('". i . "')"
+endfor
 
 " -- misc shortcuts and options
 " Fn shortcuts
@@ -277,10 +323,3 @@ function! StatusToggle()
 endfunction
 
 let g:vimwiki_list = [{'path':'~/.vimwiki/wiki', 'path_html':'~/.vimwiki/export/html/', 'auto_export':1}]
-
-au BufNewFile,BufRead admin.py     setlocal filetype=python.django
-au BufNewFile,BufRead urls.py      setlocal filetype=python.django
-au BufNewFile,BufRead models.py    setlocal filetype=python.django
-au BufNewFile,BufRead views.py     setlocal filetype=python.django
-au BufNewFile,BufRead settings.py  setlocal filetype=python.django
-au BufNewFile,BufRead forms.py     setlocal filetype=python.django

@@ -43,6 +43,7 @@ icanhazptr() {
 
 
 alias cal="cal -m -3"
+alias dfc="dfc -p +ev,/dev"
 alias ncmpcpp='[[ -z $(pidof mpd) ]] && mpd; ncmpcpp'
 alias pacman="pacman --color=auto"
 

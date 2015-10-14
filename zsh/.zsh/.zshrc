@@ -1,7 +1,7 @@
 #!/bin/zsh
 autoload -Uz colors && colors
 
-PROMPT=$'%~%{$fg[red]%}$(__git_ps1 \" (%s)\")%{$fg_bold[blue]%} » %{$reset_color%}'
+PROMPT=$'\n%{$fg_bold[magenta]%}➜ %{$fg_bold[cyan]%}%~%{$fg_bold[yellow]%}$(__git_ps1 \" (%s)\") %{$reset_color%}'
 
 # vi mode
 function zle-line-init zle-keymap-select {
@@ -64,6 +64,3 @@ fi
 
 # fuzzy completion
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
-
-# fix tmux colors
-[[ -n "$TMUX" ]] && export TERM=screen-256color
