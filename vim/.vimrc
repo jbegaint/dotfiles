@@ -68,9 +68,6 @@ nnoremap <silent><Tab> :bnext<CR>
 nnoremap j gj
 nnoremap k gk
 
-" nnoremap ; :
-" nnoremap : ;
-
 noremap <M-j> <C-w>j
 noremap <M-k> <C-w>k
 noremap <M-l> <C-w>l
@@ -81,55 +78,55 @@ nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 nnoremap Q <nop>
 
-set statusline=\ \%f%m%r%h%w\ ::\ %y\ \%{exists('*fugitive#head')?fugitive#head():''}\ %=\ %{&ff}\|%{strlen(&fenc)?&fenc:'none'}\%5.c\ [%p%%:\ %l/%L]\ 
+let gitbranch = exists('*fugitive#head()')?'('.fugitive#head().')':''
+set statusline=\ %f\ %m%r%h%w%y\ %{gitbranch}%=%l\/%-6L\ %3c\ 
 set laststatus=2
 
 " -- Plugins
 filetype off
 
 call plug#begin()
-Plug 'chriskempson/base16-vim'
-Plug 'docunext/closetag.vim'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'Raimondi/delimitMate'
-Plug 'mattn/emmet-vim', {'for': ['html', 'htmldjango']}
-Plug 'PotatoesMaster/i3-vim-syntax', {'for': 'i3'}
 Plug 'LaTeX-Box-Team/LaTeX-Box', {'for': ['latex', 'tex']}
-Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
-Plug 'scrooloose/syntastic'
-Plug 'majutsushi/tagbar'
-Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-rsi'
 Plug 'Matt-Deacalion/vim-systemd-syntax', {'for': 'systemd'}
-Plug 'jelera/vim-javascript-syntax', {'for': 'javascript'}
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-session'
-Plug 'godlygeek/tabular'
+Plug 'othree/yajs.vim'
+Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'petRUShka/vim-opencl'
 Plug 'plasticboy/vim-markdown', {'for': ['mkd', 'mkd.markdown']}
+Plug 'raichoo/haskell-vim', {'for': 'haskell'}
 Plug 'DanielFGray/DistractionFree.vim'
+Plug 'Glench/Vim-Jinja2-Syntax'
+Plug 'PotatoesMaster/i3-vim-syntax', {'for': 'i3'}
+Plug 'Raimondi/delimitMate'
 Plug 'Shougo/neocomplete.vim'
 Plug 'Shougo/vimproc.vim', {'do': 'make'}
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
-Plug 'chriskempson/base16-shell', {'dir': '~/.config/base16-shell'}
-Plug 'chriskempson/base16-xresources', {'dir': '~/.config/base16-xresources'}
-Plug 'raichoo/haskell-vim', {'for': 'haskell'}
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'haya14busa/incsearch.vim'
-Plug 'godlygeek/tabular'
 Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'vimwiki/vimwiki'
-Plug 'petRUShka/vim-opencl'
-Plug 'vim-scripts/BufOnly.vim'
+Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-buftabline'
-Plug 'unblevable/quick-scope'
-Plug 'tpope/vim-surround'
-Plug 'morhetz/gruvbox'
+Plug 'chriskempson/base16-shell', {'dir': '~/.config/base16-shell'}
+Plug 'chriskempson/base16-vim'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'docunext/closetag.vim'
+Plug 'godlygeek/tabular'
+Plug 'haya14busa/incsearch.vim'
+Plug 'honza/vim-snippets'
+Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
+Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
 Plug 'klen/python-mode'
+Plug 'majutsushi/tagbar'
+Plug 'mattn/emmet-vim', {'for': ['html', 'htmldjango']}
+Plug 'morhetz/gruvbox'
+Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
+Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rsi'
+Plug 'tpope/vim-surround'
+Plug 'unblevable/quick-scope'
+Plug 'vim-scripts/BufOnly.vim'
+Plug 'vimwiki/vimwiki'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-session'
 call plug#end()
 
 filetype plugin indent on
@@ -160,14 +157,9 @@ else
 	colorscheme base16-tomorrow
 endif
 
-" color right border after 80 chars (and background after 100)
-let &colorcolumn=join(range(80,999),",")
-let &colorcolumn="80,".join(range(100,999),",")
-highlight ColorColumn ctermbg=236 guibg=#2c2d27
+" -- Plugins options
 
-" ------ Plugins options and shortcuts ------
-
-" " -- Neocomplete
+" -- Neocomplete
 let g:neocomplete#use_vimproc = 1
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
@@ -250,6 +242,7 @@ let g:vimwiki_list = [{
 			\ 'template_default': 'default',
 			\ 'template_ext': '.tpl',
 			\ }]
+let g:vimwiki_list = [{'path':'~/.vimwiki/wiki', 'path_html':'~/.vimwiki/export/html/', 'auto_export':1}]
 
 " -- quick-scope
 " https://gist.github.com/cszentkiralyi/dc61ee28ab81d23a67aa
@@ -283,7 +276,6 @@ nnoremap <silent> <F4> :set invlist<CR>
 nnoremap <silent> <F5> :call StatusToggle()<CR>
 nnoremap <silent> <F6> :SyntasticToggleMode<CR>
 nnoremap <silent> <F8> :TagbarToggle<CR>
-nnoremap <silent> <F11> :call FillLine( '-' )<CR>
 set pastetoggle=<F12>
 
 " -- highlight current line number
@@ -299,27 +291,7 @@ augroup CLNRSet
 	autocmd! ColorScheme * hi CursorLineNR cterm=bold
 augroup END
 
-" -- fill rest of line with characters
-" see: https://stackoverflow.com/questions/3364102/how-to-fill-a-line-with-character-x-up-to-column-y-using-vim
-function! FillLine( str )
-    " set tw to the desired total length
-    let tw = &textwidth
-    let offset = 2
-    if tw==0 | let tw = 80 | endif
-    " strip trailing spaces first
-    .s/[[:space:]]*$//
-    " calculate total number of 'str's to insert
-    let reps = (tw - col("$") - offset) / len(a:str)
-    " insert them, if there's room, removing trailing spaces (though forcing
-    " there to be one)
-    if reps > 0
-        .s/$/\=(' '.repeat(a:str, reps))/
-    endif
-endfunction
-
 " -- dummy function to toggle the status line
 function! StatusToggle()
 	:let &laststatus = &laststatus == 2 ? 1 : 2
 endfunction
-
-let g:vimwiki_list = [{'path':'~/.vimwiki/wiki', 'path_html':'~/.vimwiki/export/html/', 'auto_export':1}]
