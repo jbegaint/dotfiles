@@ -88,14 +88,18 @@ filetype off
 call plug#begin()
 Plug 'LaTeX-Box-Team/LaTeX-Box', {'for': ['latex', 'tex']}
 Plug 'Matt-Deacalion/vim-systemd-syntax', {'for': 'systemd'}
-Plug 'othree/yajs.vim'
-Plug 'othree/javascript-libraries-syntax.vim'
-Plug 'petRUShka/vim-opencl'
+Plug 'othree/yajs.vim', {'for': 'javascript'}
+Plug 'othree/javascript-libraries-syntax.vim', {'for': 'javascript'}
+Plug 'petRUShka/vim-opencl', {'for': 'opencl'}
+Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown', {'for': ['mkd', 'mkd.markdown']}
 Plug 'raichoo/haskell-vim', {'for': 'haskell'}
-Plug 'DanielFGray/DistractionFree.vim'
-Plug 'Glench/Vim-Jinja2-Syntax'
+Plug 'mitsuhiko/vim-jinja'
 Plug 'PotatoesMaster/i3-vim-syntax', {'for': 'i3'}
+Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
+Plug 'klen/python-mode', {'for': 'python'}
+Plug 'mattn/emmet-vim'
+
 Plug 'Raimondi/delimitMate'
 Plug 'Shougo/neocomplete.vim'
 Plug 'Shougo/vimproc.vim', {'do': 'make'}
@@ -106,15 +110,10 @@ Plug 'chriskempson/base16-shell', {'dir': '~/.config/base16-shell'}
 Plug 'chriskempson/base16-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'docunext/closetag.vim'
-Plug 'godlygeek/tabular'
 Plug 'haya14busa/incsearch.vim'
 Plug 'honza/vim-snippets'
-Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
-Plug 'klen/python-mode'
-Plug 'majutsushi/tagbar'
-Plug 'mattn/emmet-vim', {'for': ['html', 'htmldjango']}
+Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
 Plug 'morhetz/gruvbox'
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 Plug 'scrooloose/syntastic'
@@ -124,7 +123,6 @@ Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-surround'
 Plug 'unblevable/quick-scope'
 Plug 'vim-scripts/BufOnly.vim'
-Plug 'vimwiki/vimwiki'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
 call plug#end()
@@ -157,7 +155,7 @@ else
 	colorscheme base16-tomorrow
 endif
 
-" -- Plugins options
+" -- Plugins Options
 
 " -- Neocomplete
 let g:neocomplete#use_vimproc = 1
@@ -205,10 +203,11 @@ if executable('ag')
 endif
 
 " -- Python-mode
-let g:pymode_options_colorcolumn = 1
 let g:pymode_doc_bind = ''
-let g:pymode_rope = 0
+let g:pymode_indent = 0
 let g:pymode_lint = 0
+let g:pymode_options_colorcolumn = 1
+let g:pymode_rope = 0
 
 " -- Syntastic
 let g:syntastic_python_flake8_args = '--ignore=W191,E128,E501'
@@ -231,18 +230,6 @@ let NERDTreeIgnore = ['\.pyc$', '\.o$', 'venv*']
 
 " -- buftabline
 let g:buftabline_show = 1
-
-" -- vimwiki
-let vimwiki_html_path = '~/.vimwiki/export/html/'
-let g:vimwiki_list = [{
-			\ 'path': '~/.vimwiki/wiki',
-			\ 'path_html': vimwiki_html_path,
-			\ 'auto_export': 1,
-			\ 'template_path': vimwiki_html_path.'assets/',
-			\ 'template_default': 'default',
-			\ 'template_ext': '.tpl',
-			\ }]
-let g:vimwiki_list = [{'path':'~/.vimwiki/wiki', 'path_html':'~/.vimwiki/export/html/', 'auto_export':1}]
 
 " -- quick-scope
 " https://gist.github.com/cszentkiralyi/dc61ee28ab81d23a67aa
