@@ -78,8 +78,7 @@ nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 nnoremap Q <nop>
 
-let gitbranch = exists('*fugitive#head()')?'('.fugitive#head().')':''
-set statusline=\ %f\ %m%r%h%w%y\ %{gitbranch}%=%l\/%-6L\ %3c\ 
+set statusline=\ %f\ %m%r%h%w%y\ %{GitStatusline()}%=%l\/%-6L\ %3c\ 
 set laststatus=2
 
 " -- Plugins
@@ -281,4 +280,14 @@ augroup END
 " -- dummy function to toggle the status line
 function! StatusToggle()
 	:let &laststatus = &laststatus == 2 ? 1 : 2
+endfunction
+
+function! GitStatusline(...) abort
+	" Remove '[Git...]' surrounding the status
+	let l:matches = matchlist(fugitive#statusline(), "^\\[Git\\(.*\\)\\]$")
+	if len(l:matches) == 0
+		return ''
+	else
+		return l:matches[1]
+	endif
 endfunction
