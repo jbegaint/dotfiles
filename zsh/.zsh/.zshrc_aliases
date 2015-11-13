@@ -47,8 +47,9 @@ alias dfc="dfc -p +ev,/dev"
 alias ncmpcpp='[[ -z $(pidof mpd) ]] && mpd; ncmpcpp'
 alias pacman="pacman --color=auto"
 
-alias ll="ls -l"
 alias ls="ls -F --color"
+alias ll="ls -l"
+alias la="ll -A"
 
 alias head1="head -n1"
 alias tail1="tail -n1"

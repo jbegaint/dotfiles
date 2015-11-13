@@ -98,6 +98,7 @@ Plug 'PotatoesMaster/i3-vim-syntax', {'for': 'i3'}
 Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
 Plug 'klen/python-mode', {'for': 'python'}
 Plug 'mattn/emmet-vim'
+Plug 'tmux-plugins/vim-tmux'
 
 Plug 'Raimondi/delimitMate'
 Plug 'Shougo/neocomplete.vim'
@@ -177,7 +178,7 @@ nnoremap <Leader>b :CtrlPBuffer<CR>
 nnoremap <Leader>o :BufOnly<CR>
 
 " -- Latex-Box
-let g:LatexBox_quickfix = 4
+let g:LatexBox_quickfix = 2
 let g:LatexBox_latexmk_preview_continuously = 0
 let g:LatexBox_Folding = 1
 let g:LatexBox_split_type = 'new'
