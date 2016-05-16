@@ -1,0 +1,7 @@
+*.o
+*.pyc
+*.git
+*.svn
+venv*
+staticfiles
+node_modules

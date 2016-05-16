@@ -7,7 +7,7 @@ set so=7
 set autoread
 set ttyfast
 
-set listchars=precedes:«,extends:»,eol:↲,tab:▸\ ,trail:.
+set listchars=precedes:«,extends:»,eol:↲,tab:▸\ ,trail:.,nbsp:·
 set encoding=utf-8
 set mouse=a
 
@@ -91,8 +91,10 @@ Plug 'othree/yajs.vim', {'for': 'javascript'}
 Plug 'othree/javascript-libraries-syntax.vim', {'for': 'javascript'}
 Plug 'petRUShka/vim-opencl', {'for': 'opencl'}
 Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown', {'for': ['mkd', 'mkd.markdown']}
-Plug 'raichoo/haskell-vim', {'for': 'haskell'}
+" Plug 'plasticboy/vim-markdown', {'for': ['mkd', 'mkd.markdown']}
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'neovimhaskell/haskell-vim', {'for': 'haskell'}
 Plug 'mitsuhiko/vim-jinja'
 Plug 'PotatoesMaster/i3-vim-syntax', {'for': 'i3'}
 Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
@@ -112,11 +114,11 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'haya14busa/incsearch.vim'
 Plug 'honza/vim-snippets'
-Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': 'yes \| ./install'}
+Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
+Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
 Plug 'morhetz/gruvbox'
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
-Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rsi'
@@ -125,6 +127,11 @@ Plug 'unblevable/quick-scope'
 Plug 'vim-scripts/BufOnly.vim'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
+Plug 'posva/vim-vue'
+Plug 'LnL7/vim-nix'
+Plug 'neomake/neomake'
+Plug 'romainl/Apprentice'
+
 call plug#end()
 
 filetype plugin indent on
@@ -133,7 +140,7 @@ syntax on
 " -- gui/console look
 if has('gui_running')
 	set background=dark
-	colorscheme base16-tomorrow
+	colorscheme base16-ocean
 	set guifont=Source\ Code\ Pro\ Medium\ 10
 
 	" remove menu, toolbar, and scrollbars
@@ -169,7 +176,7 @@ set completeopt-=preview
 let delimitMate_expand_cr=1
 
 " -- vim-markdown
-let g:vim_markdown_folding_disabled=1
+" let g:vim_markdown_folding_disabled=1
 
 " -- ctrlp
 nnoremap <Leader>b :CtrlPBuffer<CR>
@@ -190,15 +197,7 @@ if executable('ag')
 	set grepprg=ag\ --nogroup\ --nocolor
 
 	" use ag in ctrlp
-	let g:ctrlp_user_command = 'ag %s -l --nocolor -i
-				\ --ignore "*.o"
-				\ --ignore "*.pyc"
-				\ --ignore "*.git"
-				\ --ignore "*.svn"
-				\ --ignore venv
-				\ --ignore venv2
-				\ --ignore staticfiles
-				\ -g ""'
+	let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -i -g ""'
 	let g:ctrlp_use_caching = 1
 endif
 
@@ -254,6 +253,11 @@ for i in g:qs_enable_char_list
 	execute 'noremap <expr> <silent>' . i . " Quick_scope_selective('". i . "')"
 endfor
 
+" -- vimwiki
+let g:vimwiki_list = [{'path': '~/.vimwiki/',
+			\ 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_folding = 'expr'
+
 " -- misc shortcuts and options
 " Fn shortcuts
 nnoremap <silent> <F1> mmgqip`m
@@ -292,3 +296,5 @@ function! GitStatusline(...) abort
 		return l:matches[1]
 	endif
 endfunction
+
+autocmd! BufWritePost * Neomake

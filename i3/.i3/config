@@ -16,6 +16,7 @@
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
 # chose a FreeType font, such as:
+# vim:filetype=i3
 font pango:Source Code Pro Medium 9
 
 set $mod Mod4
@@ -177,11 +178,7 @@ set $darkgrey	#373B41
 set $red	#CC6666
 set $white	#C5C8C6
 
-new_window pixel 2
-new_float pixel 4
-
-# config for i3 patched with useless gaps
-# gap_size 0
+new_window pixel 1
 
 # client.class          border		backgr.		text    indicator
 client.focused          $grey		$grey		$black	$green
@@ -297,6 +294,4 @@ for_window [class="Thunderbird"] focus
 workspace_auto_back_and_forth yes
 force_display_urgency_hint 500 ms
 
-delay_exit_on_zero_displays 500ms
-
-# vim:filetype=i3
+# delay_exit_on_zero_displays 500ms

@@ -28,9 +28,10 @@ dunst &
 parcellite &
 redshift-gtk &
 urxvtd -q -o -f &
-volumeicon &
+pasystray &
 xss-lock -- ~/bin/lock.sh &
 unclutter -b &
+nm-applet &
 
 # fix some xdg-* related bugs
 export DE='xfce'
