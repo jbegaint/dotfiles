@@ -28,7 +28,7 @@ dunst &
 parcellite &
 redshift-gtk &
 urxvtd -q -o -f &
-pasystray &
+volumeicon &
 xss-lock -- ~/bin/lock.sh &
 unclutter -b &
 nm-applet &

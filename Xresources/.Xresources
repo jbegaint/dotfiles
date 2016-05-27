@@ -3,7 +3,7 @@ URxvt.font: xft:Source Code Pro:size=10,xft:DejaVu Sans Mono:size=10
 
 URxvt.urgentOnBell: true
 URxvt.scrollBar: false
-URxvt.internalBorder: 4
+URxvt.internalBorder: 1
 URxvt.foreground: #eeeeee
 URxvt.background: #1d1f21
 URxvt.depth: 32

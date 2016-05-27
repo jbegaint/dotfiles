@@ -117,7 +117,6 @@ Plug 'honza/vim-snippets'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
-Plug 'morhetz/gruvbox'
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -130,7 +129,7 @@ Plug 'xolox/vim-session'
 Plug 'posva/vim-vue'
 Plug 'LnL7/vim-nix'
 Plug 'neomake/neomake'
-Plug 'romainl/Apprentice'
+Plug 'tpope/vim-vinegar'
 
 call plug#end()
 
@@ -252,11 +251,6 @@ endfunction
 for i in g:qs_enable_char_list
 	execute 'noremap <expr> <silent>' . i . " Quick_scope_selective('". i . "')"
 endfor
-
-" -- vimwiki
-let g:vimwiki_list = [{'path': '~/.vimwiki/',
-			\ 'syntax': 'markdown', 'ext': '.md'}]
-let g:vimwiki_folding = 'expr'
 
 " -- misc shortcuts and options
 " Fn shortcuts

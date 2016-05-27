@@ -15,6 +15,7 @@ autoload -Uz colors && colors
 
 # git-prompt
 source /usr/share/git/completion/git-prompt.sh
+GIT_PS1_SHOWDIRTYSTATE=true
 
 # Simple prompt
 PROMPT=$'\n%{$fg_bold[magenta]%}➜ %{$fg_bold[cyan]%}%~%{$fg_bold[yellow]%}$(__git_ps1 \" (%s)\") %{$reset_color%}'
