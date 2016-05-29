@@ -19,11 +19,10 @@ set wildignore+=*.aux,*.dvi,*.bcf,*.blg,*.bbl
 set autoindent
 set smartindent
 
+set tabstop=4
+set shiftwidth=4
 set noexpandtab
 set smarttab
-set shiftwidth=8
-set tabstop=8
-set softtabstop=8
 
 set hlsearch
 set ignorecase
@@ -85,26 +84,21 @@ set laststatus=2
 filetype off
 
 call plug#begin()
+
 Plug 'LaTeX-Box-Team/LaTeX-Box', {'for': ['latex', 'tex']}
+Plug 'LnL7/vim-nix'
 Plug 'Matt-Deacalion/vim-systemd-syntax', {'for': 'systemd'}
-Plug 'othree/yajs.vim', {'for': 'javascript'}
-Plug 'othree/javascript-libraries-syntax.vim', {'for': 'javascript'}
-Plug 'petRUShka/vim-opencl', {'for': 'opencl'}
-Plug 'godlygeek/tabular'
-" Plug 'plasticboy/vim-markdown', {'for': ['mkd', 'mkd.markdown']}
-Plug 'vim-pandoc/vim-pandoc'
-Plug 'vim-pandoc/vim-pandoc-syntax'
-Plug 'neovimhaskell/haskell-vim', {'for': 'haskell'}
-Plug 'mitsuhiko/vim-jinja'
 Plug 'PotatoesMaster/i3-vim-syntax', {'for': 'i3'}
-Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
-Plug 'klen/python-mode', {'for': 'python'}
-Plug 'mattn/emmet-vim'
+Plug 'godlygeek/tabular'
+Plug 'mitsuhiko/vim-jinja'
+Plug 'neovimhaskell/haskell-vim', {'for': 'haskell'}
+Plug 'othree/javascript-libraries-syntax.vim', {'for': 'javascript'}
+Plug 'othree/yajs.vim', {'for': 'javascript'}
+Plug 'petRUShka/vim-opencl', {'for': 'opencl'}
+Plug 'posva/vim-vue'
 Plug 'tmux-plugins/vim-tmux'
 
 Plug 'Raimondi/delimitMate'
-Plug 'Shougo/neocomplete.vim'
-Plug 'Shougo/vimproc.vim', {'do': 'make'}
 Plug 'SirVer/ultisnips'
 Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-buftabline'
@@ -114,22 +108,21 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'haya14busa/incsearch.vim'
 Plug 'honza/vim-snippets'
+Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
+Plug 'klen/python-mode', {'for': 'python'}
 Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
+Plug 'mattn/emmet-vim'
+Plug 'neomake/neomake'
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-vinegar'
 Plug 'unblevable/quick-scope'
 Plug 'vim-scripts/BufOnly.vim'
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-session'
-Plug 'posva/vim-vue'
-Plug 'LnL7/vim-nix'
-Plug 'neomake/neomake'
-Plug 'tpope/vim-vinegar'
 
 call plug#end()
 
@@ -163,19 +156,8 @@ endif
 
 " -- Plugins Options
 
-" -- Neocomplete
-let g:neocomplete#use_vimproc = 1
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#enable_auto_select = 0
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-set completeopt-=preview
-
 " -- delimitMate
 let delimitMate_expand_cr=1
-
-" -- vim-markdown
-" let g:vim_markdown_folding_disabled=1
 
 " -- ctrlp
 nnoremap <Leader>b :CtrlPBuffer<CR>
@@ -207,13 +189,6 @@ let g:pymode_lint = 0
 let g:pymode_options_colorcolumn = 1
 let g:pymode_rope = 0
 
-" -- Syntastic
-let g:syntastic_python_flake8_args = '--ignore=W191,E128,E501'
-
-" -- vim-session
-let g:session_autoload = 'no'
-let g:session_autosave = 'yes'
-
 " -- UltiSnips
 let g:UltiSnipsExpandTrigger       = "<c-j>"
 let g:UltiSnipsJumpForwardTrigger  = "<c-j>"
@@ -235,17 +210,17 @@ let g:qs_enable = 0
 let g:qs_enable_char_list = [ 'f', 'F', 't', 'T' ]
 
 function! Quick_scope_selective(movement)
-    let needs_disabling = 0
-    if !g:qs_enable
-        QuickScopeToggle
-        redraw
-        let needs_disabling = 1
-    endif
-    let letter = nr2char(getchar())
-    if needs_disabling
-        QuickScopeToggle
-    endif
-    return a:movement . letter
+	let needs_disabling = 0
+	if !g:qs_enable
+		QuickScopeToggle
+		redraw
+		let needs_disabling = 1
+	endif
+	let letter = nr2char(getchar())
+	if needs_disabling
+		QuickScopeToggle
+	endif
+	return a:movement . letter
 endfunction
 
 for i in g:qs_enable_char_list
@@ -259,7 +234,6 @@ nnoremap <silent> <F2> :NERDTreeToggle<CR>
 nnoremap <silent> <F3> :set invnumber<CR>
 nnoremap <silent> <F4> :set invlist<CR>
 nnoremap <silent> <F5> :call StatusToggle()<CR>
-nnoremap <silent> <F6> :SyntasticToggleMode<CR>
 nnoremap <silent> <F8> :TagbarToggle<CR>
 set pastetoggle=<F12>
 
@@ -291,4 +265,6 @@ function! GitStatusline(...) abort
 	endif
 endfunction
 
-autocmd! BufWritePost * Neomake
+augroup neomake
+	autocmd! BufWritePost * Neomake
+augroup END
