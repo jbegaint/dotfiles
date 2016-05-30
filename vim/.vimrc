@@ -234,6 +234,7 @@ nnoremap <silent> <F2> :NERDTreeToggle<CR>
 nnoremap <silent> <F3> :set invnumber<CR>
 nnoremap <silent> <F4> :set invlist<CR>
 nnoremap <silent> <F5> :call StatusToggle()<CR>
+nnoremap <silent> <F7> :ClangFormat<CR>
 nnoremap <silent> <F8> :TagbarToggle<CR>
 set pastetoggle=<F12>
 
