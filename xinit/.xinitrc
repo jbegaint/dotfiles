@@ -16,24 +16,9 @@ COLORS=~/.config/base16-xresources/base16-tomorrow.dark.256.xresources && \
 	[[ -f $COLORS ]] && \
 	xrdb -merge $COLORS
 
-# set wallpaper
-eval $(cat ~/.fehbg)
-
-# remap useless caps lock to escape
-setxkbmap -option caps:escape
-
 # autostart apps
-~/bin/docked.sh &
-dunst &
-parcellite &
-redshift-gtk &
 urxvtd -q -o -f &
-volumeicon &
 xss-lock -- ~/bin/lock.sh &
-unclutter -b &
-nm-applet &
-
-# fix some xdg-* related bugs
-export DE='xfce'
+~/bin/docked.sh &
 
 exec i3

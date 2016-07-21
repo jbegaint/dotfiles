@@ -1,5 +1,8 @@
-#!/bin/zsh
 # vim: ts=4:sw=4:ft=zsh:
+
+include() {
+	[[ -f $1 ]] && {source $1; return 0} || {printf 'Error: file "%s" not found.\n' $1; return 1}
+}
 
 # zsh options
 setopt AUTOCD
@@ -14,8 +17,7 @@ zstyle ':completion:*' rehash true
 autoload -Uz colors && colors
 
 # git-prompt
-source /usr/share/git/completion/git-prompt.sh
-GIT_PS1_SHOWDIRTYSTATE=true
+include /usr/share/git/completion/git-prompt.sh && GIT_PS1_SHOWDIRTYSTATE=true
 
 # Simple prompt
 PROMPT=$'\n%{$fg_bold[magenta]%}➜ %{$fg_bold[cyan]%}%~%{$fg_bold[yellow]%}$(__git_ps1 \" (%s)\") %{$reset_color%}'
@@ -23,9 +25,7 @@ RPROMPT=''
 
 # env
 export EDITOR="vim"
-export GOPATH="$HOME/.go"
-export RUBYPATH="$(ruby -e 'print Gem.user_dir')"
-export PATH="$HOME/bin:$RUBYPATH/bin:$GOPATH/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
 
 # history
 export HISTFILE=~/.histfile
@@ -33,12 +33,7 @@ export HISTSIZE=1000
 export SAVEHIST=1000
 
 # load aliases
-ALIASFILE=~/.zsh/.zshrc_aliases
-if [ -f $ALIASFILE ]; then
-	source $ALIASFILE
-else
-	print "404: $ALIASFILE not found."
-fi
+include ~/.zsh/.zshrc_aliases
 
 # enable alert
 precmd () {
@@ -49,17 +44,9 @@ precmd () {
 bindkey -e
 bindkey    "^[[3~"          delete-char
 
-# check for interactive mode
-if [[ $- == *i* ]]; then
-	# color scheme
-	. ~/.config/base16-shell/base16-tomorrow.dark.sh
+# color scheme
+include ~/.config/base16-shell/scripts/base16-tomorrow-night.sh
 
-	# fuzzy completion
-	[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
-
-	# z
-	. ~/bin/z/z.sh
-
-	# dircolors
-	eval $(dircolors ~/.dircolors)
-fi
+# fuzzy completion
+include /usr/share/fzf/completion.zsh
+include /usr/share/fzf/key-bindings.zsh
