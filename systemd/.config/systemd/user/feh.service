@@ -1,0 +1,9 @@
+[Unit]
+Description=feh
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/sh %h/.fehbg
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,8 @@
+[Unit]
+Description=Parcellite
+
+[Service]
+ExecStart=/usr/bin/parcellite
+
+[Install]
+WantedBy=default.target

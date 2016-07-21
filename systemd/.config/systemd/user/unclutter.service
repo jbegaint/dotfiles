@@ -1,0 +1,8 @@
+[Unit]
+Description=Unclutter
+
+[Service]
+ExecStart=/usr/bin/unclutter
+
+[Install]
+WantedBy=default.target
