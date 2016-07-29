@@ -20,7 +20,7 @@ autoload -Uz colors && colors
 include /usr/share/git/completion/git-prompt.sh && GIT_PS1_SHOWDIRTYSTATE=true
 
 # Simple prompt
-PROMPT=$'\n%{$fg_bold[magenta]%}➜ %{$fg_bold[cyan]%}%~%{$fg_bold[yellow]%}$(__git_ps1 \" (%s)\") %{$reset_color%}'
+PROMPT=$'\n%{$fg_bold[magenta]%} » %{$fg_bold[cyan]%}%~%{$fg_bold[yellow]%}$(__git_ps1 \" (%s)\") %{$reset_color%}'
 RPROMPT=''
 
 # env
