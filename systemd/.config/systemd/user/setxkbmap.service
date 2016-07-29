@@ -1,8 +1,0 @@
-[Unit]
-Description=setxkbmap layout and remappings
-
-[Service]
-ExecStart=/usr/bin/setxkbmap fr -option caps:escape
-
-[Install]
-WantedBy=default.target

@@ -3,8 +3,8 @@
 #
 # Executed by startx (run your window manager from here)
 
-if [ -d /etc/X11/xinit/xinitrc.d ]; then
-	for f in /etc/X11/xinit/xinitrc.d/*; do
+if [ -d /etc/X11/xinit/xinitrc.d ] ; then
+	for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
 		[ -x "$f" ] && . "$f"
 	done
 	unset f
@@ -17,8 +17,15 @@ COLORS=~/.config/base16-xresources/base16-tomorrow.dark.256.xresources && \
 	xrdb -merge $COLORS
 
 # autostart apps
+. ~/.fehbg &
+dunst &
+nm-applet &
+parcellite &
+redshift-gtk &
+setxkbmap fr -option caps:escape
+unclutter &
 urxvtd -q -o -f &
+volumeicon &
 xss-lock -- ~/bin/lock.sh &
-~/bin/docked.sh &
 
 exec i3
