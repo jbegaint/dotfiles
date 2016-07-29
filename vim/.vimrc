@@ -98,6 +98,7 @@ Plug 'petRUShka/vim-opencl', {'for': 'opencl'}
 Plug 'posva/vim-vue'
 Plug 'tmux-plugins/vim-tmux'
 
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'Raimondi/delimitMate'
 Plug 'SirVer/ultisnips'
 Plug 'airblade/vim-gitgutter'
