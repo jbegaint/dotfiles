@@ -1,5 +1,5 @@
 !Urxvt -----------------------------------------------------------------------
-URxvt.font: xft:Source Code Pro:size=10,xft:DejaVu Sans Mono:size=10
+URxvt.font: xft:Iosevka:size=11
 
 URxvt.urgentOnBell: true
 URxvt.scrollBar: false
