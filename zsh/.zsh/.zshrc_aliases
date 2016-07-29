@@ -44,7 +44,7 @@ icanhazptr() {
 
 
 alias cal="cal -m -3"
-alias dfc="dfc -p +ev,/dev"
+alias dfc="dfc -p +mapper,/dev -q type"
 alias pacman="pacman --color=auto"
 alias grep="grep --color=auto"
 
