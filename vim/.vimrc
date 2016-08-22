@@ -98,6 +98,7 @@ Plug 'petRUShka/vim-opencl', {'for': 'opencl'}
 Plug 'posva/vim-vue'
 Plug 'tmux-plugins/vim-tmux'
 
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'Raimondi/delimitMate'
 Plug 'SirVer/ultisnips'
 Plug 'airblade/vim-gitgutter'
@@ -110,7 +111,6 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'haya14busa/incsearch.vim'
 Plug 'honza/vim-snippets'
 Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
-Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
 Plug 'klen/python-mode', {'for': 'python'}
 Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}

@@ -44,8 +44,7 @@ icanhazptr() {
 
 
 alias cal="cal -m -3"
-alias dfc="dfc -p +ev,/dev"
-alias ncmpcpp='[[ -z $(pidof mpd) ]] && mpd; ncmpcpp'
+alias dfc="dfc -p +mapper,/dev -q type"
 alias pacman="pacman --color=auto"
 alias grep="grep --color=auto"
 
@@ -73,75 +72,3 @@ alias uncaps="xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'"
 # tip found on arch bbs
 alias install_date="echo $(ls -lct /etc | tail -1 | awk '{print $6, $7, $8}')"
 #vim:fenc=utf-8:nu:ai:si:et:ts=2:sw=2:ft=zsh:
-
-lsc () {
-    ls "$@" | wc -l
-}
-
-mkcd () {
-    mkdir -p $@
-    cd $_;
-}
-
-extract() {
-    if [ -f $1 ] ; then
-        case $1 in
-            *.tar.bz2)   tar xvjf $1    ;;
-            *.tar.gz)    tar xvzf $1    ;;
-            *.tar.xz)    tar xvJf $1    ;;
-            *.bz2)       bunzip2 $1     ;;
-            *.rar)       unrar x $1     ;;
-            *.gz)        gunzip $1      ;;
-            *.tar)       tar xvf $1     ;;
-            *.tbz2)      tar xvjf $1    ;;
-            *.tgz)       tar xvzf $1    ;;
-            *.zip)       unzip $1       ;;
-            *.Z)         uncompress $1  ;;
-            *.7z)        7z x $1        ;;
-            *.xz)        unxz $1        ;;
-            *.exe)       cabextract $1  ;;
-            *)           echo "\`$1': unrecognized file compression";;
-        esac
-    else
-        echo "\`$1' is not a valid file"
-    fi
-}
-
-icanhazip() {
-    dig +short myip.opendns.com @resolver1.opendns.com
-}
-
-icanhazptr() {
-    nslookup $(icanhazip) | perl -n -e '/name\s=\s(.*)\.$/ && print "$1\n"'
-}
-
-
-alias cal="cal -m -3"
-alias dfc="dfc -p +ev,/dev"
-alias ncmpcpp='[[ -z $(pidof mpd) ]] && mpd; ncmpcpp'
-alias pacman="pacman --color=auto"
-alias grep="grep --color=auto"
-
-alias ls="ls -F --color"
-alias ll="ls -l"
-alias lt="ll -t"
-alias la="ll -A"
-
-alias df="df -h"
-
-alias head1="head -n1"
-alias tail1="tail -n1"
-
-alias cpv="rsync -poghb --backup-dir=/tmp/rsync -e /dev/null --progress --"
-alias lock='i3lock -i <(import -window root - | convert -blur -1x5 - png:-)'
-alias pacback="pacman -Qqne > ~/Documents/installed_packages.txt"
-alias pong="ping -c3 google.com"
-alias reload="source ~/.zsh/.zshrc"
-alias temp="sensors"
-alias vim='nvim'
-
-alias caps="xmodmap -e 'keycode 0x42 = Caps_Lock'"
-alias uncaps="xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'"
-
-# tip found on arch bbs
-alias install_date="echo $(ls -lct /etc | tail -1 | awk '{print $6, $7, $8}')"
