@@ -227,6 +227,12 @@ for i in g:qs_enable_char_list
 	execute 'noremap <expr> <silent>' . i . " Quick_scope_selective('". i . "')"
 endfor
 
+" -- gutentags
+let g:gutentags_cache_dir = '~/.vim/tags/'
+
+" -- vim-tmux-navigator & neovim compat
+nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
+
 " -- misc shortcuts and options
 " Fn shortcuts
 nnoremap <silent> <F1> mmgqip`m
