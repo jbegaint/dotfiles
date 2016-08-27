@@ -107,6 +107,7 @@ Plug 'chriskempson/base16-shell', {'dir': '~/.config/base16-shell'}
 Plug 'chriskempson/base16-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'editorconfig/editorconfig-vim'
 Plug 'haya14busa/incsearch.vim'
 Plug 'honza/vim-snippets'
 Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
@@ -115,6 +116,7 @@ Plug 'klen/python-mode', {'for': 'python'}
 Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
 Plug 'mattn/emmet-vim'
 Plug 'neomake/neomake'
+Plug 'rhysd/vim-clang-format'
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -232,6 +234,9 @@ let g:gutentags_cache_dir = '~/.vim/tags/'
 
 " -- vim-tmux-navigator & neovim compat
 nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
+
+" -- editorconfig
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
 " -- misc shortcuts and options
 " Fn shortcuts
