@@ -24,7 +24,8 @@ PROMPT=$'\n%{$fg_bold[magenta]%} » %{$fg_bold[cyan]%}%~%{$fg_bold[yellow]%}$(__
 RPROMPT=''
 
 # env
-export EDITOR="vim"
+export EDITOR="nvim"
+export BROWSER="chromium"
 export PATH="$HOME/bin:$PATH"
 
 # history
