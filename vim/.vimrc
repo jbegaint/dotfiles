@@ -1,4 +1,4 @@
-"-- General
+" -- General
 set number
 set ruler
 set cc=80
@@ -53,13 +53,15 @@ set splitbelow
 let mapleader = "\<Space>"
 let maplocalleader = "\<Space>"
 
-nnoremap <Leader><Space> za
+" -- Mappings
 nnoremap <CR> :noh<CR><CR>
 
+nnoremap <Leader><Space> za
 nnoremap <Leader>c :bp\|bd #<CR>
+nnoremap <Leader>s mmvip:sort<CR>`m
 
-nnoremap <silent> <S-j> o<ESC>k
-nnoremap <silent> <S-k> O<ESC>j
+nnoremap <silent><S-j> o<ESC>k
+nnoremap <silent><S-k> O<ESC>j
 
 nnoremap <silent><S-Tab> :bprev<CR>
 nnoremap <silent><Tab> :bnext<CR>
@@ -77,6 +79,16 @@ nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 nnoremap Q <nop>
 
+nnoremap <silent><F1> mmgqip`m
+nnoremap <silent><F3> :set invnumber<CR>
+nnoremap <silent><F4> :set invlist<CR>
+nnoremap <silent><F5> :call StatusToggle()<CR>
+nnoremap <silent><F7> :ClangFormat<CR>
+nnoremap <silent><F8> :TagbarToggle<CR>
+nnoremap <silent><F11> :Goyo<CR>
+set pastetoggle=<F12>
+
+" -- Statusline
 set statusline=\ %f\ %m%r%h%w%y\ %{GitStatusline()}%=%l\/%-6L\ %3c\ 
 set laststatus=2
 
@@ -89,16 +101,16 @@ Plug 'LaTeX-Box-Team/LaTeX-Box', {'for': ['latex', 'tex']}
 Plug 'LnL7/vim-nix'
 Plug 'Matt-Deacalion/vim-systemd-syntax', {'for': 'systemd'}
 Plug 'PotatoesMaster/i3-vim-syntax', {'for': 'i3'}
-Plug 'godlygeek/tabular'
+Plug 'mattn/emmet-vim'
 Plug 'mitsuhiko/vim-jinja'
 Plug 'neovimhaskell/haskell-vim', {'for': 'haskell'}
 Plug 'othree/javascript-libraries-syntax.vim', {'for': 'javascript'}
 Plug 'othree/yajs.vim', {'for': 'javascript'}
 Plug 'petRUShka/vim-opencl', {'for': 'opencl'}
 Plug 'posva/vim-vue'
+Plug 'rust-lang/rust.vim'
 Plug 'tmux-plugins/vim-tmux'
 
-Plug 'ludovicchabant/vim-gutentags'
 Plug 'Raimondi/delimitMate'
 Plug 'SirVer/ultisnips'
 Plug 'airblade/vim-gitgutter'
@@ -108,16 +120,16 @@ Plug 'chriskempson/base16-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'godlygeek/tabular'
 Plug 'haya14busa/incsearch.vim'
 Plug 'honza/vim-snippets'
 Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
-Plug 'junegunn/fzf.vim'
+Plug 'junegunn/goyo.vim'
 Plug 'klen/python-mode', {'for': 'python'}
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
-Plug 'mattn/emmet-vim'
 Plug 'neomake/neomake'
 Plug 'rhysd/vim-clang-format'
-Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rsi'
@@ -150,7 +162,6 @@ if has('gui_running')
 
 	inoremap <C-BS> <C-W>
 else
-	set t_Co=256
 	set background=dark
 	let base16colorspace=256
 	colorscheme base16-tomorrow
@@ -200,9 +211,6 @@ let g:UltiSnipsListSnippets        = "<c-k>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
-" -- NERDTree
-let NERDTreeIgnore = ['\.pyc$', '\.o$', 'venv*']
-
 " -- buftabline
 let g:buftabline_show = 1
 
@@ -238,16 +246,24 @@ nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
 " -- editorconfig
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
-" -- misc shortcuts and options
-" Fn shortcuts
-nnoremap <silent> <F1> mmgqip`m
-nnoremap <silent> <F2> :NERDTreeToggle<CR>
-nnoremap <silent> <F3> :set invnumber<CR>
-nnoremap <silent> <F4> :set invlist<CR>
-nnoremap <silent> <F5> :call StatusToggle()<CR>
-nnoremap <silent> <F7> :ClangFormat<CR>
-nnoremap <silent> <F8> :TagbarToggle<CR>
-set pastetoggle=<F12>
+" -- goyo
+function! s:goyo_enter()
+  silent !tmux set status off
+  silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+endfunction
+
+function! s:goyo_leave()
+  silent !tmux set status on
+  silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
+" -- neomake
+augroup neomake
+	autocmd! BufWritePost * Neomake
+augroup END
 
 " -- highlight current line number
 " 1. clear highlight
@@ -276,7 +292,3 @@ function! GitStatusline(...) abort
 		return l:matches[1]
 	endif
 endfunction
-
-augroup neomake
-	autocmd! BufWritePost * Neomake
-augroup END
