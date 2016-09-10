@@ -17,7 +17,6 @@
 # right-to-left text rendering, you should instead use pango for rendering and
 # chose a FreeType font, such as:
 # vim:filetype=i3
-#font pango:Source Code Pro Medium 9
 font pango:Iosevka Regular 9
 
 set $mod Mod4
@@ -136,8 +135,8 @@ bindsym $mod+Control+Up move workspace to output up
 bindsym $mod+Control+Right move workspace to output right
 
 # cycle through the workspaces
-bindsym $mod+Tab workspace next
-bindsym $mod+Shift+Tab workspace prev
+bindsym $mod+Tab focus right
+bindsym $mod+Shift+Tab focus left
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
