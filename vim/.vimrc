@@ -280,3 +280,5 @@ endfunction
 augroup neomake
 	autocmd! BufWritePost * Neomake
 augroup END
+
+autocmd FileType cfg setlocal commentstring=#\ %s
