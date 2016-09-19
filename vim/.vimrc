@@ -7,7 +7,8 @@ set so=7
 set autoread
 set ttyfast
 
-set listchars=precedes:«,extends:»,eol:↲,tab:▸\ ,trail:.,nbsp:·
+set listchars=precedes:«,extends:»,eol:↲,tab:▸\ ,trail:.,nbsp:·,space:␣
+
 set encoding=utf-8
 set mouse=a
 
@@ -261,9 +262,9 @@ autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 " -- neomake
-augroup neomake
-	autocmd! BufWritePost * Neomake
-augroup END
+autocmd! BufWritePost * Neomake
+
+let g:neomake_python_enabled_makers = ['flake8', 'pep8', 'pylint']
 
 " -- commentary
 autocmd FileType cfg setlocal commentstring=#\ %s
