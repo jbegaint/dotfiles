@@ -86,6 +86,7 @@ nnoremap <silent><F4> :set invlist<CR>
 nnoremap <silent><F5> :call StatusToggle()<CR>
 nnoremap <silent><F7> :ClangFormat<CR>
 nnoremap <silent><F8> :TagbarToggle<CR>
+nnoremap <silent><F10> :Gstatus<CR>
 nnoremap <silent><F11> :Goyo<CR>
 set pastetoggle=<F12>
 
