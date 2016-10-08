@@ -195,6 +195,7 @@ bar {
 	position top
 	modifier Mod1
 	strip_workspace_numbers yes
+	font pango:Iosevka Regular 9
 
 	colors {
 		background	$black
