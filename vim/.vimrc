@@ -267,9 +267,12 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 autocmd! BufWritePost * Neomake
 
 let g:neomake_python_enabled_makers = ['flake8', 'pep8', 'pylint']
+let g:neomake_cpp_clang_args = ['-std=c++11', '-Wextra', '-Wall']
+let g:neomake_cpp_clangtidy_args = ['-checks=*', '--', '-std=c++11']
 
 " -- commentary
 autocmd FileType cfg setlocal commentstring=#\ %s
+autocmd FileType cmake setlocal commentstring=#\ %s
 
 " -- highlight current line number
 " 1. clear highlight
