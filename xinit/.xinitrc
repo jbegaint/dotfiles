@@ -19,13 +19,17 @@ COLORS=~/.config/base16-xresources/base16-tomorrow.dark.256.xresources && \
 # autostart apps
 . ~/.fehbg &
 dunst &
-nm-applet &
-parcellite &
-redshift-gtk &
+# nm-applet &
+# parcellite &
+# redshift-gtk &
+# volumeicon &
+redshift &
 setxkbmap fr -option caps:escape
 unclutter &
 urxvtd -q -o -f &
-volumeicon &
 xss-lock -- ~/bin/lock.sh &
+compton -b
+(sleep 2s && ~/.config/lemonbuddy/launch.sh)&
 
+# exec gnome-session
 exec i3

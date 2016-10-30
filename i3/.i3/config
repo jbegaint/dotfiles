@@ -17,7 +17,8 @@
 # right-to-left text rendering, you should instead use pango for rendering and
 # chose a FreeType font, such as:
 # vim:filetype=i3
-font pango:Iosevka Regular 9
+# font pango:Iosevka Regular 9
+font pango:Droid Sans 10
 
 set $mod Mod4
 
@@ -183,32 +184,32 @@ set $white	#C5C8C6
 
 new_window pixel 1
 
-# client.class          border		backgr.		text    indicator
+# client.class          border		backgr.		text    indicator  childborder
 client.focused          $grey		$grey		$black	$green
 client.focused_inactive $black		$darkgrey	$white	$green
 client.unfocused        $black		$darkgrey	$grey	$green
 client.urgent           $red		$red		$black  $green
 
 
-bar {
-	status_command i3blocks
-	position top
-	modifier Mod1
-	strip_workspace_numbers yes
-	font pango:Iosevka Regular 9
+# bar {
+# 	status_command i3blocks
+# 	position top
+# 	modifier Mod1
+# 	strip_workspace_numbers yes
+# 	font pango:Iosevka Regular 9
 
-	colors {
-		background	$black
-		separator	$black
-		statusline	$white
+# 	colors {
+# 		background	$black
+# 		separator	$black
+# 		statusline	$white
 
-		# bar.class		border		backgr.		text
-		focused_workspace	$grey		$black		$grey
-		active_workspace	$grey		$black		$green
-		inactive_workspace	$darkgrey	$black		$grey
-		urgent_workspace	$red		$red		$black
-	}
-}
+# 		# bar.class		border		backgr.		text
+# 		focused_workspace	$grey		$black		$grey
+# 		active_workspace	$grey		$black		$green
+# 		inactive_workspace	$darkgrey	$black		$grey
+# 		urgent_workspace	$red		$red		$black
+# 	}
+# }
 
 # audio mode
 set $audiomenu "volume: [+]5% [-]5% [m]ute [r]eset"

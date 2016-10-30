@@ -36,11 +36,6 @@ export SAVEHIST=1000
 # load aliases
 include ~/.zsh/.zshrc_aliases
 
-# enable alert
-precmd () {
-    echo -ne '\a'
-}
-
 # key bindings
 bindkey -e
 bindkey    "^[[3~"          delete-char
@@ -51,3 +46,11 @@ include ~/.config/base16-shell/scripts/base16-tomorrow-night.sh
 # fuzzy completion
 include /usr/share/fzf/completion.zsh
 include /usr/share/fzf/key-bindings.zsh
+
+# z
+. ~/.zsh/z.sh
+function precmd () {
+	z --add "$(pwd -P)"
+	# enable alert
+	echo -ne '\a'
+}
