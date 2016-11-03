@@ -57,7 +57,9 @@ let maplocalleader = "\<Space>"
 " -- Mappings
 nnoremap <CR> :noh<CR><CR>
 
-nnoremap <Leader><Space> za
+nnoremap <Leader><Leader> :ls<CR>:b<Space>
+nnoremap <Leader>b :ls<CR>:b<Space>
+nnoremap <Leader>r :source ~/.vimrc<CR>
 nnoremap <Leader>c :bp\|bd #<CR>
 nnoremap <Leader>s mmvip:sort<CR>`m
 
@@ -174,9 +176,6 @@ endif
 " -- delimitMate
 let delimitMate_expand_cr=1
 
-" -- ctrlp
-nnoremap <Leader>b :CtrlPBuffer<CR>
-
 " -- BufOnly
 nnoremap <Leader>o :BufOnly<CR>
 
@@ -253,11 +252,13 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 function! s:goyo_enter()
   silent !tmux set status off
   silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+  set tabline=0
 endfunction
 
 function! s:goyo_leave()
   silent !tmux set status on
   silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+  call buftabline#update(0)
 endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
