@@ -195,6 +195,7 @@ if executable('ag')
 	let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -i -g ""'
 	let g:ctrlp_use_caching = 1
 endif
+let g:ctrlp_working_path_mode = 0
 
 " -- Python-mode
 let g:pymode_doc = 1
