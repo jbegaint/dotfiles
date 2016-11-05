@@ -14,8 +14,7 @@ set mouse=a
 
 set wildmenu
 set wildmode=longest:list,full
-set wildignore=*.o,*~,*.pyc
-set wildignore+=*.aux,*.dvi,*.bcf,*.blg,*.bbl
+set wildignore=*.o,*~,*.pyc,*.aux,*.dvi,*.bcf,*.blg,*.bbl
 
 set autoindent
 set smartindent
@@ -102,21 +101,19 @@ filetype off
 call plug#begin()
 
 Plug 'LaTeX-Box-Team/LaTeX-Box', {'for': ['latex', 'tex']}
-Plug 'LnL7/vim-nix'
+Plug 'LnL7/vim-nix', {'for': 'nix'}
 Plug 'Matt-Deacalion/vim-systemd-syntax', {'for': 'systemd'}
 Plug 'PotatoesMaster/i3-vim-syntax', {'for': 'i3'}
-Plug 'mattn/emmet-vim'
-Plug 'mitsuhiko/vim-jinja'
+Plug 'mattn/emmet-vim', {'for': ['hmtl', 'jinja']}
+Plug 'mitsuhiko/vim-jinja', {'for': 'jinja'}
 Plug 'neovimhaskell/haskell-vim', {'for': 'haskell'}
 Plug 'othree/javascript-libraries-syntax.vim', {'for': 'javascript'}
 Plug 'othree/yajs.vim', {'for': 'javascript'}
 Plug 'petRUShka/vim-opencl', {'for': 'opencl'}
-Plug 'posva/vim-vue'
-Plug 'rust-lang/rust.vim'
-Plug 'tmux-plugins/vim-tmux'
+Plug 'posva/vim-vue', {'for': 'vue'}
+Plug 'rust-lang/rust.vim', {'for': 'rust'}
 
 Plug 'Raimondi/delimitMate'
-Plug 'SirVer/ultisnips'
 Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-buftabline'
 Plug 'chriskempson/base16-shell', {'dir': '~/.config/base16-shell'}
@@ -126,7 +123,6 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'godlygeek/tabular'
 Plug 'haya14busa/incsearch.vim'
-Plug 'honza/vim-snippets'
 Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
 Plug 'junegunn/goyo.vim'
 Plug 'klen/python-mode', {'for': 'python'}
@@ -134,12 +130,12 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
 Plug 'neomake/neomake'
 Plug 'rhysd/vim-clang-format'
+Plug 'tmux-plugins/vim-tmux'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
-Plug 'unblevable/quick-scope'
 Plug 'vim-scripts/BufOnly.vim'
 
 call plug#end()
@@ -205,40 +201,8 @@ let g:pymode_lint = 0
 let g:pymode_options_colorcolumn = 1
 let g:pymode_rope = 0
 
-" -- UltiSnips
-let g:UltiSnipsExpandTrigger       = "<c-j>"
-let g:UltiSnipsJumpForwardTrigger  = "<c-j>"
-let g:UltiSnipsJumpBackwardTrigger = "<c-p>"
-let g:UltiSnipsListSnippets        = "<c-k>"
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-
 " -- buftabline
 let g:buftabline_show = 1
-
-" -- quick-scope
-" https://gist.github.com/cszentkiralyi/dc61ee28ab81d23a67aa
-let g:qs_enable = 0
-let g:qs_enable_char_list = [ 'f', 'F', 't', 'T' ]
-
-function! Quick_scope_selective(movement)
-	let needs_disabling = 0
-	if !g:qs_enable
-		QuickScopeToggle
-		redraw
-		let needs_disabling = 1
-	endif
-	let letter = nr2char(getchar())
-	if needs_disabling
-		QuickScopeToggle
-	endif
-	return a:movement . letter
-endfunction
-
-for i in g:qs_enable_char_list
-	execute 'noremap <expr> <silent>' . i . " Quick_scope_selective('". i . "')"
-endfor
 
 " -- gutentags
 let g:gutentags_cache_dir = '~/.vim/tags/'
