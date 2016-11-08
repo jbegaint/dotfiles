@@ -259,7 +259,6 @@ bindsym $mod+o move absolute position center
 # dmenu menus
 bindsym $mod+d exec ~/bin/dmenu_run
 bindsym $mod+m exec ~/bin/mpc_dmenu.sh
-bindsym $mod+n exec ~/bin/rename_i3_ws.py
 bindsym $mod+i exec ~/bin/mpc_info.sh
 
 bindsym Print exec ~/bin/snap.sh
