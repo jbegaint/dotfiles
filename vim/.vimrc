@@ -195,7 +195,7 @@ let g:ctrlp_working_path_mode = 0
 
 " -- Python-mode
 let g:pymode_doc = 1
-let g:pymode_doc_bind = 'K'
+let g:pymode_doc_bind = '<Leader>K'
 let g:pymode_indent = 1
 let g:pymode_lint = 0
 let g:pymode_options_colorcolumn = 1
