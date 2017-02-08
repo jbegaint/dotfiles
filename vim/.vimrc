@@ -7,7 +7,11 @@ set so=7
 set autoread
 set ttyfast
 
-set listchars=precedes:«,extends:»,eol:↲,tab:▸\ ,trail:.,nbsp:·,space:␣
+if has("patch-7.4.710")
+	set listchars=precedes:«,extends:»,eol:↲,tab:▸\ ,trail:.,nbsp:·,space:␣
+else
+	set listchars=precedes:«,extends:»,eol:↲,tab:▸\ ,trail:.,nbsp:·
+endif
 
 set encoding=utf-8
 set mouse=a
