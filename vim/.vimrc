@@ -139,7 +139,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-vinegar'
+Plug 'justinmk/vim-dirvish'
 Plug 'vim-scripts/BufOnly.vim'
 
 call plug#end()
