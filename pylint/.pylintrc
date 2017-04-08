@@ -1,0 +1,4 @@
+[TYPECHECK]
+ignored-modules = numpy,cv2,np
+
+disable=C0103
