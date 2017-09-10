@@ -92,7 +92,6 @@ nnoremap <silent><F5> :call StatusToggle()<CR>
 nnoremap <silent><F7> :ClangFormat<CR>
 nnoremap <silent><F8> :TagbarToggle<CR>
 nnoremap <silent><F10> :Gstatus<CR>
-nnoremap <silent><F11> :Goyo<CR>
 set pastetoggle=<F12>
 
 " -- Statusline
@@ -126,11 +125,10 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'godlygeek/tabular'
-Plug 'haya14busa/incsearch.vim'
 Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
-Plug 'junegunn/goyo.vim'
+Plug 'justinmk/vim-dirvish'
 Plug 'klen/python-mode', {'for': 'python'}
-Plug 'ludovicchabant/vim-gutentags'
+Plug 'ludovicchabant/vim-gutentags',
 Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
 Plug 'neomake/neomake'
 Plug 'rhysd/vim-clang-format'
@@ -139,13 +137,14 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-surround'
-Plug 'justinmk/vim-dirvish'
 Plug 'vim-scripts/BufOnly.vim'
 
 call plug#end()
 
 filetype plugin indent on
 syntax on
+
+runtime macros/matchit.vim
 
 " -- gui/console look
 if has('gui_running')
@@ -168,7 +167,7 @@ if has('gui_running')
 else
 	set background=dark
 	let base16colorspace=256
-	colorscheme base16-tomorrow
+	colorscheme base16-ocean
 endif
 
 " -- Plugins Options
@@ -217,28 +216,13 @@ nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
 " -- editorconfig
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
-" -- goyo
-function! s:goyo_enter()
-  silent !tmux set status off
-  silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
-  set tabline=0
-endfunction
-
-function! s:goyo_leave()
-  silent !tmux set status on
-  silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
-  call buftabline#update(0)
-endfunction
-
-autocmd! User GoyoEnter nested call <SID>goyo_enter()
-autocmd! User GoyoLeave nested call <SID>goyo_leave()
-
 " -- neomake
 autocmd! BufWritePost * Neomake
 
-let g:neomake_python_enabled_makers = ['flake8', 'pep8', 'pylint']
-let g:neomake_cpp_clang_args = ['-std=c++11', '-Wextra', '-Wall']
+let g:neomake_cpp_clang_args = ['-std=c++14', '-Wextra', '-Wall']
 let g:neomake_cpp_clangtidy_args = ['-checks=*', '--', '-std=c++11']
+let g:neomake_cpp_enabled_makers = ['clang']
+let g:neomake_python_enabled_makers = ['flake8', 'pep8', 'pylint']
 
 " -- commentary
 autocmd FileType cfg setlocal commentstring=#\ %s
