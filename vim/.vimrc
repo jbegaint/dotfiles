@@ -18,7 +18,7 @@ set mouse=a
 
 set wildmenu
 set wildmode=longest:list,full
-set wildignore=*.o,*~,*.pyc,*.aux,*.dvi,*.bcf,*.blg,*.bbl
+set wildignore=*.o,*~,*.pyc,*.aux,*.dvi,*.bcf,*.blg,*.bbl,*egg-info
 
 set autoindent
 set smartindent
@@ -128,7 +128,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'godlygeek/tabular'
 Plug 'haya14busa/incsearch.vim'
 Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
-Plug 'junegunn/goyo.vim'
+Plug 'justinmk/vim-dirvish'
 Plug 'klen/python-mode', {'for': 'python'}
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
@@ -139,13 +139,15 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-surround'
-Plug 'justinmk/vim-dirvish'
 Plug 'vim-scripts/BufOnly.vim'
 
 call plug#end()
 
 filetype plugin indent on
 syntax on
+
+"-- matchit '%' on 'if' to jump to 'else'.
+runtime macros/matchit.vim
 
 " -- gui/console look
 if has('gui_running')
