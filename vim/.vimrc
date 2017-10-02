@@ -5,7 +5,6 @@ set cc=80
 set so=7
 
 set autoread
-set ttyfast
 
 if has("patch-7.4.710")
 	set listchars=precedes:«,extends:»,eol:↲,tab:▸\ ,trail:.,nbsp:·,space:␣
@@ -21,10 +20,11 @@ set wildmode=longest:list,full
 set wildignore=*.o,*~,*.pyc,*.aux,*.dvi,*.bcf,*.blg,*.bbl,*egg-info
 
 set autoindent
-set smartindent
+" set smartindent
 
+set shiftwidth=0
+set softtabstop=-1
 set tabstop=4
-set shiftwidth=4
 set noexpandtab
 set smarttab
 
@@ -139,10 +139,15 @@ Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/BufOnly.vim'
 
+Plug 'romainl/Apprentice'
+
 call plug#end()
 
 filetype plugin indent on
-syntax on
+" syntax on
+if !exists(g:syntax_on)
+	syntax enable
+endif
 
 "-- matchit '%' on 'if' to jump to 'else'.
 runtime macros/matchit.vim
