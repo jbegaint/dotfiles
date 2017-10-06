@@ -119,8 +119,6 @@ Plug 'rust-lang/rust.vim', {'for': 'rust'}
 Plug 'Raimondi/delimitMate'
 Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-buftabline'
-Plug 'chriskempson/base16-shell', {'dir': '~/.config/base16-shell'}
-Plug 'chriskempson/base16-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'editorconfig/editorconfig-vim'
@@ -144,7 +142,6 @@ Plug 'romainl/Apprentice'
 call plug#end()
 
 filetype plugin indent on
-" syntax on
 if !exists(g:syntax_on)
 	syntax enable
 endif
@@ -154,9 +151,8 @@ runtime macros/matchit.vim
 
 " -- gui/console look
 if has('gui_running')
-	set background=dark
-	colorscheme base16-ocean
 	set guifont=Source\ Code\ Pro\ Medium\ 10
+	colorscheme apprentice
 
 	" remove menu, toolbar, and scrollbars
 	set guioptions-=m
@@ -171,9 +167,7 @@ if has('gui_running')
 
 	inoremap <C-BS> <C-W>
 else
-	set background=dark
-	let base16colorspace=256
-	colorscheme base16-ocean
+	colorscheme apprentice
 endif
 
 " -- Plugins Options
