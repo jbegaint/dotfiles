@@ -18,7 +18,7 @@
 # chose a FreeType font, such as:
 # vim:filetype=i3
 # font pango:Iosevka Regular 9
-font pango:Droid Sans 10
+font pango:Droid Sans 9
 
 set $mod Mod4
 
@@ -26,9 +26,9 @@ set $mod Mod4
 floating_modifier Mod4
 
 # start a terminal
-# bindsym $mod+Return exec urxvt
 bindsym $mod+Return exec urxvtc
-bindsym $mod+Shift+Return exec st
+# bindsym $mod+Shift+Return exec st
+bindsym $mod+Shift+Return exec urxvtc -name "_scratch_" -g 100x12
 
 # kill focused window
 bindsym $mod+q kill
@@ -85,6 +85,9 @@ bindsym $mod+a focus parent
 # focus the child container
 bindsym $mod+c focus child
 
+# toggle  border
+bindsym $mod+Shift+t border toggle
+
 # switch to workspace
 set $ws1 1:www
 set $ws2 2:misc
@@ -93,14 +96,14 @@ set $ws4 4:mail
 set $ws5 5:V
 set $ws6 6:VI
 set $ws7 7:VII
-set $ws8 8:VIII
+set $ws8 8:[f]
 set $ws9 9:IX
 set $ws10 10:X
 
-workspace $ws1 output LVDS-1
-workspace $ws2 output LVDS-1
-workspace $ws3 output LVDS-1
-workspace $ws4 output LVDS-1
+# workspace $ws1 output LVDS-1
+# workspace $ws2 output LVDS-1
+# workspace $ws3 output LVDS-1
+# workspace $ws4 output LVDS-1
 
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
@@ -174,42 +177,42 @@ bindsym $mod+r mode "resize"
 
 # Windows and bar themes
 # define colors (base16 themes mix)
-set $black	#1D1F21
-set $blue	#81A2BE
-set $green	#B5BD68
-set $grey	#969896
-set $darkgrey	#373B41
-set $red	#CC6666
-set $white	#C5C8C6
+set $black     #1d1f21
+set $blue      #81a2be
+set $darkgrey  #373b41
+set $green     #b5bd68
+set $grey      #969896
+set $red       #cc6666
+set $white     #c5c8c6
+set $yellow    #f0c674
 
 new_window pixel 1
 
 # client.class          border		backgr.		text    indicator  childborder
-client.focused          $grey		$grey		$black	$green
-client.focused_inactive $black		$darkgrey	$white	$green
-client.unfocused        $black		$darkgrey	$grey	$green
-client.urgent           $red		$red		$black  $green
+client.focused          $grey		$grey		$black	$green	$grey
+client.focused_inactive $black		$darkgrey	$white	$green  $darkgrey
+client.unfocused        $black		$darkgrey	$grey	$green  $darkgrey
+client.urgent           $red		$red		$black  $green  $red
 
+bar {
+	status_command i3status
+	position top
+	modifier Mod1
+	strip_workspace_numbers yes
+	font pango:Iosevka Regular 9
 
-# bar {
-# 	status_command i3blocks
-# 	position top
-# 	modifier Mod1
-# 	strip_workspace_numbers yes
-# 	font pango:Iosevka Regular 9
+	colors {
+		background	$black
+		separator	$black
+		statusline	$white
 
-# 	colors {
-# 		background	$black
-# 		separator	$black
-# 		statusline	$white
-
-# 		# bar.class		border		backgr.		text
-# 		focused_workspace	$grey		$black		$grey
-# 		active_workspace	$grey		$black		$green
-# 		inactive_workspace	$darkgrey	$black		$grey
-# 		urgent_workspace	$red		$red		$black
-# 	}
-# }
+		focused_workspace	$yellow		$yellow			$black
+		active_workspace	$black		$grey			$black
+		inactive_workspace	$black 		$white			$black
+		urgent_workspace	$red		$red			$black
+		binding_mode 		$yellow     $yellow    		$black
+	}
+}
 
 # audio mode
 set $audiomenu "volume: [+]5% [-]5% [m]ute [r]eset"
@@ -260,34 +263,48 @@ bindsym $mod+o move absolute position center
 bindsym $mod+d exec ~/bin/dmenu_run
 bindsym $mod+m exec ~/bin/mpc_dmenu.sh
 bindsym $mod+i exec ~/bin/mpc_info.sh
+bindsym $mod+z exec ~/bin/quickswitch.py -d "dmenu -i -l 20	-sf '#1d1f21' -sb '#b5bd68' -nf '#969896' -nb '#1d1f21' -fn Iosevka-9:Regular"
 
 bindsym Print exec ~/bin/snap.sh
 bindsym Control+mod1+l exec ~/bin/lock.sh
 bindsym XF86Launch1 exec physlock -d
 
 # floating windows rules
+for_window [class="file_progress"] floating enable
+for_window [window_role="Preferences"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [window_type="menu"] floating enable
+
 for_window [class="Arandr"] floating enable
-for_window [class="Galculator"] floating enable
 for_window [class="Gcolor2"] floating enable
+for_window [class="REC"] floating enable
 for_window [class="Skype"] floating enable
+for_window [class="Tk"] floating enable
 for_window [class="Transmission"] floating enable
 for_window [class="XCalc"] floating enable
 for_window [class="^Wine$"] floating enable
-for_window [class="file_progress"] floating enable
 for_window [class="mpv"] floating enable
-for_window [class="Tk"] floating enable
 for_window [class="qemu-*"] floating enable
-for_window [window_role="bubble"] floating enable
-for_window [window_role="pop-up"] floating enable
+for_window [class="(?i)eom"] floating enable
 
-# assign workspace
-assign [class="Pidgin"] $ws10
-for_window [class="Pidgin"] focus
+for_window [instance="_scratch_"] floating enable
 
+for_window [class="(?i)pavucontrol"] floating enable, move position center
+
+# assign workspaces
 assign [class="Thunderbird"] $ws4
 for_window [class="Thunderbird"] focus
 
+# title for floating windows
+# font pango:Droid Sans 12
+# for_window [floating] border normal 1, title_format "<span font='Droid Sans 8'> > %title</span>"
+# for_window [workspace="8"] floating enable, border normal 1, title_format "<span font='Droid Sans 8'> > %title</span>"
+for_window [workspace="8"] floating enable, border normal 1
+
 workspace_auto_back_and_forth yes
 force_display_urgency_hint 500 ms
-
-# delay_exit_on_zero_displays 500ms
+hide_edge_borders none
+# hide_edge_borders smart

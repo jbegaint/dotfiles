@@ -26,7 +26,8 @@ RPROMPT=''
 # env
 export EDITOR="nvim"
 export BROWSER="chromium"
-export PATH="$HOME/bin:$PATH"
+PATH="/usr/lib/ccache/bin/:$HOME/bin:$PATH"
+PATH="$HOME/.node_modules/bin:$PATH"
 
 # history
 export HISTFILE=~/.histfile
@@ -41,7 +42,9 @@ bindkey -e
 bindkey    "^[[3~"          delete-char
 
 # color scheme
-include ~/.config/base16-shell/scripts/base16-tomorrow-night.sh
+#include ~/.config/base16-shell/scripts/base16-tomorrow-night.sh
+# BASE16_SHELL=$HOME/.config/base16-shell/
+# [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
 # fuzzy completion
 include /usr/share/fzf/completion.zsh
@@ -54,3 +57,9 @@ function precmd () {
 	# enable alert
 	echo -ne '\a'
 }
+
+export npm_config_prefix=~/.node_modules
+
+# virtualenv
+export WORKON_HOME=~/.virtualenvs
+source /usr/bin/virtualenvwrapper_lazy.sh

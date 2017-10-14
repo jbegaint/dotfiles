@@ -11,3 +11,7 @@ if [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]]; then
 	exec startx -- -keeptty -nolisten tcp > ~/.xorg.log 2>&1
 	logout
 fi
+
+if [ -e /home/jean/.nix-profile/etc/profile.d/nix.sh ]; then
+	. /home/jean/.nix-profile/etc/profile.d/nix.sh
+fi # added by Nix installer

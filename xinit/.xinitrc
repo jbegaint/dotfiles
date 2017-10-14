@@ -18,15 +18,19 @@ COLORS=~/.config/base16-xresources/base16-tomorrow.dark.256.xresources && \
 
 # autostart apps
 . ~/.fehbg &
+# compton -b
 dunst &
 nm-applet &
-parcellite &
 redshift &
 setxkbmap fr -option caps:escape
 unclutter &
 urxvtd -q -o -f &
+xfce4-clipman &
 xss-lock -- ~/bin/lock.sh &
-compton -b
-(sleep 2s && ~/.config/lemonbuddy/launch.sh)&
+volumeicon &
+
+dbus-update-activation-environment --systemd DISPLAY
+eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+export SSH_AUTH_SOCK
 
 exec i3

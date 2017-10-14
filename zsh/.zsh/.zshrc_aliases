@@ -64,11 +64,12 @@ alias pacback="pacman -Qqne > ~/Documents/installed_packages.txt"
 alias pong="ping -c3 google.com"
 alias reload="source ~/.zsh/.zshrc"
 alias temp="sensors"
-alias vim='nvim'
+# alias vim='nvim'
 
 alias caps="xmodmap -e 'keycode 0x42 = Caps_Lock'"
 alias uncaps="xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'"
 
 # tip found on arch bbs
 alias install_date="echo $(ls -lct /etc | tail -1 | awk '{print $6, $7, $8}')"
-#vim:fenc=utf-8:nu:ai:si:et:ts=2:sw=2:ft=zsh:
+
+alias sxiv="sxiv -b -s f"

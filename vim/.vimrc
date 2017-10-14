@@ -66,7 +66,7 @@ nnoremap <Leader>r :source ~/.vimrc<CR>
 nnoremap <Leader>c :bp\|bd #<CR>
 nnoremap <Leader>s mmvip:sort<CR>`m
 
-nnoremap <Leader>ct :Start! ctags -R<CR>
+nnoremap <Leader>t :Start! ctags -R<CR>
 
 nnoremap <silent><S-j> o<ESC>k
 nnoremap <silent><S-k> O<ESC>j
