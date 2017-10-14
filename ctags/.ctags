@@ -6,6 +6,7 @@
 --exclude=bundle
 --exclude=min
 --exclude=vendor
+--exclude=external
 --exclude=\*.min.\*
 --exclude=\*.map
 --exclude=\*.swp
