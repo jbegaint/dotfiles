@@ -66,6 +66,8 @@ nnoremap <Leader>r :source ~/.vimrc<CR>
 nnoremap <Leader>c :bp\|bd #<CR>
 nnoremap <Leader>s mmvip:sort<CR>`m
 
+nnoremap <Leader>ct :Start! ctags -R<CR>
+
 nnoremap <silent><S-j> o<ESC>k
 nnoremap <silent><S-k> O<ESC>j
 
@@ -126,7 +128,7 @@ Plug 'godlygeek/tabular'
 Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
 Plug 'justinmk/vim-dirvish'
 Plug 'klen/python-mode', {'for': 'python'}
-Plug 'ludovicchabant/vim-gutentags',
+" Plug 'ludovicchabant/vim-gutentags',
 Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
 Plug 'neomake/neomake'
 Plug 'rhysd/vim-clang-format'
@@ -135,6 +137,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-dispatch'
 Plug 'vim-scripts/BufOnly.vim'
 
 Plug 'romainl/Apprentice'
@@ -208,7 +211,7 @@ let g:pymode_rope = 0
 let g:buftabline_show = 1
 
 " -- gutentags
-let g:gutentags_cache_dir = '~/.vim/tags/'
+" let g:gutentags_cache_dir = '~/.vim/tags/'
 
 " -- vim-tmux-navigator & neovim compat
 nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
