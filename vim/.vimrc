@@ -68,6 +68,9 @@ nnoremap <Leader>s mmvip:sort<CR>`m
 
 nnoremap <Leader>t :Start! ctags -R<CR>
 
+nnoremap <Leader>ev :e ~/.vimrc<CR>
+nnoremap <Leader>ep :e ~/.plan/plan.md<CR>
+
 nnoremap <silent><S-j> o<ESC>k
 nnoremap <silent><S-k> O<ESC>j
 
