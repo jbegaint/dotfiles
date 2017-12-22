@@ -61,12 +61,17 @@ let maplocalleader = "\<Space>"
 nnoremap <CR> :noh<CR><CR>
 
 nnoremap <Leader><Leader> :ls<CR>:b<Space>
-nnoremap <Leader>b :ls<CR>:b<Space>
+nnoremap <Leader>b :ls<CR>:buffer<Space>
+nnoremap <Leader>B :ls<CR>:sbuffer<Space>
+nnoremap <Leader>l :b#<CR>
 nnoremap <Leader>r :source ~/.vimrc<CR>
 nnoremap <Leader>c :bp\|bd #<CR>
 nnoremap <Leader>s mmvip:sort<CR>`m
 
 nnoremap <Leader>t :Start! ctags -R<CR>
+
+nnoremap <Leader>ev :e ~/.vimrc<CR>
+nnoremap <Leader>ep :e ~/.plan/plan.md<CR>
 
 nnoremap <silent><S-j> o<ESC>k
 nnoremap <silent><S-k> O<ESC>j
@@ -130,7 +135,7 @@ Plug 'justinmk/vim-dirvish'
 Plug 'klen/python-mode', {'for': 'python'}
 " Plug 'ludovicchabant/vim-gutentags',
 Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
-Plug 'neomake/neomake'
+" Plug 'neomake/neomake'
 Plug 'rhysd/vim-clang-format'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'tpope/vim-commentary'
@@ -141,6 +146,7 @@ Plug 'tpope/vim-dispatch'
 Plug 'vim-scripts/BufOnly.vim'
 
 Plug 'romainl/Apprentice'
+Plug 'w0rp/ale'
 
 call plug#end()
 
@@ -220,14 +226,19 @@ nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
 " -- neomake
-autocmd! BufWritePost * Neomake
+" autocmd! BufWritePost * Neomake
 
-let g:neomake_cpp_clang_args = ['-std=c++14', '-Wextra', '-Wall']
-let g:neomake_cpp_clangtidy_args = ['-checks=*', '--', '-std=c++11']
-let g:neomake_cpp_enabled_makers = ['clang']
-let g:neomake_python_enabled_makers = ['flake8', 'pep8', 'pylint']
+" let g:neomake_cpp_clang_args = ['-std=c++14', '-Wextra', '-Wall']
+" let g:neomake_cpp_clangtidy_args = ['-checks=*', '--', '-std=c++11']
+" let g:neomake_cpp_enabled_makers = ['clang']
+" let g:neomake_python_enabled_makers = ['flake8', 'pep8', 'pylint']
 
-" -- commentary
+" -- ale
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 0
+let g:ale_linters = {
+			\'cpp': ['clangtidy', 'clangcheck', 'clangformat']
+			\}
 autocmd FileType cfg setlocal commentstring=#\ %s
 autocmd FileType cmake setlocal commentstring=#\ %s
 
