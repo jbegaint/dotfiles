@@ -1,2 +1,2 @@
 setlocal spell spelllang=en
-setlocal tw=72
+setlocal textwidth=72
