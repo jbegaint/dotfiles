@@ -16,6 +16,18 @@ zstyle ':completion:*' rehash true
 # enable colors
 autoload -Uz colors && colors
 
+# Enable Ctrl-x-e to edit command line
+autoload -U edit-command-line
+
+# Emacs style
+zle -N edit-command-line
+bindkey '^xe' edit-command-line
+bindkey '^x^e' edit-command-line
+
+# Vi style:
+# zle -N edit-command-line
+# bindkey -M vicmd v edit-command-line
+
 # git-prompt
 include /usr/share/git/completion/git-prompt.sh && GIT_PS1_SHOWDIRTYSTATE=true
 
@@ -24,7 +36,7 @@ PROMPT=$'\n%{$fg_bold[magenta]%} » %{$fg_bold[cyan]%}%~%{$reset_color%}%{$fg_bo
 RPROMPT=''
 
 # env
-export EDITOR="nvim"
+export EDITOR="vim"
 export BROWSER="chromium"
 PATH="/usr/lib/ccache/bin/:$HOME/bin:$PATH"
 PATH="$HOME/.node_modules/bin:$PATH"
