@@ -130,19 +130,15 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'godlygeek/tabular'
-Plug 'hynek/vim-python-pep8-indent', {'for': 'python'}
 Plug 'justinmk/vim-dirvish'
-Plug 'klen/python-mode', {'for': 'python'}
-" Plug 'ludovicchabant/vim-gutentags',
 Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
-" Plug 'neomake/neomake'
 Plug 'rhysd/vim-clang-format'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-dispatch'
 Plug 'vim-scripts/BufOnly.vim'
 
 Plug 'romainl/Apprentice'
@@ -205,19 +201,8 @@ if executable('ag')
 endif
 let g:ctrlp_working_path_mode = 0
 
-" -- Python-mode
-let g:pymode_doc = 1
-let g:pymode_doc_bind = '<Leader>K'
-let g:pymode_indent = 1
-let g:pymode_lint = 0
-let g:pymode_options_colorcolumn = 1
-let g:pymode_rope = 0
-
 " -- buftabline
 let g:buftabline_show = 1
-
-" -- gutentags
-" let g:gutentags_cache_dir = '~/.vim/tags/'
 
 " -- vim-tmux-navigator & neovim compat
 nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
@@ -225,20 +210,18 @@ nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
 " -- editorconfig
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
-" -- neomake
-" autocmd! BufWritePost * Neomake
-
-" let g:neomake_cpp_clang_args = ['-std=c++14', '-Wextra', '-Wall']
-" let g:neomake_cpp_clangtidy_args = ['-checks=*', '--', '-std=c++11']
-" let g:neomake_cpp_enabled_makers = ['clang']
-" let g:neomake_python_enabled_makers = ['flake8', 'pep8', 'pylint']
-
 " -- ale
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
 let g:ale_linters = {
-			\'cpp': ['clangtidy', 'clangcheck', 'clangformat']
+			\'cpp': ['clang', 'clangtidy', 'clangcheck'],
+			\'latex': ['chktex', 'proselint']
 			\}
+let g:ale_cpp_clang_options = '-Wall -Wextra -Werror -I../includes -I./includes -I. -std=c++11'
+let g:ale_cpp_clangcheck_options = '-Wall -Wextra -Werror -I../includes -I./includes -I. -std=c++11'
+let g:ale_cpp_clangtidy_options = '-Wall -Wextra -Werror -I../includes -I./includes -I. -std=c++11'
+
+" -- commentary
 autocmd FileType cfg setlocal commentstring=#\ %s
 autocmd FileType cmake setlocal commentstring=#\ %s
 
