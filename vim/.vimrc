@@ -214,10 +214,9 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
 let g:ale_linters = {
-			\'cpp': ['clang', 'clangtidy', 'clangcheck'],
+			\'cpp': ['clangtidy', 'clangcheck'],
 			\'latex': ['chktex', 'proselint']
 			\}
-let g:ale_cpp_clang_options = '-Wall -Wextra -Werror -I../includes -I./includes -I. -std=c++11'
 let g:ale_cpp_clangcheck_options = '-Wall -Wextra -Werror -I../includes -I./includes -I. -std=c++11'
 let g:ale_cpp_clangtidy_options = '-Wall -Wextra -Werror -I../includes -I./includes -I. -std=c++11'
 
