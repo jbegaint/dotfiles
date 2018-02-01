@@ -122,6 +122,7 @@ Plug 'othree/yajs.vim', {'for': 'javascript'}
 Plug 'petRUShka/vim-opencl', {'for': 'opencl'}
 Plug 'posva/vim-vue', {'for': 'vue'}
 Plug 'rust-lang/rust.vim', {'for': 'rust'}
+Plug 'Vimjas/vim-python-pep8-indent', {'for': 'python'}
 
 Plug 'Raimondi/delimitMate'
 Plug 'airblade/vim-gitgutter'
