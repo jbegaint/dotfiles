@@ -1,4 +1,7 @@
 --python-kinds=-i
+--c++-kinds=+p
+--fields=+iaS
+--extra=+q
 --extra=+f
 --exclude=.git
 --exclude=.svn
