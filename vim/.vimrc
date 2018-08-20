@@ -63,7 +63,7 @@ nnoremap <CR> :noh<CR><CR>
 nnoremap <Leader><Leader> :ls<CR>:b<Space>
 nnoremap <Leader>b :ls<CR>:buffer<Space>
 nnoremap <Leader>B :ls<CR>:sbuffer<Space>
-nnoremap <Leader>l :b#<CR>
+" nnoremap <Leader>l :b#<CR>
 nnoremap <Leader>r :source ~/.vimrc<CR>
 nnoremap <Leader>c :bp\|bd #<CR>
 nnoremap <Leader>s mmvip:sort<CR>`m
@@ -93,6 +93,7 @@ vnoremap <F1> <ESC>
 nnoremap Q <nop>
 
 nnoremap <silent><F1> mmgqip`m
+nnoremap <silent><F9> mmgqip`m
 nnoremap <silent><F3> :set invnumber<CR>
 nnoremap <silent><F4> :set invlist<CR>
 nnoremap <silent><F5> :call StatusToggle()<CR>
@@ -145,6 +146,8 @@ Plug 'vim-scripts/BufOnly.vim'
 Plug 'romainl/Apprentice'
 Plug 'w0rp/ale'
 
+" Plug 'Chilledheart/vim-clangd'
+
 call plug#end()
 
 filetype plugin indent on
@@ -185,7 +188,7 @@ let delimitMate_expand_cr=1
 nnoremap <Leader>o :BufOnly<CR>
 
 " -- Latex-Box
-let g:LatexBox_quickfix = 2
+let g:LatexBox_quickfix = 3
 let g:LatexBox_latexmk_preview_continuously = 0
 let g:LatexBox_Folding = 1
 let g:LatexBox_split_type = 'new'
@@ -218,8 +221,8 @@ let g:ale_linters = {
 			\'cpp': ['clangtidy', 'clangcheck'],
 			\'latex': ['chktex', 'proselint']
 			\}
-let g:ale_cpp_clangcheck_options = '-Wall -Wextra -Werror -I../includes -I./includes -I. -std=c++11'
-let g:ale_cpp_clangtidy_options = '-Wall -Wextra -Werror -I../includes -I./includes -I. -std=c++11'
+let g:ale_cpp_clangcheck_options = '-Wall -Wextra -Werror -I../includes -I./includes -I. -std=c++14'
+let g:ale_cpp_clangtidy_options = '-Wall -Wextra -Werror -I../includes -I./includes -I. -std=c++14'
 
 " -- commentary
 autocmd FileType cfg setlocal commentstring=#\ %s
