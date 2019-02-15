@@ -157,7 +157,8 @@ runtime macros/matchit.vim
 
 " -- gui/console look
 if has('gui_running')
-	set guifont=Source\ Code\ Pro\ Medium\ 10
+	" set guifont=Source\ Code\ Pro\ Medium\ 10
+	set guifont=Hack\ Medium\ 10
 	colorscheme apprentice
 
 	" remove menu, toolbar, and scrollbars
@@ -185,11 +186,12 @@ let delimitMate_expand_cr=1
 nnoremap <Leader>o :BufOnly<CR>
 
 " -- Latex-Box
-let g:LatexBox_quickfix = 2
+let g:LatexBox_quickfix = 3
 let g:LatexBox_latexmk_preview_continuously = 0
 let g:LatexBox_Folding = 1
 let g:LatexBox_split_type = 'new'
 let g:LatexBox_latexmk_async = 1
+let g:LatexBox_latexmk_options = '-lualatex' 
 
 " -- The Silver Searcher
 if executable('ag')
