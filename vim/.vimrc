@@ -194,7 +194,7 @@ let g:LatexBox_quickfix = 3
 let g:LatexBox_latexmk_preview_continuously = 0
 let g:LatexBox_Folding = 1
 let g:LatexBox_split_type = 'new'
-let g:LatexBox_latexmk_async = 1
+let g:LatexBox_latexmk_async = 0
 
 " -- The Silver Searcher
 if executable('ag')
