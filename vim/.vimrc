@@ -19,7 +19,10 @@ set mouse=a
 
 set wildmenu
 set wildmode=longest:list,full
-set wildignore=*.o,*~,*.pyc,*.aux,*.dvi,*.bcf,*.blg,*.bbl,*egg-info
+set wildignore=*.o,*~,*.pyc
+set wildignore+=*.aux,*.dvi,*.bcf,*.blg,*.bbl
+set wildignore+=*.egg/,*.egg-info/
+set wildignore+=*__pycache__/
 
 set autoindent
 " set smartindent
