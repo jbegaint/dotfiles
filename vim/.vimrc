@@ -162,7 +162,7 @@ runtime macros/matchit.vim
 
 " -- gui/console look
 if has('gui_running')
-	set guifont=Source\ Code\ Pro\ Medium\ 10
+	set guifont=Source\ Code\ Pro\ Medium\ 12
 	colorscheme apprentice
 
 	" remove menu, toolbar, and scrollbars
