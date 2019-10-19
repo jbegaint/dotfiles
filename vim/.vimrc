@@ -19,7 +19,10 @@ set mouse=a
 
 set wildmenu
 set wildmode=longest:list,full
-set wildignore=*.o,*~,*.pyc,*.aux,*.dvi,*.bcf,*.blg,*.bbl,*egg-info
+set wildignore=*.o,*~,*.pyc
+set wildignore+=*.aux,*.dvi,*.bcf,*.blg,*.bbl
+set wildignore+=*.egg/,*.egg-info/
+set wildignore+=*__pycache__/
 
 set autoindent
 " set smartindent
@@ -162,7 +165,12 @@ runtime macros/matchit.vim
 
 " -- gui/console look
 if has('gui_running')
+<<<<<<< HEAD
 	set guifont=Source\ Code\ Pro\ Medium\ 12
+=======
+	" set guifont=Source\ Code\ Pro\ Medium\ 10
+	set guifont=Hack\ Medium\ 10
+>>>>>>> c484056a70600ffcc02de3fbd00f2be9be8af4d1
 	colorscheme apprentice
 
 	" remove menu, toolbar, and scrollbars
@@ -195,6 +203,7 @@ let g:LatexBox_latexmk_preview_continuously = 0
 let g:LatexBox_Folding = 1
 let g:LatexBox_split_type = 'new'
 let g:LatexBox_latexmk_async = 0
+let g:LatexBox_latexmk_options = '-lualatex' 
 
 " -- The Silver Searcher
 if executable('ag')

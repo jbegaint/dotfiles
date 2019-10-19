@@ -1,5 +1,5 @@
 [TYPECHECK]
-ignored-modules=numpy,cv2,np
+ignored-modules=numpy,cv2,np,torch
 docstring-min-length=10
 
 disable=C0103,W0141  # ?,bad built ins
