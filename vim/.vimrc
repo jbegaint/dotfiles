@@ -53,8 +53,10 @@ set nofoldenable
 set modeline
 
 set complete+=kspell
+
+set notimeout
 set ttimeout
-set ttimeoutlen=100
+set ttimeoutlen=10
 
 set splitright
 set splitbelow
@@ -134,7 +136,6 @@ Plug 'Raimondi/delimitMate'
 Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-buftabline'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'godlygeek/tabular'
 Plug 'justinmk/vim-dirvish'
@@ -151,8 +152,6 @@ Plug 'vim-scripts/BufOnly.vim'
 Plug 'romainl/Apprentice'
 Plug 'w0rp/ale'
 
-" Plug 'Chilledheart/vim-clangd'
-
 call plug#end()
 
 filetype plugin indent on
@@ -160,17 +159,15 @@ if !exists(g:syntax_on)
 	syntax enable
 endif
 
+set synmaxcol=1024
+
 "-- matchit '%' on 'if' to jump to 'else'.
 runtime macros/matchit.vim
 
 " -- gui/console look
 if has('gui_running')
-<<<<<<< HEAD
 	set guifont=Source\ Code\ Pro\ Medium\ 12
-=======
-	" set guifont=Source\ Code\ Pro\ Medium\ 10
 	set guifont=Hack\ Medium\ 10
->>>>>>> c484056a70600ffcc02de3fbd00f2be9be8af4d1
 	colorscheme apprentice
 
 	" remove menu, toolbar, and scrollbars
@@ -208,13 +205,8 @@ let g:LatexBox_latexmk_options = '-lualatex'
 " -- The Silver Searcher
 if executable('ag')
 	" use ag over grep
-	set grepprg=ag\ --nogroup\ --nocolor
-
-	" use ag in ctrlp
-	let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -i -g ""'
-	let g:ctrlp_use_caching = 1
+	set grepprg=ag\ --vimgrep
 endif
-let g:ctrlp_working_path_mode = 0
 
 " -- buftabline
 let g:buftabline_show = 1
@@ -266,3 +258,8 @@ function! GitStatusline(...) abort
 		return l:matches[1]
 	endif
 endfunction
+
+augroup grepcw
+    autocmd!
+    autocmd QuickFixCmdPost grep cwindow
+augroup END
