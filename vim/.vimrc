@@ -76,6 +76,7 @@ nnoremap <Leader>c :bp\|bd #<CR>
 nnoremap <Leader>s mmvip:sort<CR>`m
 
 nnoremap <Leader>t :Start! ctags -R<CR>
+nnoremap <Leader>y :execute '!black %'<CR>\|:!isort %<CR><CR>
 
 nnoremap <Leader>ev :e ~/.vimrc<CR>
 nnoremap <Leader>ep :e ~/.plan/plan.md<CR>
@@ -118,7 +119,8 @@ filetype off
 
 call plug#begin()
 
-Plug 'LaTeX-Box-Team/LaTeX-Box', {'for': ['latex', 'tex']}
+" Plug 'LaTeX-Box-Team/LaTeX-Box', {'for': ['latex', 'tex']}
+Plug 'lervag/vimtex', {'for': ['latex', 'tex']}
 Plug 'LnL7/vim-nix', {'for': 'nix'}
 Plug 'Matt-Deacalion/vim-systemd-syntax', {'for': 'systemd'}
 Plug 'PotatoesMaster/i3-vim-syntax', {'for': 'i3'}
@@ -195,12 +197,13 @@ let delimitMate_expand_cr=1
 nnoremap <Leader>o :BufOnly<CR>
 
 " -- Latex-Box
-let g:LatexBox_quickfix = 3
-let g:LatexBox_latexmk_preview_continuously = 0
-let g:LatexBox_Folding = 1
-let g:LatexBox_split_type = 'new'
-let g:LatexBox_latexmk_async = 0
-let g:LatexBox_latexmk_options = '-lualatex' 
+let g:vimtex_quickfix_ignore_filters = [
+			\ 'Marginpar on page',
+			\]
+
+let g:vimtex_quickfix_open_on_warning = 0
+
+let g:tex_flavor = "latex"
 
 " -- The Silver Searcher
 if executable('ag')
